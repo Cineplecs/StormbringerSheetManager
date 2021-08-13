@@ -1,0 +1,78 @@
+<resources>
+    <string name="app_name">StormbringerSheetManager</string>
+
+    <string name="NationalityTextViewStandard">Nessuna nazionalità selezionata</string>
+
+    <string name="Melniboné">I Melniboneani sono una specie pre-umana molto simile al homo sapiens.
+    Sono alti di statura, scuri di carnagione e con capelli neri.
+    Sono particolarmente sofisticati, crudeli e amorali. Negli ultimi giorni dei Regni Giovani
+    divennero decadenti, sognatori e isolazionisti. Adorano le divinità del Caos e possiedono
+    innate capacità magiche. In ere passate strinsero alleanze con i Signori degli Elementi
+    e con i signori degli Animali. Se il vostro personaggio è Melniboleano, lanciate 1D10 e
+    aggiungetelo alla INT, aggiungete 2D6 al MAN e 3 alla TAG. Tutti i Melniboleani sono Nobili
+    e Guerrieri. La loro corporatura è longilinea. Se il totale di INT e MAN raggiunge o supera 32,
+    il personaggio è anche uno Stregone.</string>
+
+    <string name="Pan_Tang">Gli uomini di Pan Tang sono grossi e robusti, con la pelle scura e i capelli
+    neri. Le loro barbe sono lunghe e folte. Sono divisi in due classi: Sacerdoti/Stregoni e Guerrieri.
+     Adorano i Signori del Caos, a cui celebrano riti perversi. Aggiungete 1D8 a INT, 1D8 al MAN,
+    e 1 alla TAG. La loro corporatura è robusta. Se la somma di INT e MAN raggiunge o supera 32, il PG è
+    un Sacerdote/Stregone. Se INT e MAN non raggiungono 32, il PG è un Guerriero. Lanciate infine
+    1D100: se ottenete un risultato da 1 a 20 il vostro PG è anche Nobile</string>
+
+    <string name="Myrrhyn">Glu uomini alati di Myrrhyn sono un\'altra specie umanoide, ma non umana.
+    La loro caratteristica principale è quella di avere le ali e di poter volare.
+    Gli uomini sono piccoli, magri e calvi. Le donne sono leggiadre, belle e hanno i capelli.
+    Talvolta nascono privi di ali. La loro corporatura è longilinea.
+    Posseggono alcune abilità magiche, anche se non evidenti come gli abitanti di Melniboné o di Pan Tang.
+    Aggiungete 1D6 a InT, 1D6 al MAN e, se il PG è una femmina, aggiungete 1D6 al FAS.
+    Infine sottraete 2 alla TAG, se questa è uguale o superiore a 9. Se la somma di INT e MAN raggiunge
+    o supera 32, il PG è anche uno Stregone. Dopo aver determinato la classe del PG (se è già Stregone
+    ne avrà una seconda): se è Marinaio, Ladro o Mendicante, ignorate il tiro e trasformante il PG in un
+    Guerriero. Infine ricordate che, anche se il PG ha la capacità di volare, non potrà farlo se sovraccarico:
+    non potrà ad esempio trasportare più di due armi o indossare una qualsiasi armatura.</string>
+
+    <string name="Dharijor">Gli abitanti di Dharijor possono avere indifferentemente una corporatura
+    longilinea, normale o robusta.
+    Normalmente gli uomini di Pan Tango scelgono le loro mogli e concubine tra le donne di Dharijor, che
+    considerano più leggiadre delle loro connazionali. I frutti di queste unioni spesso ritornano alla patria
+    materna come spie del Teocrate. La gente di Dharijor è generalmente vigorosa e di carnagione scura.
+    Aggiungete 1D4 alla COS. Gli occhi e i capelli sono in prevalenza castano scuro.
+    I natii sono abili sia nell'\arte della guerra che in quella della pace. Adorano gli dei del Caos,
+    e la Chiesa Caotica è molto influente. Il capo religioso è Jagreen Lern, Teocrate di Pan Tang;
+    anche il Re gli deve obbedienza in materia di religione.</string>
+
+    <string name="Jharkor">Al popolo di Jharkor appartengono individui estremamente diversi tra loro.
+    Pertanto il cittadino jharkoriano può avere qualsiasi tipo di corporatura.
+    Lanciate 1D6: con 1-2 la corporatura sarà longilinea, con 3-4 normale e con 5-6 robusta. Gli abitanti
+    adorano gli dei del Caos, e si occupano prevalentemente di lavori di alto artigianato.
+    Sottraete 1D4 al FAS, e aggiungete 1D4 alla DES. Tirate per determinare Classe e abilità</string>
+
+    <string name="Shazaar">La gente di Shazaar appartiene ad una razza di uomini forti e robusti.
+    Gli abitanti possono avere qualsiasi colore di capelli, classe e corporatura (lanciate 1D6:
+    con 1-2 sarà longilinea, con 3-4 normale, con 5-6 robusta). Aggiungete 1D6 alla COS. Tirate per
+    determinare Classe e abilità</string>
+
+    <string name="Tarkesh">Tarkesh è la più grande nazione marittima del Nord. I suoi abitanti posseggono
+    pelle e capelli scuri, hanno corporatura normale o robusta (a vostra scelta) e tendono ad essere bassi
+    di statura. Aggiungete 1D4 alla COS e sottraete 1 alla TAG, se ha un valore maggiore o uguale a 10.
+    I Tarkeshiti hanno di norma nomi tripli, come Dhak-Knuul-Gorm. Tirate per la Classe: se è Agricoltore
+    o Cacciatore, cambiatelo in Marinaio. Determinate poi le abilità del personaggio</string>
+
+    <string name="Vilmir">Il popolo di Vilmir è il più ordinario dei Regni Giovani: non vi sono modifiche
+    alle Caratteristiche ottenute in precedenza. I Vilmiriani tendono ad avere capelli biondi o rossi e
+    a vivere in grandi città. Lanciate 1D6 per determinare il tipo di corporatura: 1 indica corporatura
+    longilinea; da 2 a 5 normale, mentre 6 indica robusta. Tirate per determinare la Classe e le abilità</string>
+
+    <string name="Ilmiora">Il popolo di Ilmiora è molto simile a quello di Vilmir, ma gli Ilmioriani
+    sono più manierati ed educati; aggiungete 1D4 al FAS. Gli Ilmioriani possono avere qualunque corporatura
+    e colore di capelli. Per stabilire la corporatura, lanciate 1D6: con 1 la corporatura sarà esile,
+    da 2 a 5 normale, con 6 robusta. Tirate per determinare la Classe e le abilità</string>
+
+    <string name="Prova">Questa è la prova per il cambio di testo della text view</string>
+    <string name="navigation_drawer_open"> Open navigation drawer </string>
+    <string name="navigation_drawer_close"> Close navigation drawer </string>
+    <string name="selected_item"> Selected item: </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
