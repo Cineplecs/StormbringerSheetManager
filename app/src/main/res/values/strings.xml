@@ -20,7 +20,7 @@
     un Sacerdote/Stregone. Se INT e MAN non raggiungono 32, il PG è un Guerriero. Lanciate infine
     1D100: se ottenete un risultato da 1 a 20 il vostro PG è anche Nobile</string>
 
-    <string name="Myrrhyn">Glu uomini alati di Myrrhyn sono un\'altra specie umanoide, ma non umana.
+    <string name="Myrrhyn">Glu uomini alati di Myrrhyn sono una specie umanoide, ma non umana.
     La loro caratteristica principale è quella di avere le ali e di poter volare.
     Gli uomini sono piccoli, magri e calvi. Le donne sono leggiadre, belle e hanno i capelli.
     Talvolta nascono privi di ali. La loro corporatura è longilinea.
@@ -38,7 +38,7 @@
     considerano più leggiadre delle loro connazionali. I frutti di queste unioni spesso ritornano alla patria
     materna come spie del Teocrate. La gente di Dharijor è generalmente vigorosa e di carnagione scura.
     Aggiungete 1D4 alla COS. Gli occhi e i capelli sono in prevalenza castano scuro.
-    I natii sono abili sia nell'\arte della guerra che in quella della pace. Adorano gli dei del Caos,
+    I natii sono abili sia nella arte della guerra che in quella della pace. Adorano gli dei del Caos,
     e la Chiesa Caotica è molto influente. Il capo religioso è Jagreen Lern, Teocrate di Pan Tang;
     anche il Re gli deve obbedienza in materia di religione.</string>
 
@@ -68,6 +68,85 @@
     sono più manierati ed educati; aggiungete 1D4 al FAS. Gli Ilmioriani possono avere qualunque corporatura
     e colore di capelli. Per stabilire la corporatura, lanciate 1D6: con 1 la corporatura sarà esile,
     da 2 a 5 normale, con 6 robusta. Tirate per determinare la Classe e le abilità</string>
+
+    <string name="Nadsokor">La città dei mendicanti giace nominalmente entro i confini di Vilmir
+    ma, di fatto, segue leggi proprie e verrà eprtanto trattata come una nazione indipendente.
+    Solo i menomati, i malati e i depravati provendono da Nadsokor o vi vivono.
+    Tra i cittadini si possono trovare tutti i possibili colori di capelli e i tipi di corporatura (
+    potete scegliere quella che preferite). Sottraete 1D6 dalla COS e 1D6 dal FAS. Il personaggio
+    è automaticamente un Mendicante. Determinare le sue abilità nella sezione apposita e,
+    successivamente, consultare la sezione Handicap. I pezzenti di Nadsokor non adorano alcun dio,
+    ma temono molto il loro sovrano.</string>
+
+    <string name="Solitudine_Piangente">Così chiamata a causa del suono desolato del vento, che soffia
+    costantemente sulla sabbia del deserto, la Solitudine Piangente è la patria di molte tribù barbare
+    nomadi. I nativi sono di statura bassa, scuri di carnagione, muscolosi e abili guerrieri:
+    hanno una corporatura normale. Aggiungete 1D6 alla FOR, 1D4 alla DES, 1D6 alla CON;
+    sottraete 1D4 dal FAS, e 1 alla TAG se è uguale o superiore a 10. I personaggi provenienti da questa
+     terra sono automaticamente Guerrieri e Cacciatori; inoltre posseggono l\'abilità
+    iniziale di Cavalcare a 80% + 1D6. Tirare per determinare le abilità del personaggio</string>
+
+    <string name="Eshmir">Gli uomini della nazione orientale di Eshmir tendono a essere bassi, ad avere
+    occhi obliqui e capelli rossi o castano chiaro. Adorano gli Dei del Caos e generalmente vivono
+    isolati dai Regni Giovani. Tra loro si possono trovare alcuni mediocri stregoni. Aggiungete
+    1D4 all\'INT, 1D6 al MAN e sottraete 2 alla TAG, se questa è uguale o maggiore di 10.
+    La loro corporatura è normale. Se la somma di INT e MAN raggiunge o supera 32, il personaggio
+    sarà automaticamente Sacerdote e Stregone; se la sua FOR raggiunge o supera 13, è automaticamente
+    un Sacerdote Guerriero, membro della più illustre classe di Eshmir: quella dei Sacerdoti Guerrieri
+    del Caos. Se la somma di INT e MAN non raggiunge 32, tirare per determinare la Classe e
+    abilità del personaggio.</string>
+
+    <string name="Isola_delle_Città_Purpuree">Gli uomini dell\'isola sono un popolo sereno, con capelli
+    castano scuro o neri. Tendono ad essere grossi, di corporatura normale o robusta. Aggiungete
+    1D4 alla FOR e 1D6 alla COS. Tirare per determinare la Classe e abilità del personaggio, tenendo presente
+    però che il risultato di Cacciatore dovrà essere modificato in Marinaio.</string>
+
+    <string name="Argimillar">Il popolo di Argimiliar rientra nell\'ordinario genere umano.
+    Nessuna Caratteristica riceve modifiche. Gli abitanti hanno corporatura normale e generalmente capelli
+    castano scuro. Tirare per determinare la Classe e abilità del personaggio.</string>
+
+    <string name="Pikarayd">La gente di Pikarayd vive in una terra selvaggia e sottosviluppata,
+    dove solo i forti sopravvivono Gli uomini della capitale, Chalal, sono conosciuti soprattutto
+    come guerrieri. Aggiungete 2D4 alla FOR e 1 alla TAG. I nativi tendono ad avere corporatura
+    normale o robusta, carnagione scura e capelli neri. Tirare per determinare la Classe e abilità
+    del personaggio.</string>
+
+    <string name="Lormyr">Lormyr è una nazione fredda e antica, i cui giorni di gloria appartengono
+    ad un passato risalente a quatro secoli fa. Anche se la gente è robusta e serena, con capelli
+    biondo chiari o castano chiaro, non ha talenti speciali ed è leggermente tarda di comprendonio.
+    Sottraete 1D4 all\'INT ed aggiungete 2 alla TAG. La corporatura può essere normale o robusta
+    (a vostra scelta). Tirare per determinare la Classe e abilità del personaggio.</string>
+
+    <string name="Filkhar">La gente di Filkhar appartiene ad una razza agile  epacifica. I
+    Filkhariani hanno una corporatura esile o normale e capelli castano chiaro o biondo cenere.
+    Aggiungete 1D4 alla DES. Tirare per determinare la Classe e abilità del personaggio.</string>
+
+    <string name="Oin">Gli abitanti di Oin appartengono ad una razza di barbari forti ma degenerati,
+    di poco superiori alle bestie. Hanno corporatura robusta e capelli castani, generalmente sporchi.
+    Se potessero comprendere il significato della parola "adorare", adorerebbero gli Dei del Caos.
+    Sottraete 1D6 all\'INT, se questa è maggiore o uguale a 10, 1D6 alla DES, se è maggiore o
+    uguale a 10, 1D6 al Man se il suo valore raggiunge o supera 10;
+    aggiungete 1D6 alla COS. Tirare per determinare la Classe, modificando i risultati di Sacerdote
+    o Marinaio in Agricoltore.</string>
+
+    <string name="Yu">Gli Yuriti sono molto simili al popolo di Oin, anche se ancor meno civilizzati;
+    hanno corporatura robusta e una sporca peluria castano-grigia che ricopre gran parte del loro
+    corpo, quasi come animali (non è però così fitto da divenire una pelliccia).
+    Sottraete 1D6 all\'INT, se questa ha un valore uguale o superiore a 10, 1D6 al MAN se
+    questo ha un valore uguale o superiore a 10, e 1D6 al FAS, se qeusto ha un valore uguale o
+    superiore a 10; aggiungete 1D6 alla FOR e 1D6 alla CON; tirare per determinare la Classe,
+    modificando i risultati di Sacerdote, Mercante o Marinaio in Cacciatore.</string>
+
+    <string name="Org">Il popolo di Org ricorda i nani della tradizione nordica europea,
+    anche se si tratta di nani degenerati. I loro corpi, tozzi e contorti, sono ricoperti da una
+    sottile peluria nera; hanno una corporatura robusta e la loro forma principale di religione
+    consiste in un\'innominabile venerazione dei loro avi deceduti, ma non morti.
+    Sottraete 2D4 al MAN se esso raggiunge o supera 10, 2D4 al FAS, se raggiunge o supera 10,
+    1D6 dall\'INT, se questa raggiunge o supera 10 e 1D6 alla DES, se raggiunge o supera 10.
+    Aggiungete 1D8 alla COS e 1D4 alla FOR. Sottraete 2 alla TAG, se essa ha un valore ugulae
+    o superiore a 10. Lanciate poi 1D20: se ottenete 1, il personaggio è un Nobile; con qualsiasi
+    altro risultato, il personaggio sarà un Cacciatore. Tirare per determinare le abilità.</string>
+
 
     <string name="Prova">Questa è la prova per il cambio di testo della text view</string>
     <string name="navigation_drawer_open"> Open navigation drawer </string>

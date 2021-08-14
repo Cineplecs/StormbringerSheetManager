@@ -105,10 +105,10 @@
                 android:textSize="18sp"/>
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/buttonProsegui"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Prossimo" />
+                android:text="Prosegui" />
         </LinearLayout>
     </ScrollView>
 
