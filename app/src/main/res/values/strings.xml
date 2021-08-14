@@ -147,6 +147,7 @@
     o superiore a 10. Lanciate poi 1D20: se ottenete 1, il personaggio è un Nobile; con qualsiasi
     altro risultato, il personaggio sarà un Cacciatore. Tirare per determinare le abilità.</string>
 
+    <string name="Default_Class_Text">La classe verrà selezionata automaticamente</string>
 
     <string name="Prova">Questa è la prova per il cambio di testo della text view</string>
     <string name="navigation_drawer_open"> Open navigation drawer </string>

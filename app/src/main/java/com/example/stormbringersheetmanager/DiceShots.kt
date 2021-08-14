@@ -25,4 +25,9 @@ object DiceShots {
         var diceShot : Int = (1..20).random()
         return diceShot
     }
+
+    fun D4() : Int {
+        var diceShot : Int = (1..4).random()
+        return diceShot
+    }
 }

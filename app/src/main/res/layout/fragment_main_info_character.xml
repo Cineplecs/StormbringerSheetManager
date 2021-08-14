@@ -90,25 +90,20 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="20dp"
                 android:paddingBottom="10dp"
-                android:text="Nazionalità"
+                android:text="Altezza"
                 android:textSize="18sp" />
 
             <Spinner
-                android:id="@+id/nationalitySpinner"
+                android:id="@+id/heightSpinner"
                 android:layout_width="match_parent"
-                android:layout_height="55dp"/>
-
-            <TextView
-                android:id="@+id/nationalityTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"/>
+                android:layout_height="55dp" />
 
             <Button
                 android:id="@+id/buttonProsegui"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Prosegui" />
+
         </LinearLayout>
     </ScrollView>
 

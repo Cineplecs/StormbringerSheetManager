@@ -6,213 +6,226 @@
     tools:context=".CharacterCreation.ClassAndSkillsSelection">
 
     <LinearLayout
+        android:id="@+id/linearLayoutVerticalClassMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/linearLayoutVerticalClassMain">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
+            android:paddingBottom="20dp"
             android:text="Stats and Class calculator"
-            android:paddingBottom="20dp"/>
+            android:textSize="30sp" />
 
         <LinearLayout
+            android:id="@+id/linearLayoutHorizonatlClassFOR"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:id="@+id/linearLayoutHorizonatlClassFOR"
             android:paddingTop="15dp"
             android:paddingBottom="15dp">
 
             <TextView
+                android:id="@+id/TextViewFOR"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/TextViewFOR"
-                android:text="FOR Stat"
-                android:textSize="20sp"
                 android:layout_weight="0.8"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:text="FOR Stat"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/ButtonFOR"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/holo_blue_dark"
                 android:layout_weight="0.2"
-                android:textSize="15sp"
-                android:text="Calculate FOR"/>
+                android:background="@android:color/holo_blue_dark"
+                android:text="Calculate FOR"
+                android:textSize="15sp" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayoutHorizonatlClassCOS"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:id="@+id/linearLayoutHorizonatlClassCOS"
             android:paddingTop="15dp"
             android:paddingBottom="15dp">
 
             <TextView
+                android:id="@+id/TextViewCOS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/TextViewCOS"
-                android:text="COS Stat"
-                android:textSize="20sp"
                 android:layout_weight="0.8"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:text="COS Stat"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/ButtonCOS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/holo_blue_dark"
                 android:layout_weight="0.2"
-                android:textSize="15sp"
-                android:text="Calculate COS"/>
+                android:background="@android:color/holo_blue_dark"
+                android:text="Calculate COS"
+                android:textSize="15sp" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayoutHorizonatlClassINT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:id="@+id/linearLayoutHorizonatlClassINT"
             android:paddingTop="15dp"
             android:paddingBottom="15dp">
 
             <TextView
+                android:id="@+id/TextViewINT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/TextViewINT"
-                android:text="INT Stat"
-                android:textSize="20sp"
                 android:layout_weight="0.8"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:text="INT Stat"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/ButtonINT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/holo_blue_dark"
                 android:layout_weight="0.2"
-                android:textSize="15sp"
-                android:text="Calculate INT"/>
+                android:background="@android:color/holo_blue_dark"
+                android:text="Calculate INT"
+                android:textSize="15sp" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayoutHorizonatlClassMAN"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:id="@+id/linearLayoutHorizonatlClassMAN"
             android:paddingTop="15dp"
             android:paddingBottom="15dp">
 
             <TextView
+                android:id="@+id/TextViewMAN"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/TextViewMAN"
-                android:text="MAN Stat"
-                android:textSize="20sp"
                 android:layout_weight="0.8"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:text="MAN Stat"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/ButtonMAN"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/holo_blue_dark"
                 android:layout_weight="0.2"
-                android:textSize="15sp"
-                android:text="Calculate MAN"/>
+                android:background="@android:color/holo_blue_dark"
+                android:text="Calculate MAN"
+                android:textSize="15sp" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayoutHorizonatlClassDES"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:id="@+id/linearLayoutHorizonatlClassDES"
             android:paddingTop="15dp"
             android:paddingBottom="15dp">
 
             <TextView
+                android:id="@+id/TextViewDES"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/TextViewDES"
-                android:text="DES Stat"
-                android:textSize="20sp"
                 android:layout_weight="0.8"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:text="DES Stat"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/ButtonDES"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/holo_blue_dark"
                 android:layout_weight="0.2"
-                android:textSize="15sp"
-                android:text="Calculate DES"/>
+                android:background="@android:color/holo_blue_dark"
+                android:text="Calculate DES"
+                android:textSize="15sp" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayoutHorizonatlClassTAG"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:id="@+id/linearLayoutHorizonatlClassTAG"
             android:paddingTop="15dp"
             android:paddingBottom="15dp">
 
             <TextView
+                android:id="@+id/TextViewTAG"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/TextViewTAG"
-                android:text="TAG Stat"
-                android:textSize="20sp"
                 android:layout_weight="0.8"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:text="TAG Stat"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/ButtonTAG"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/holo_blue_dark"
                 android:layout_weight="0.2"
-                android:textSize="15sp"
-                android:text="Calculate TAG"/>
+                android:background="@android:color/holo_blue_dark"
+                android:text="Calculate TAG"
+                android:textSize="15sp" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linearLayoutHorizonatlClassFAS"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:id="@+id/linearLayoutHorizonatlClassFAS"
             android:paddingTop="15dp"
             android:paddingBottom="15dp">
 
             <TextView
+                android:id="@+id/TextViewFAS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/TextViewFAS"
-                android:text="FAS Stat"
-                android:textSize="20sp"
                 android:layout_weight="0.8"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:text="FAS Stat"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/ButtonFAS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/holo_blue_dark"
                 android:layout_weight="0.2"
-                android:textSize="15sp"
-                android:text="Calculate FAS"/>
+                android:background="@android:color/holo_blue_dark"
+                android:text="Calculate FAS"
+                android:textSize="15sp" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/classText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="15dp"
+            android:paddingTop="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="15dp"
+            android:text="Clicca sul pulsante per ottenere una classe"
+            android:textColor="#000000"
+            android:textSize="20sp" />
 
     </LinearLayout>
 </ScrollView>
