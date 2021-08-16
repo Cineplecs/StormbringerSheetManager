@@ -33,21 +33,16 @@ class MainInfoCharacterFragment : Fragment() {
 
         val ageSpinner = view.findViewById<Spinner>(R.id.ageSpinner)
         val genderSpinner = view.findViewById<Spinner>(R.id.genderSpinner)
-        val heightSpinner = view.findViewById<Spinner>(R.id.heightSpinner)
 
         val genderNames = arrayOf("Selezionare un genere", "Maschio", "Femmina")
         val ageYears = arrayOfNulls<Int>(90)
         spinnerFill(ageYears)
-        val height = arrayOfNulls<Int>(231)
-        spinnerFill(height)
 
         val ageAdapter = ArrayAdapter<Int>(requireContext(), R.layout.spinner_item, ageYears)
         val genderAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, genderNames)
-        val heightAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, height)
 
         ageSpinner.adapter = ageAdapter
         genderSpinner.adapter = genderAdapter
-        heightSpinner.adapter = heightAdapter
 
         buttonProsegui.setOnClickListener(){
             if(!nameEditText.text.isNullOrEmpty()){
@@ -58,7 +53,6 @@ class MainInfoCharacterFragment : Fragment() {
                         bundle.putInt("age", ageSpinner.selectedItem.toString().toInt())
                         bundle.putString("characterName", nameEditText.text.toString())
                         bundle.putString("playerName", playerEditText.text.toString())
-                        bundle.putInt("height", heightSpinner.selectedItem.toString().toInt())
                         var nextFragment = ClassAndSkillsSelection()
                         nextFragment.arguments = bundle
                         var fragmentTransaction : FragmentTransaction = parentFragmentManager.beginTransaction()

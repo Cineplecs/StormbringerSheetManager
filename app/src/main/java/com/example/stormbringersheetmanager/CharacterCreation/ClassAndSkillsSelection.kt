@@ -1,6 +1,5 @@
 package com.example.stormbringersheetmanager.CharacterCreation
 
-import android.graphics.Color
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
@@ -8,10 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.textservice.TextInfo
 import android.widget.*
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import com.example.stormbringersheetmanager.DiceShots
+import androidx.fragment.app.FragmentTransaction
+import com.example.stormbringersheetmanager.DiceRolls
 import com.example.stormbringersheetmanager.R
 
 class ClassAndSkillsSelection : Fragment() {
@@ -80,7 +81,7 @@ class ClassAndSkillsSelection : Fragment() {
 
         ButtonFOR.setOnClickListener{
             for(i in 1..3){
-                FOR += DiceShots.D6()
+                FOR += DiceRolls.D6()
             }
             ButtonFOR.isClickable = false
             TextFOR.text = FOR.toString()
@@ -89,7 +90,7 @@ class ClassAndSkillsSelection : Fragment() {
 
         ButtonCOS.setOnClickListener{
             for(i in 1..3){
-                COS += DiceShots.D6()
+                COS += DiceRolls.D6()
             }
             ButtonCOS.isClickable = false
             TextCOS.text = COS.toString()
@@ -98,7 +99,7 @@ class ClassAndSkillsSelection : Fragment() {
 
         ButtonINT.setOnClickListener{
             for(i in 1..3){
-                INT += DiceShots.D6()
+                INT += DiceRolls.D6()
             }
             ButtonINT.isClickable = false
             TextINT.text = INT.toString()
@@ -107,7 +108,7 @@ class ClassAndSkillsSelection : Fragment() {
 
         ButtonMAN.setOnClickListener {
             for(i in 1..3){
-                MAN += DiceShots.D6()
+                MAN += DiceRolls.D6()
             }
             ButtonMAN.isClickable = false
             TextMAN.text = MAN.toString()
@@ -116,7 +117,7 @@ class ClassAndSkillsSelection : Fragment() {
 
         ButtonDES.setOnClickListener{
             for(i in 1..3){
-                DES += DiceShots.D6()
+                DES += DiceRolls.D6()
             }
             ButtonDES.isClickable = false
             TextDES.text = DES.toString()
@@ -125,7 +126,7 @@ class ClassAndSkillsSelection : Fragment() {
 
         ButtonFAS.setOnClickListener {
             for(i in 1..3){
-                FAS += DiceShots.D6()
+                FAS += DiceRolls.D6()
             }
             ButtonFAS.isClickable = false
             TextFAS.text = FAS.toString()
@@ -134,7 +135,7 @@ class ClassAndSkillsSelection : Fragment() {
 
         ButtonTAG.setOnClickListener {
             for(i in 1..3){
-                TAG += DiceShots.D6()
+                TAG += DiceRolls.D6()
             }
             ButtonTAG.isClickable = false
             TextTAG.text = TAG.toString()
@@ -213,6 +214,29 @@ class ClassAndSkillsSelection : Fragment() {
         confirmButton.setOnClickListener{
             spinner.isEnabled = false
             corpSpinner.isEnabled = false
+            var bundleFOR = TextFOR.text.toString().toInt()
+            var bundleINT = TextINT.text.toString().toInt()
+            var bundleCOS = TextCOS.text.toString().toInt()
+            var bundleMAN = TextMAN.text.toString().toInt()
+            var bundleDES = TextDES.text.toString().toInt()
+            var bundleTAG = TextTAG.text.toString().toInt()
+            var bundleFAS = TextFAS.text.toString().toInt()
+            bundle.putInt("FOR", bundleFOR)
+            bundle.putInt("FAS", bundleFAS)
+            bundle.putInt("DES", bundleDES)
+            bundle.putInt("COS", bundleCOS)
+            bundle.putInt("INT", bundleINT)
+            bundle.putInt("MAN", bundleMAN)
+            bundle.putInt("TAG", bundleTAG)
+
+            bundle.putStringArrayList("class", finalClass)
+            var nextFragment = SkillsCalculatorAndSelection()
+            nextFragment.arguments = bundle
+            var fragmentTransaction : FragmentTransaction = parentFragmentManager.beginTransaction()
+            fragmentTransaction.replace(
+                R.id.fragment_container,
+                nextFragment
+            ).commit()
         }
 
         corpSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -279,8 +303,8 @@ class ClassAndSkillsSelection : Fragment() {
                         finalClass.add("Nobile")
                         finalClass.add("Guerriero")
                         warriorClass(finalClass)
-                        TextINT.text = (TextINT.text.toString().toInt() + DiceShots.D10()).toString()
-                        TextMAN.text = (TextMAN.text.toString().toInt() + (DiceShots.D6() + DiceShots.D6())).toString()
+                        TextINT.text = (TextINT.text.toString().toInt() + DiceRolls.D10()).toString()
+                        TextMAN.text = (TextMAN.text.toString().toInt() + (DiceRolls.D6() + DiceRolls.D6())).toString()
                         TextTAG.text = (TextTAG.text.toString().toInt() + 3).toString()
                         classText.text = finalClassToString(finalClass)
                         corpText.text = "Corporatura longilinea"
@@ -291,8 +315,8 @@ class ClassAndSkillsSelection : Fragment() {
                     "Pan Tang" -> {
                         nationalityTextView.text = resources.getString(R.string.Pan_Tang)
                         finalClass.clear()
-                        TextINT.text = (TextINT.text.toString().toInt() + DiceShots.D8()).toString()
-                        TextMAN.text = (TextMAN.text.toString().toInt() + DiceShots.D8()).toString()
+                        TextINT.text = (TextINT.text.toString().toInt() + DiceRolls.D8()).toString()
+                        TextMAN.text = (TextMAN.text.toString().toInt() + DiceRolls.D8()).toString()
                         TextTAG.text = (TextTAG.text.toString().toInt() + 1).toString()
                         if((TextINT.text.toString().toInt() + TextMAN.text.toString().toInt()) >= 32){
                             finalClass.add("Sacerdote/Stregone")
@@ -300,7 +324,7 @@ class ClassAndSkillsSelection : Fragment() {
                             finalClass.add("Guerriero")
                             warriorClass(finalClass)
                         }
-                        if(DiceShots.D100() in 1..20){
+                        if(DiceRolls.D100() in 1..20){
                             finalClass.add("Nobile")
                         }
                         classText.text = finalClassToString(finalClass)
@@ -312,10 +336,10 @@ class ClassAndSkillsSelection : Fragment() {
                     "Myrrhyn" -> {
                         nationalityTextView.text = resources.getString(R.string.Myrrhyn)
                         finalClass.clear()
-                        TextINT.text = (TextINT.text.toString().toInt() + DiceShots.D6()).toString()
-                        TextMAN.text = (TextMAN.text.toString().toInt() + DiceShots.D6()).toString()
+                        TextINT.text = (TextINT.text.toString().toInt() + DiceRolls.D6()).toString()
+                        TextMAN.text = (TextMAN.text.toString().toInt() + DiceRolls.D6()).toString()
                         if(bundle.get("gender")!! == "Femmina"){
-                            TextFAS.text = (TextFAS.text.toString().toInt() + DiceShots.D6()).toString()
+                            TextFAS.text = (TextFAS.text.toString().toInt() + DiceRolls.D6()).toString()
                         }
                         if(TextTAG.text.toString().toInt() >= 9){
                             TextTAG.text = (TextTAG.text.toString().toInt() - 2).toString()
@@ -348,7 +372,7 @@ class ClassAndSkillsSelection : Fragment() {
                     "Dharijor" -> {
                         classText.text = resources.getString(R.string.Default_Class_Text)
                         nationalityTextView.text = resources.getString(R.string.Dharijor)
-                        TextCOS.text = (TextCOS.text.toString().toInt() + DiceShots.D4()).toString()
+                        TextCOS.text = (TextCOS.text.toString().toInt() + DiceRolls.D4()).toString()
                         finalClass.clear()
                         finalClass.add(classChoice())
                         warriorClass(finalClass)
@@ -365,15 +389,25 @@ class ClassAndSkillsSelection : Fragment() {
                         var corp = corpRoll()
                         corpText.text = "Corporatura\n" + corp
                         bundle.putString("corp", corp)
+                        TextFAS.text = (TextFAS.text.toString().toInt() - DiceRolls.D4()).toString()
+                        TextDES.text = (TextDES.text.toString().toInt() + DiceRolls.D4()).toString()
+                        finalClass.add(classChoice())
+                        warriorClass(finalClass)
+                        merchantClass(finalClass)
+                        sailorClass(finalClass)
                         linearLayout.addView(corpText)
                         linearLayout.addView(confirmButton)
                     }
                     "Shazaar" -> {
                         nationalityTextView.text = resources.getString(R.string.Shazaar)
-                        //TODO
                         finalClass.clear()
                         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, corpNames)
                         corpSpinner.adapter = arrayAdapter
+                        finalClass.add(classChoice())
+                        warriorClass(finalClass)
+                        merchantClass(finalClass)
+                        sailorClass(finalClass)
+                        TextCOS.text = (TextCOS.text.toString().toInt() + DiceRolls.D6()).toString()
                         linearLayout.addView(corpSpinner)
                         linearLayout.addView(confirmButton)
                     }
@@ -381,34 +415,58 @@ class ClassAndSkillsSelection : Fragment() {
                         nationalityTextView.text = resources.getString(R.string.Tarkesh)
                         //TODO
                         finalClass.clear()
+                        TextCOS.text = (TextCOS.text.toString().toInt() + DiceRolls.D4()).toString()
+                        if(TextTAG.text.toString().toInt() >= 10) {
+                            TextTAG.text = (TextTAG.text.toString().toInt() - 1).toString()
+                        }
                         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, corpNamesShortHigh)
                         corpSpinner.adapter = arrayAdapter
+                        finalClass.add(classChoice())
+                        warriorClass(finalClass)
+                        merchantClass(finalClass)
+                        sailorClass(finalClass)
+                        for(i in 0 until finalClass.size){
+                            if(finalClass[i] == "Agricoltore" || finalClass[i] == "Cacciatore"){
+                                finalClass.removeAt(i)
+                                finalClass.add("Marinaio")
+                            }
+                        }
                         linearLayout.addView(corpSpinner)
                         linearLayout.addView(confirmButton)
                     }
                     "Vilmir" -> {
                         nationalityTextView.text = resources.getString(R.string.Vilmir)
-                        //TODO
                         finalClass.clear()
                         val corpTemp = corpRollAlt()
                         corpText.text = corpTemp
+                        finalClass.add(classChoice())
+                        warriorClass(finalClass)
+                        merchantClass(finalClass)
+                        sailorClass(finalClass)
                         linearLayout.addView(corpText)
+                        bundle.putString("corp", corpTemp)
                         linearLayout.addView(confirmButton)
                     }
                     "Ilmiora" -> {
                         nationalityTextView.text = resources.getString(R.string.Ilmiora)
-                        //TODO
+                        TextFAS.text = (TextFAS.text.toString().toInt() + DiceRolls.D4()).toString()
                         finalClass.clear()
                         val corpTemp = corpRollAlt()
                         corpText.text = corpTemp
+                        finalClass.add(classChoice())
+                        warriorClass(finalClass)
+                        merchantClass(finalClass)
+                        sailorClass(finalClass)
                         bundle.putString("corp", corpTemp)
                         linearLayout.addView(corpText)
                         linearLayout.addView(confirmButton)
                     }
                     "Nadsokor" -> {
                         nationalityTextView.text = resources.getString(R.string.Nadsokor)
-                        //TODO
                         finalClass.clear()
+                        finalClass.add("Mendicante")
+                        TextCOS.text = (TextCOS.text.toString().toInt() - DiceRolls.D6()).toString()
+                        TextFAS.text = (TextFAS.text.toString().toInt() - DiceRolls.D6()).toString()
                         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, corpNames)
                         corpSpinner.adapter = arrayAdapter
                         linearLayout.addView(corpSpinner)
@@ -417,8 +475,16 @@ class ClassAndSkillsSelection : Fragment() {
                     "Solitudine Piangente" -> {
                         nationalityTextView.text =
                             resources.getString(R.string.Solitudine_Piangente)
-                        //TODO
+                        TextFOR.text = (TextFOR.text.toString().toInt() + DiceRolls.D6()).toString()
+                        TextDES.text = (TextDES.text.toString().toInt() + DiceRolls.D4()).toString()
+                        TextCOS.text = (TextCOS.text.toString().toInt() + DiceRolls.D6()).toString()
+                        if(TextTAG.text.toString().toInt() >= 10) {
+                            TextTAG.text = (TextTAG.text.toString().toInt() - 1).toString()
+                        }
                         finalClass.clear()
+                        finalClass.add("Guerriero")
+                        finalClass.add("Cacciatore")
+                        warriorClass(finalClass)
                         val corpTemp = "normale"
                         bundle.putString("corp", corpTemp)
                         corpText.text = corpTemp
@@ -429,6 +495,28 @@ class ClassAndSkillsSelection : Fragment() {
                         nationalityTextView.text = resources.getString(R.string.Eshmir)
                         //TODO
                         finalClass.clear()
+                        TextINT.text = (TextINT.text.toString().toInt() + DiceRolls.D4()).toString()
+                        TextMAN.text = (TextMAN.text.toString().toInt() + DiceRolls.D6()).toString()
+                        if(TextTAG.text.toString().toInt() >= 10){
+                            TextTAG.text = (TextTAG.text.toString().toInt() - 2).toString()
+                        }
+                        if((TextINT.text.toString().toInt() + TextMAN.text.toString().toInt()) >= 32){
+                            finalClass.add("Stregone")
+                            finalClass.add("Sacerdote")
+                            if(TextFOR.text.toString().toInt() >= 13){
+                                for(i in 0 until finalClass.size){
+                                    if(finalClass[i] == "Sacerdote"){
+                                        finalClass.removeAt(i)
+                                        finalClass.add("Sacerdote Guerriero")
+                                    }
+                                }
+                            }
+                        } else {
+                            finalClass.add(classChoice())
+                            warriorClass(finalClass)
+                            merchantClass(finalClass)
+                            sailorClass(finalClass)
+                        }
                         val corpTemp = "normale"
                         bundle.putString("corp", corpTemp)
                         corpText.text = corpTemp
@@ -440,72 +528,167 @@ class ClassAndSkillsSelection : Fragment() {
                             resources.getString(R.string.Isola_delle_Città_Purpuree)
                         //TODO
                         finalClass.clear()
+                        TextFOR.text = (TextFOR.text.toString().toInt() + DiceRolls.D4()).toString()
+                        TextCOS.text = (TextCOS.text.toString().toInt() + DiceRolls.D6()).toString()
                         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, corpNamesShortHigh)
                         corpSpinner.adapter = arrayAdapter
+                        finalClass.add(classChoice())
+                        warriorClass(finalClass)
+                        merchantClass(finalClass)
+                        sailorClass(finalClass)
+                        if(finalClass.contains("Marinaio")) {
+                            for (i in 0 until finalClass.size) {
+                                if (finalClass[i] == "Cacciatore") {
+                                    finalClass.removeAt(i)
+                                    finalClass.add("Marinaio")
+                                    sailorClass(finalClass)
+                                }
+                            }
+                        }
                         linearLayout.addView(corpSpinner)
                         linearLayout.addView(confirmButton)
                     }
                     "Argimiliar" -> {
                         nationalityTextView.text = resources.getString(R.string.Argimillar)
-                        //TODO
                         finalClass.clear()
                         val corpTemp = "normale"
                         bundle.putString("corp", corpTemp)
                         corpText.text = corpTemp
+                        finalClass.add(classChoice())
+                        warriorClass(finalClass)
+                        merchantClass(finalClass)
+                        sailorClass(finalClass)
                         linearLayout.addView(corpText)
                         linearLayout.addView(confirmButton)
                     }
                     "Pikarayd" -> {
                         nationalityTextView.text = resources.getString(R.string.Pikarayd)
-                        //TODO
                         finalClass.clear()
+                        TextFOR.text = (
+                                TextFOR.text.toString().toInt() +
+                                        (DiceRolls.D4() + DiceRolls.D4())).toString()
                         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, corpNamesShortHigh)
                         corpSpinner.adapter = arrayAdapter
+                        finalClass.add(classChoice())
+                        warriorClass(finalClass)
+                        merchantClass(finalClass)
+                        sailorClass(finalClass)
                         linearLayout.addView(corpSpinner)
                         linearLayout.addView(confirmButton)
                     }
                     "Lormyr" -> {
                         nationalityTextView.text = resources.getString(R.string.Lormyr)
-                        //TODO
                         finalClass.clear()
+                        TextINT.text = (TextINT.text.toString().toInt() - DiceRolls.D4()).toString()
+                        TextTAG.text = (TextTAG.text.toString().toInt() + 2).toString()
                         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, corpNamesShortHigh)
                         corpSpinner.adapter = arrayAdapter
+                        finalClass.add(classChoice())
+                        warriorClass(finalClass)
+                        merchantClass(finalClass)
+                        sailorClass(finalClass)
                         linearLayout.addView(corpSpinner)
                         linearLayout.addView(confirmButton)
                     }
                     "Filkhar" -> {
                         nationalityTextView.text = resources.getString(R.string.Filkhar)
-                        //TODO
                         finalClass.clear()
+                        TextDES.text = (TextDES.text.toString().toInt() + DiceRolls.D4()).toString()
                         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, corpNamesShortLow)
                         corpSpinner.adapter = arrayAdapter
+                        finalClass.add(classChoice())
+                        warriorClass(finalClass)
+                        merchantClass(finalClass)
+                        sailorClass(finalClass)
                         linearLayout.addView(corpSpinner)
                         linearLayout.addView(confirmButton)
                     }
                     "Oin" -> {
                         nationalityTextView.text = resources.getString(R.string.Oin)
-                        //TODO
                         finalClass.clear()
+                        if(TextINT.text.toString().toInt() >= 10) {
+                            TextINT.text =
+                                (TextINT.text.toString().toInt() - DiceRolls.D6()).toString()
+                        }
+                        if(TextDES.text.toString().toInt() >= 10){
+                            TextDES.text = (TextDES.text.toString().toInt() - DiceRolls.D6()).toString()
+                        }
+                        if(TextMAN.text.toString().toInt() >= 10){
+                            TextMAN.text = (TextMAN.text.toString().toInt() - DiceRolls.D6()).toString()
+                        }
+                        TextCOS.text = (TextCOS.text.toString().toInt() + DiceRolls.D6()).toString()
                         val corpTemp = "robusta"
                         bundle.putString("corp", corpTemp)
                         corpText.text = corpTemp
+                        finalClass.add(classChoice())
+                        warriorClass(finalClass)
+                        merchantClass(finalClass)
+                        if(!finalClass.contains("Agricoltore")){
+                            if(finalClass.contains("Sacerdote")){
+                                finalClass.remove("Sacerdote")
+                            }
+                            if(finalClass.contains("Marianio")){
+                                finalClass.remove("Marinaio")
+                            }
+                            finalClass.add("Agricoltore")
+                        }
                         linearLayout.addView(corpText)
                         linearLayout.addView(confirmButton)
                     }
                     "Yu" -> {
                         nationalityTextView.text = resources.getString(R.string.Yu)
-                        //TODO
                         finalClass.clear()
+                        if(TextINT.text.toString().toInt() >= 10){
+                            TextINT.text = (TextINT.text.toString().toInt() - DiceRolls.D6()).toString()
+                        }
+                        if(TextMAN.text.toString().toInt() >= 10){
+                            TextMAN.text = (TextMAN.text.toString().toInt() - DiceRolls.D6()).toString()
+                        }
+                        if(TextFAS.text.toString().toInt() >= 10){
+                            TextFAS.text = (TextFAS.text.toString().toInt() - DiceRolls.D6()).toString()
+                        }
                         val corpTemp = "robusta"
                         bundle.putString("corp", corpTemp)
                         corpText.text = corpTemp
+                        finalClass.add(classChoice())
+                        warriorClass(finalClass)
+                        if(!finalClass.contains("Cacciatore")){
+                            if(finalClass.contains("Sacerdote")){
+                                finalClass.remove("Sacerdote")
+                            } else if(finalClass.contains("Mercante")){
+                                finalClass.remove("Mercante")
+                            } else if(finalClass.contains("Marianio")){
+                                finalClass.remove("Marianio")
+                            }
+                            finalClass.add("Cacciatore")
+                        }
                         linearLayout.addView(corpText)
                         linearLayout.addView(confirmButton)
                     }
                     "Org" -> {
                         nationalityTextView.text = resources.getString(R.string.Org)
-                        //TODO
                         finalClass.clear()
+                        if(TextMAN.text.toString().toInt() >= 10){
+                            TextMAN.text =
+                                (TextMAN.text.toString().toInt() - (DiceRolls.D4() + DiceRolls.D4())).toString()
+                        }
+                        if(TextFAS.text.toString().toInt() >= 10){
+                            TextFAS.text =
+                                (TextFAS.text.toString().toInt() - (DiceRolls.D4() + DiceRolls.D4())).toString()
+                        }
+                        if(TextDES.text.toString().toInt() >= 10){
+                            TextDES.text =
+                                (TextDES.text.toString().toInt() - DiceRolls.D6()).toString()
+                        }
+                        if(TextTAG.text.toString().toInt() >= 10){
+                            TextTAG.text = (TextTAG.text.toString().toInt() - 2).toString()
+                        }
+                        TextFOR.text = (TextFOR.text.toString().toInt() + DiceRolls.D4()).toString()
+                        TextCOS.text = (TextCOS.text.toString().toInt() + DiceRolls.D8()).toString()
+                        when(DiceRolls.D20()){
+                            1 -> finalClass.add("Nobile")
+                            else -> finalClass.add("Cacciatore")
+                        }
                         val corpTemp = "robusta"
                         bundle.putString("corp", corpTemp)
                         corpText.text = corpTemp
@@ -539,7 +722,7 @@ class ClassAndSkillsSelection : Fragment() {
     }
 
     private fun warriorClass(finalClass: ArrayList<String>){
-        var subClass : Int = DiceShots.D10()
+        var subClass : Int = DiceRolls.D10()
         if(subClass in (9..10)){
             for(i in 0..(finalClass.size - 1)){
                 if(finalClass[i] == "Guerriero"){
@@ -550,7 +733,7 @@ class ClassAndSkillsSelection : Fragment() {
     }
 
     private fun merchantClass(finalClass: ArrayList<String>){
-        var subClass : Int = DiceShots.D10()
+        var subClass : Int = DiceRolls.D10()
         if(subClass in (8..10)){
             for(i in 0..(finalClass.size - 1)){
                 if(finalClass[i] == "Mercante"){
@@ -567,7 +750,7 @@ class ClassAndSkillsSelection : Fragment() {
     }
 
     private fun sailorClass(finalClass: ArrayList<String>){
-        var subClass : Int = DiceShots.D10()
+        var subClass : Int = DiceRolls.D10()
         if(subClass == 9){
             for(i in 0..(finalClass.size - 1)){
                 if(finalClass[i].equals("Marinaio")){
@@ -585,7 +768,7 @@ class ClassAndSkillsSelection : Fragment() {
 
     private fun corpRoll() : String{
         var corp : String = ""
-        val diceShot : Int = DiceShots.D6()
+        val diceShot : Int = DiceRolls.D6()
         when(diceShot){
             1,2 -> corp = "longilinea"
             3,4 -> corp = "normale"
@@ -596,7 +779,7 @@ class ClassAndSkillsSelection : Fragment() {
 
     private fun corpRollAlt() : String{
         var corp : String = ""
-        val diceShot : Int = DiceShots.D6()
+        val diceShot : Int = DiceRolls.D6()
         when(diceShot){
             1 -> corp = "longilinea"
             in (2..5) -> corp = "normale"
@@ -619,7 +802,7 @@ class ClassAndSkillsSelection : Fragment() {
 
     private fun classChoice() : String {
         var classString = ""
-        val tiroClasse: Int = DiceShots.D100()
+        val tiroClasse: Int = DiceRolls.D100()
         when (tiroClasse) {
             in 1..20 -> {
                 classString = "Guerriero"

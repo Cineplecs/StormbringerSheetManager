@@ -1,6 +1,6 @@
 package com.example.stormbringersheetmanager
 
-object DiceShots {
+object DiceRolls {
     fun D100() : Int {
         var diceShot : Int = (1..100).random()
         return diceShot
