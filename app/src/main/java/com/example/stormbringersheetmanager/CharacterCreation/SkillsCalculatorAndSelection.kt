@@ -50,6 +50,18 @@ class SkillsCalculatorAndSelection : Fragment() {
         }
     }
 
+    private fun finalClassToString(finalClass: ArrayList<String>) : String{
+        var finalString = ""
+        for(i in 0..(finalClass.size-1)){
+            if(i == (finalClass.size - 1)){
+                finalString += finalClass[i]
+            } else {
+                finalString += finalClass[i] + "\n"
+            }
+        }
+        return finalString
+    }
+
     private fun Attacco(pairArrayList : ArrayList<Pair<String, Int>>) : Int{
         var attacco = 0
         if(pairArrayList[0].second > 12){
@@ -270,6 +282,10 @@ class SkillsCalculatorAndSelection : Fragment() {
             comunicazione -= (9 - pairArrayList[6].second)
         }
         return comunicazione
+    }
+
+    private fun warriorClass(){
+
     }
 
 }
