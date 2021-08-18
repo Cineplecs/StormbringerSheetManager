@@ -41,7 +41,12 @@ class EquipmentSelection : Fragment() {
             weaponNames[i] = armiMischia[i].name
         }
 
-        val weaponAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, weaponNames)
+        val weaponAdapter = object : ArrayAdapter<String>(requireContext(), R.layout.spinner_item, weaponNames){
+            override fun isEnabled(position: Int): Boolean {
+                //TODO
+                return false
+            }
+        }
         weaponSpinner.adapter = weaponAdapter
 
         weaponSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{

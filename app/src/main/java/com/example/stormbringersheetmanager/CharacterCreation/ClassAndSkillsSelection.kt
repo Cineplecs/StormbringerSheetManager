@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.textservice.TextInfo
 import android.widget.*
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -155,25 +154,6 @@ class ClassAndSkillsSelection : Fragment() {
         val FASBACK = TextFAS.text.toString().toInt()
         val TAGBACK = TextTAG.text.toString().toInt()
 
-        /**
-        val spinner = Spinner(requireContext())
-        spinner.layoutParams = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        )
-        spinner.gravity = Gravity.CENTER
-        val nationalityNames = arrayOf(
-            "Selezionare una nazionalità",
-            "Melniboné", "Pan Tang", "Myrrhyn", "Dharijor", "Jharkor", "Shazaar", "Tarkesh", "Vilmir",
-            "Ilmiora", "Nadsokor", "Solitudine Piangente", "Eshmir", "Isola delle Città Purpuree",
-            "Argimiliar", "Pikarayd", "Lormyr", "Filkhar", "Oin", "Yu", "Org"
-        )
-
-        val nationalityAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, nationalityNames)
-        spinner.adapter = nationalityAdapter
-        linearLayout.addView(spinner)
-        */
-
         val nationalityTextView = TextView(requireContext())
         nationalityTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20F)
         nationalityTextView.layoutParams = LinearLayout.LayoutParams(
@@ -265,29 +245,97 @@ class ClassAndSkillsSelection : Fragment() {
             ).commit()
         }
 
+        val heightSpinner = Spinner(requireContext())
+        heightSpinner.layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+        )
+        //TODO
+
+        var heightWeightPair = heightAndWeight(
+            TextTAG.text.toString().toInt(),
+            corpText.text.toString()
+        )
+
+        var height = heightWeightPair.first
+        println("Prova-1")
+        for(i in height.indices){
+            println(height[i])
+        }
+        var weigth = heightWeightPair.second
+        println("Prova-2")
+        for(i in weigth.indices){
+            println(weigth[i])
+        }
+        //TODO
+
+        corpSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                if(corpText.isVisible){
+                    linearLayout.removeView(corpText)
+                }
+                if(confirmButton.isVisible){
+                    linearLayout.removeView(confirmButton)
+                }
+                if(bundle.containsKey("corp")){
+                    bundle.remove("corp")
+                }
+                if(corpText.isVisible){
+                    linearLayout.removeView(corpText)
+                }
+                bundle.putString("corp", corpSpinner.selectedItem.toString())
+                corpText.text = "Corporatura " + corpSpinner.selectedItem.toString()
+
+                var heightWeightPair2 = heightAndWeight(
+                    TextTAG.text.toString().toInt(),
+                    corpText.text.toString()
+                )
+
+                var height = heightWeightPair2.first
+                println("Prova1-1")
+                for(i in height.indices){
+                    println(height[i])
+                }
+                var weight = heightWeightPair2.second
+                println("Prova1-2 " + weight.size)
+                for(i in weight.indices){
+                    println(weight[i])
+                }
+                //TODO
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
+
+
+
+
         nationalityButton.setOnClickListener(){
-            nationalityNumber = DiceRolls.D20()
+            nationalityNumber = DiceRolls.D100()
             when(nationalityNumber){
-                1 -> nationality = "Malniboné"
-                2 -> nationality = "Pan Tang"
-                3 -> nationality = "Myrrhyn"
-                4 -> nationality = "Dharijor"
-                5 -> nationality = "Jharkor"
-                6 -> nationality = "Shazaar"
-                7 -> nationality = "Tarkesh"
-                8 -> nationality = "Vilmir"
-                9 -> nationality = "Ilmiora"
-                10 -> nationality = "Nadsokor"
-                11 -> nationality = "Solitudine Piangente"
-                12 -> nationality = "Eshmir"
-                13 -> nationality = "Isola delle Città Purpuree"
-                14 -> nationality = "Argimiliar"
-                15 -> nationality = "Pikarayd"
-                16 -> nationality = "Lormyr"
-                17 -> nationality = "Filkhar"
-                18 -> nationality = "Oin"
-                19 -> nationality = "Yu"
-                20 -> nationality = "Org"
+                in 1..2-> nationality = "Malniboné"
+                in 3..5-> nationality = "Pan Tang"
+                in 6..8 -> nationality = "Myrrhyn"
+                in 9..12 -> nationality = "Dharijor"
+                in 13..16 -> nationality = "Jharkor"
+                in 17..24 -> nationality = "Shazaar"
+                in 25..29 -> nationality = "Tarkesh"
+                in 30..37 -> nationality = "Vilmir"
+                in 38..44 -> nationality = "Ilmiora"
+                in 45..49 -> nationality = "Nadsokor"
+                in 50..56 -> nationality = "Solitudine Piangente"
+                in 57..60 -> nationality = "Eshmir"
+                in 61..67 -> nationality = "Isola delle Città Purpuree"
+                in 68..74 -> nationality = "Argimiliar"
+                in 75..81 -> nationality = "Pikarayd"
+                in 82..88 -> nationality = "Lormyr"
+                in 89..95 -> nationality = "Filkhar"
+                in 96..97 -> nationality = "Oin"
+                in 98..99 -> nationality = "Yu"
+                100 -> nationality = "Org"
             }
             nationalityText.text = nationality
             classText.isGone = false
@@ -715,47 +763,25 @@ class ClassAndSkillsSelection : Fragment() {
             classText.text = finalClassToString(finalClass)
             nationalityText.text = nationality
             nationalityButton.isGone = true
+
+
+            var heightWeigthPair = heightAndWeight(
+                TextTAG.text.toString().toInt(),
+                corpText.text.toString()
+            )
+
+            var height = heightWeigthPair.first
+            println("Prova-1")
+            for(i in height.indices){
+                println(height[i])
+            }
+            var weigth = heightWeigthPair.second
+            println("Prova-2")
+            for(i in weigth.indices){
+                println(weigth[i])
+            }
         }
         linearLayout.addView(nationalityButton)
-
-        corpSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                if(corpText.isVisible){
-                    linearLayout.removeView(corpText)
-                }
-                if(confirmButton.isVisible){
-                    linearLayout.removeView(confirmButton)
-                }
-                if(bundle.containsKey("corp")){
-                    bundle.remove("corp")
-                }
-                if(corpText.isVisible){
-                    linearLayout.removeView(corpText)
-                }
-                bundle.putString("corp", corpSpinner.selectedItem.toString())
-                corpText.text = "Corporatura\n" + corpSpinner.selectedItem.toString()
-                linearLayout.addView(corpText)
-                linearLayout.addView(confirmButton)
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-
-        }
-
-        /**
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-
-
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-
-        }*/
 
     }
 
@@ -888,5 +914,283 @@ class ClassAndSkillsSelection : Fragment() {
             }
         }
         return classString
+    }
+
+    private fun emptyAndFillArrayList(arrayList : ArrayList<Int>, minSize : Int, maxSize : Int) : ArrayList<Int>{
+        arrayList.clear()
+        for(i in minSize..maxSize){
+            arrayList.add(i)
+        }
+        return arrayList
+    }
+
+    private fun heightAndWeight(TAG: Int, corp: String): Pair<ArrayList<Int>, IntArray> {
+        var weight: IntArray = IntArray(0)
+        var height = ArrayList<Int>()
+        when (TAG) {
+            1 -> {
+                height = emptyAndFillArrayList(height, 0, 30)
+                if (corp == "Corporatura longilinea") {
+                    weight = (0..5).toIntArray()
+                } else if (corp == "Corporatura normale") {
+                    weight = (0..7).toIntArray()
+                } else if (corp == "Corporatura robusta") {
+                    weight = (0..10).toIntArray()
+                }
+            }
+            2 -> {
+                height = emptyAndFillArrayList(height, 31, 60)
+                if (corp == "Corporatura longilinea") {
+                    weight = (6..10).toIntArray()
+                } else if (corp == "Corporatura normale") {
+                    weight = (8..15).toIntArray()
+                } else if (corp == "Corporatura robusta") {
+                    weight = (11..20).toIntArray()
+                }
+            }
+            3 -> {
+                height = emptyAndFillArrayList(height, 61, 90)
+                if (corp == "Corporatura longilinea") {
+                    weight = (11..15).toIntArray()
+                } else if (corp == "Corporatura normale") {
+                    weight = (15..22).toIntArray()
+                } else if (corp == "Corporatura robusta") {
+                    weight = (21..30).toIntArray()
+                }
+            }
+            4 -> {
+                height = emptyAndFillArrayList(height, 91, 105)
+                if (corp == "Corporatura longilinea") {
+                    weight = (16..20).toIntArray()
+                } else if (corp == "Corporatura normale") {
+                    weight = (23..30).toIntArray()
+                } else if (corp == "Corporatura robusta") {
+                    weight = (31..40).toIntArray()
+                }
+            }
+            5 -> {
+                height = emptyAndFillArrayList(height, 106, 120)
+                if (corp == "Corporatura longilinea") {
+                    weight = (21..25).toIntArray()
+                } else if (corp == "Corporatura normale") {
+                    weight = (31..37).toIntArray()
+                } else if (corp == "Corporatura robusta") {
+                    weight = (41..50).toIntArray()
+                }
+            }
+            6 -> {
+                height = emptyAndFillArrayList(height, 121, 135)
+                if (corp == "Corporatura longilinea") {
+                    weight = (26..30).toIntArray()
+                } else if (corp == "Corporatura normale") {
+                    weight = (38..45).toIntArray()
+                } else if (corp == "Corporatura robusta") {
+                    weight = (51..60).toIntArray()
+                }
+            }
+            7 -> {
+                height = emptyAndFillArrayList(height, 136, 150)
+                if (corp == "Corporatura longilinea") {
+                    weight = (31..35).toIntArray()
+                } else if (corp == "Corporatura normale") {
+                    weight = (46..52).toIntArray()
+                } else if (corp == "Corporatura robusta") {
+                    weight = (61..70).toIntArray()
+                }
+            }
+            8 -> {
+                height = emptyAndFillArrayList(height, 151, 155)
+                if (corp == "Corporatura longilinea") {
+                    weight = (36..40).toIntArray()
+                } else if (corp == "Corporatura normale") {
+                    weight = (53..60).toIntArray()
+                } else if (corp == "Corporatura robusta") {
+                    weight = (71..80).toIntArray()
+                }
+            }
+            9 -> {
+                height = emptyAndFillArrayList(height, 156, 160)
+                if (corp == "Corporatura longilinea") {
+                    weight = (41..45).toIntArray()
+                } else if (corp == "Corporatura normale") {
+                    weight = (61..67).toIntArray()
+                } else if (corp == "Corporatura robusta") {
+                    weight = (81..90).toIntArray()
+                }
+            }
+            10 -> {
+                height = emptyAndFillArrayList(height, 161, 165)
+                if (corp == "Corporatura longilinea") {
+                    weight = (46..50).toIntArray()
+                } else if (corp == "Corporatura normale") {
+                    weight = (68..75).toIntArray()
+                } else if (corp == "Corporatura robusta") {
+                    weight = (91..100).toIntArray()
+                }
+            }
+            11 -> {
+                height = emptyAndFillArrayList(height, 166, 170)
+                if (corp == "Corporatura longilinea") {
+                    weight = (51..55).toIntArray()
+                } else if (corp == "Corporatura normale") {
+                    weight = (76..82).toIntArray()
+                } else if (corp == "Corporatura robusta") {
+                    weight = (101..110).toIntArray()
+                }
+            }
+            12 -> {
+                height = emptyAndFillArrayList(height, 171, 175)
+                if (corp == "Corporatura longilinea") {
+                    weight = (56..60).toIntArray()
+                } else if (corp == "Corporatura normale") {
+                    weight = (83..90).toIntArray()
+                } else if (corp == "Corporatura robusta") {
+                    weight = (111..120).toIntArray()
+                }
+            }
+            13 -> {
+                height = emptyAndFillArrayList(height, 176, 180)
+                if (corp == "Corporatura longilinea") {
+                    weight = (61..65).toIntArray()
+                } else if (corp == "Corporatura normale") {
+                    weight = (91..97).toIntArray()
+                } else if (corp == "Corporatura robusta") {
+                    weight = (121..130).toIntArray()
+                }
+            }
+            14 -> {
+                height = emptyAndFillArrayList(height, 181, 185)
+                if (corp == "Corporatura longilinea") {
+                    weight = (66..70).toIntArray()
+                } else if (corp == "Corporatura normale") {
+                    weight = (98..105).toIntArray()
+                } else if (corp == "Corporatura robusta") {
+                    weight = (131..140).toIntArray()
+                }
+            }
+            15 -> {
+                height = emptyAndFillArrayList(height, 186, 190)
+                if (corp == "Corporatura longilinea") {
+                    weight = (71..75).toIntArray()
+                } else if (corp == "Corporatura normale") {
+                    weight = (106..112).toIntArray()
+                } else if (corp == "Corporatura robusta") {
+                    weight = (141..150).toIntArray()
+                }
+            }
+            16 -> {
+                height = emptyAndFillArrayList(height, 191, 195)
+                if (corp == "Corporatura longilinea") {
+                    weight = (76..80).toIntArray()
+                } else if (corp == "Corporatura normale") {
+                    weight = (113..120).toIntArray()
+                } else if (corp == "Corporatura robusta") {
+                    weight = (151..160).toIntArray()
+                }
+            }
+            17 -> {
+                height = emptyAndFillArrayList(height, 196, 200)
+                if (corp == "Corporatura longilinea") {
+                    weight = (81..85).toIntArray()
+                } else if (corp == "Corporatura normale") {
+                    weight = (121..127).toIntArray()
+                } else if (corp == "Corporatura robusta") {
+                    weight = (161..170).toIntArray()
+                }
+            }
+            18 -> {
+                height = emptyAndFillArrayList(height, 201, 205)
+                if (corp == "Corporatura longilinea") {
+                    weight = (86..90).toIntArray()
+                } else if (corp == "Corporatura normale") {
+                    weight = (128..135).toIntArray()
+                } else if (corp == "Corporatura robusta") {
+                    weight = (171..180).toIntArray()
+                }
+            }
+            19 -> {
+                height = emptyAndFillArrayList(height, 206, 210)
+                if (corp == "Corporatura longilinea") {
+                    weight = (91..95).toIntArray()
+                } else if (corp == "Corporatura normale") {
+                    weight = (136..142).toIntArray()
+                } else if (corp == "Corporatura robusta") {
+                    weight = (181..190).toIntArray()
+                }
+            }
+            20 -> {
+                height = emptyAndFillArrayList(height, 211, 215)
+                if (corp == "Corporatura longilinea") {
+                    weight = (96..100).toIntArray()
+                } else if (corp == "Corporatura normale") {
+                    weight = (143..150).toIntArray()
+                } else if (corp == "Corporatura robusta") {
+                    weight = (191..200).toIntArray()
+                }
+            }
+            21 -> {
+                height = emptyAndFillArrayList(height, 216, 220)
+                if (corp == "Corporatura longilinea") {
+                    weight = (101..105).toIntArray()
+                } else if (corp == "Corporatura normale") {
+                    weight = (151..157).toIntArray()
+                } else if (corp == "Corporatura robusta") {
+                    weight = (201..210).toIntArray()
+                }
+            }
+            22 -> {
+                height = emptyAndFillArrayList(height, 221, 225)
+                if (corp == "Corporatura longilinea") {
+                    weight = (106..110).toIntArray()
+                } else if (corp == "Corporatura normale") {
+                    weight = (158..165).toIntArray()
+                } else if (corp == "Corporatura robusta") {
+                    weight = (211..220).toIntArray()
+                }
+            }
+            23 -> {
+                height = emptyAndFillArrayList(height, 226, 230)
+                if (corp == "Corporatura longilinea") {
+                    weight = (111..115).toIntArray()
+                } else if (corp == "Corporatura normale") {
+                    weight = (166..172).toIntArray()
+                } else if (corp == "Corporatura robusta") {
+                    weight = (221..230).toIntArray()
+                }
+            }
+            24 -> {
+                height = emptyAndFillArrayList(height, 231, 235)
+                if (corp == "Corporatura longilinea") {
+                    weight = (116..120).toIntArray()
+                } else if (corp == "Corporatura normale") {
+                    weight = (173..180).toIntArray()
+                } else if (corp == "Corporatura robusta") {
+                    weight = (231..240).toIntArray()
+                }
+            }
+            else -> {
+                height = emptyAndFillArrayList(height, 236, 240)
+                if (corp == "Corporatura longilinea") {
+                    weight = (121..125).toIntArray()
+                } else if (corp == "Corporatura normale") {
+                    weight = (181..187).toIntArray()
+                } else if (corp == "Corporatura robusta") {
+                    weight = (241..250).toIntArray()
+                }
+            }
+        }
+        println("Vediamo se sta merda fin qua arriva: " + weight.size)
+        return Pair(height, weight)
+    }
+
+    fun IntRange.toIntArray(): IntArray {
+        if (last < first)
+            return IntArray(0)
+
+        val result = IntArray(last - first + 1)
+        var index = 0
+        for (element in this)
+            result[index++] = element
+        return result
     }
 }

@@ -285,7 +285,7 @@ class SkillsCalculatorAndSelection : Fragment() {
     }
 
     private fun warriorClass(){
-
+        //TODO
     }
 
 }
