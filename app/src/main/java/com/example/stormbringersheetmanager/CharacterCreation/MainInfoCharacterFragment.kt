@@ -53,7 +53,7 @@ class MainInfoCharacterFragment : Fragment() {
                         bundle.putInt("age", ageSpinner.selectedItem.toString().toInt())
                         bundle.putString("characterName", nameEditText.text.toString())
                         bundle.putString("playerName", playerEditText.text.toString())
-                        var nextFragment = ClassAndSkillsSelection()
+                        var nextFragment = ClassSelection()
                         nextFragment.arguments = bundle
                         var fragmentTransaction : FragmentTransaction = parentFragmentManager.beginTransaction()
                         fragmentTransaction.replace(

@@ -14,7 +14,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.stormbringersheetmanager.DiceRolls
 import com.example.stormbringersheetmanager.R
 
-class ClassAndSkillsSelection : Fragment() {
+class ClassSelection : Fragment() {
 
     private lateinit var TextINT : TextView
     private lateinit var ButtonINT : Button
@@ -250,7 +250,63 @@ class ClassAndSkillsSelection : Fragment() {
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT,
         )
+
+        val weightSpinner = Spinner(requireContext())
+        weightSpinner.layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+        )
         //TODO
+
+        val heightText = TextView(requireContext())
+        heightText.layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        heightText.text = "Selezionare un'altezza"
+        heightText.setTextColor(resources.getColor(android.R.color.black))
+        heightText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20F)
+        heightText.setPadding(15, 15, 15, 15)
+        heightText.gravity = Gravity.CENTER
+
+        val weightText = TextView(requireContext())
+        weightText.layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        weightText.text = "Selezionare un peso"
+        weightText.setTextColor(resources.getColor(android.R.color.black))
+        weightText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20F)
+        weightText.setPadding(15, 15, 15, 15)
+        weightText.gravity = Gravity.CENTER
+
+        heightSpinner.onItemSelectedListener = object  : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                if(bundle.containsKey("height")){
+                    bundle.remove("height")
+                }
+                bundle.putInt("height", heightSpinner.selectedItem.toString().toInt())
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
+
+        weightSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                if(bundle.containsKey("weight")){
+                    bundle.remove("weight")
+                }
+                bundle.putInt("weight", weightSpinner.selectedItem.toString().toInt())
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
 
         var heightWeightPair = heightAndWeight(
             TextTAG.text.toString().toInt(),
@@ -267,7 +323,15 @@ class ClassAndSkillsSelection : Fragment() {
         for(i in weigth.indices){
             println(weigth[i])
         }
+
         //TODO
+        var heightAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, height)
+        heightSpinner.adapter = heightAdapter
+
+        var weightAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, weigth.toList())
+        weightSpinner.adapter = weightAdapter
+
+
 
         corpSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -283,6 +347,19 @@ class ClassAndSkillsSelection : Fragment() {
                 if(corpText.isVisible){
                     linearLayout.removeView(corpText)
                 }
+                if(heightSpinner.isVisible) {
+                    linearLayout.removeView(heightSpinner)
+                }
+                if(heightText.isVisible){
+                    linearLayout.removeView(heightText)
+                }
+                if(weightSpinner.isVisible) {
+                    linearLayout.removeView(weightSpinner)
+                }
+                if(weightText.isVisible){
+                    linearLayout.removeView(weightText)
+                }
+
                 bundle.putString("corp", corpSpinner.selectedItem.toString())
                 corpText.text = "Corporatura " + corpSpinner.selectedItem.toString()
 
@@ -291,17 +368,28 @@ class ClassAndSkillsSelection : Fragment() {
                     corpText.text.toString()
                 )
 
-                var height = heightWeightPair2.first
+                var height2 = heightWeightPair2.first
                 println("Prova1-1")
-                for(i in height.indices){
+                for(i in height2.indices){
                     println(height[i])
                 }
-                var weight = heightWeightPair2.second
-                println("Prova1-2 " + weight.size)
-                for(i in weight.indices){
-                    println(weight[i])
+                var weight2 = heightWeightPair2.second
+                println("Prova1-2 " + weight2.size)
+                for(i in weight2.indices){
+                    println(weight2[i])
                 }
                 //TODO
+                heightAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, height2)
+                heightSpinner.adapter = heightAdapter
+
+                weightAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, weight2.toList())
+                weightSpinner.adapter = weightAdapter
+
+                linearLayout.addView(heightText)
+                linearLayout.addView(heightSpinner)
+                linearLayout.addView(weightText)
+                linearLayout.addView(weightSpinner)
+                linearLayout.addView(confirmButton)
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -310,13 +398,10 @@ class ClassAndSkillsSelection : Fragment() {
 
         }
 
-
-
-
         nationalityButton.setOnClickListener(){
             nationalityNumber = DiceRolls.D100()
             when(nationalityNumber){
-                in 1..2-> nationality = "Malniboné"
+                in 1..2-> nationality = "Melniboné"
                 in 3..5-> nationality = "Pan Tang"
                 in 6..8 -> nationality = "Myrrhyn"
                 in 9..12 -> nationality = "Dharijor"
@@ -352,6 +437,18 @@ class ClassAndSkillsSelection : Fragment() {
             if(corpText.isVisible){
                 linearLayout.removeView(corpText)
             }
+            if(heightSpinner.isVisible){
+                linearLayout.removeView(heightSpinner)
+            }
+            if(heightText.isVisible){
+                linearLayout.removeView(heightText)
+            }
+            if(weightSpinner.isVisible){
+                linearLayout.removeView(weightSpinner)
+            }
+            if(weightText.isVisible){
+                linearLayout.removeView(weightText)
+            }
 
             TextFOR.text = FORBACK.toString()
             TextINT.text = INTBACK.toString()
@@ -375,6 +472,10 @@ class ClassAndSkillsSelection : Fragment() {
                     corpText.text = "Corporatura longilinea"
                     bundle.putString("corp", "longilinea")
                     linearLayout.addView(corpText)
+                    linearLayout.addView(heightText)
+                    linearLayout.addView(heightSpinner)
+                    linearLayout.addView(weightText)
+                    linearLayout.addView(weightSpinner)
                     linearLayout.addView(confirmButton)
                 }
                 "Pan Tang" -> {
@@ -396,6 +497,10 @@ class ClassAndSkillsSelection : Fragment() {
                     corpText.text = "Corporatura robusta"
                     bundle.putString("corp", "robusta")
                     linearLayout.addView(corpText)
+                    linearLayout.addView(heightText)
+                    linearLayout.addView(heightSpinner)
+                    linearLayout.addView(weightText)
+                    linearLayout.addView(weightSpinner)
                     linearLayout.addView(confirmButton)
                 }
                 "Myrrhyn" -> {
@@ -432,6 +537,10 @@ class ClassAndSkillsSelection : Fragment() {
                     corpText.text = "Corporatura longilinea"
                     bundle.putString("corp", "longilinea")
                     linearLayout.addView(corpText)
+                    linearLayout.addView(heightText)
+                    linearLayout.addView(heightSpinner)
+                    linearLayout.addView(weightText)
+                    linearLayout.addView(weightSpinner)
                     linearLayout.addView(confirmButton)
                 }
                 "Dharijor" -> {
@@ -446,6 +555,10 @@ class ClassAndSkillsSelection : Fragment() {
                     val arrayAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, corpNames)
                     corpSpinner.adapter = arrayAdapter
                     linearLayout.addView(corpSpinner)
+                    linearLayout.addView(heightText)
+                    linearLayout.addView(heightSpinner)
+                    linearLayout.addView(weightText)
+                    linearLayout.addView(weightSpinner)
                     linearLayout.addView(confirmButton)
                 }
                 "Jharkor" -> {
@@ -461,6 +574,10 @@ class ClassAndSkillsSelection : Fragment() {
                     merchantClass(finalClass)
                     sailorClass(finalClass)
                     linearLayout.addView(corpText)
+                    linearLayout.addView(heightText)
+                    linearLayout.addView(heightSpinner)
+                    linearLayout.addView(weightText)
+                    linearLayout.addView(weightSpinner)
                     linearLayout.addView(confirmButton)
                 }
                 "Shazaar" -> {
@@ -474,6 +591,10 @@ class ClassAndSkillsSelection : Fragment() {
                     sailorClass(finalClass)
                     TextCOS.text = (TextCOS.text.toString().toInt() + DiceRolls.D6()).toString()
                     linearLayout.addView(corpSpinner)
+                    linearLayout.addView(heightText)
+                    linearLayout.addView(heightSpinner)
+                    linearLayout.addView(weightText)
+                    linearLayout.addView(weightSpinner)
                     linearLayout.addView(confirmButton)
                 }
                 "Tarkesh" -> {
@@ -497,6 +618,10 @@ class ClassAndSkillsSelection : Fragment() {
                         }
                     }
                     linearLayout.addView(corpSpinner)
+                    linearLayout.addView(heightText)
+                    linearLayout.addView(heightSpinner)
+                    linearLayout.addView(weightText)
+                    linearLayout.addView(weightSpinner)
                     linearLayout.addView(confirmButton)
                 }
                 "Vilmir" -> {
@@ -510,6 +635,10 @@ class ClassAndSkillsSelection : Fragment() {
                     sailorClass(finalClass)
                     linearLayout.addView(corpText)
                     bundle.putString("corp", corpTemp)
+                    linearLayout.addView(heightText)
+                    linearLayout.addView(heightSpinner)
+                    linearLayout.addView(weightText)
+                    linearLayout.addView(weightSpinner)
                     linearLayout.addView(confirmButton)
                 }
                 "Ilmiora" -> {
@@ -524,6 +653,10 @@ class ClassAndSkillsSelection : Fragment() {
                     sailorClass(finalClass)
                     bundle.putString("corp", corpTemp)
                     linearLayout.addView(corpText)
+                    linearLayout.addView(heightText)
+                    linearLayout.addView(heightSpinner)
+                    linearLayout.addView(weightText)
+                    linearLayout.addView(weightSpinner)
                     linearLayout.addView(confirmButton)
                 }
                 "Nadsokor" -> {
@@ -535,6 +668,10 @@ class ClassAndSkillsSelection : Fragment() {
                     val arrayAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, corpNames)
                     corpSpinner.adapter = arrayAdapter
                     linearLayout.addView(corpSpinner)
+                    linearLayout.addView(heightText)
+                    linearLayout.addView(heightSpinner)
+                    linearLayout.addView(weightText)
+                    linearLayout.addView(weightSpinner)
                     linearLayout.addView(confirmButton)
                 }
                 "Solitudine Piangente" -> {
@@ -554,6 +691,10 @@ class ClassAndSkillsSelection : Fragment() {
                     bundle.putString("corp", corpTemp)
                     corpText.text = "Corporatura " + corpTemp
                     linearLayout.addView(corpText)
+                    linearLayout.addView(heightText)
+                    linearLayout.addView(heightSpinner)
+                    linearLayout.addView(weightText)
+                    linearLayout.addView(weightSpinner)
                     linearLayout.addView(confirmButton)
                 }
                 "Eshmir" -> {
@@ -586,6 +727,10 @@ class ClassAndSkillsSelection : Fragment() {
                     bundle.putString("corp", corpTemp)
                     corpText.text = "Corporatura " + corpTemp
                     linearLayout.addView(corpText)
+                    linearLayout.addView(heightText)
+                    linearLayout.addView(heightSpinner)
+                    linearLayout.addView(weightText)
+                    linearLayout.addView(weightSpinner)
                     linearLayout.addView(confirmButton)
                 }
                 "Isola delle Città Purpuree" -> {
@@ -610,6 +755,10 @@ class ClassAndSkillsSelection : Fragment() {
                         }
                     }
                     linearLayout.addView(corpSpinner)
+                    linearLayout.addView(heightText)
+                    linearLayout.addView(heightSpinner)
+                    linearLayout.addView(weightText)
+                    linearLayout.addView(weightSpinner)
                     linearLayout.addView(confirmButton)
                 }
                 "Argimiliar" -> {
@@ -623,6 +772,10 @@ class ClassAndSkillsSelection : Fragment() {
                     merchantClass(finalClass)
                     sailorClass(finalClass)
                     linearLayout.addView(corpText)
+                    linearLayout.addView(heightText)
+                    linearLayout.addView(heightSpinner)
+                    linearLayout.addView(weightText)
+                    linearLayout.addView(weightSpinner)
                     linearLayout.addView(confirmButton)
                 }
                 "Pikarayd" -> {
@@ -638,6 +791,10 @@ class ClassAndSkillsSelection : Fragment() {
                     merchantClass(finalClass)
                     sailorClass(finalClass)
                     linearLayout.addView(corpSpinner)
+                    linearLayout.addView(heightText)
+                    linearLayout.addView(heightSpinner)
+                    linearLayout.addView(weightText)
+                    linearLayout.addView(weightSpinner)
                     linearLayout.addView(confirmButton)
                 }
                 "Lormyr" -> {
@@ -652,6 +809,10 @@ class ClassAndSkillsSelection : Fragment() {
                     merchantClass(finalClass)
                     sailorClass(finalClass)
                     linearLayout.addView(corpSpinner)
+                    linearLayout.addView(heightText)
+                    linearLayout.addView(heightSpinner)
+                    linearLayout.addView(weightText)
+                    linearLayout.addView(weightSpinner)
                     linearLayout.addView(confirmButton)
                 }
                 "Filkhar" -> {
@@ -665,6 +826,10 @@ class ClassAndSkillsSelection : Fragment() {
                     merchantClass(finalClass)
                     sailorClass(finalClass)
                     linearLayout.addView(corpSpinner)
+                    linearLayout.addView(heightText)
+                    linearLayout.addView(heightSpinner)
+                    linearLayout.addView(weightText)
+                    linearLayout.addView(weightSpinner)
                     linearLayout.addView(confirmButton)
                 }
                 "Oin" -> {
@@ -697,6 +862,10 @@ class ClassAndSkillsSelection : Fragment() {
                         finalClass.add("Agricoltore")
                     }
                     linearLayout.addView(corpText)
+                    linearLayout.addView(heightText)
+                    linearLayout.addView(heightSpinner)
+                    linearLayout.addView(weightText)
+                    linearLayout.addView(weightSpinner)
                     linearLayout.addView(confirmButton)
                 }
                 "Yu" -> {
@@ -727,6 +896,10 @@ class ClassAndSkillsSelection : Fragment() {
                         finalClass.add("Cacciatore")
                     }
                     linearLayout.addView(corpText)
+                    linearLayout.addView(heightText)
+                    linearLayout.addView(heightSpinner)
+                    linearLayout.addView(weightText)
+                    linearLayout.addView(weightSpinner)
                     linearLayout.addView(confirmButton)
                 }
                 "Org" -> {
@@ -757,6 +930,10 @@ class ClassAndSkillsSelection : Fragment() {
                     bundle.putString("corp", corpTemp)
                     corpText.text = "Corporatura " + corpTemp
                     linearLayout.addView(corpText)
+                    linearLayout.addView(heightText)
+                    linearLayout.addView(heightSpinner)
+                    linearLayout.addView(weightText)
+                    linearLayout.addView(weightSpinner)
                     linearLayout.addView(confirmButton)
                 }
             }
@@ -780,6 +957,10 @@ class ClassAndSkillsSelection : Fragment() {
             for(i in weigth.indices){
                 println(weigth[i])
             }
+
+            heightAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, height)
+            heightSpinner.adapter = heightAdapter
+
         }
         linearLayout.addView(nationalityButton)
 
