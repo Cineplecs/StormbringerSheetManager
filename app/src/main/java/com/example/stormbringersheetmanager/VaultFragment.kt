@@ -11,6 +11,7 @@ import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.Navigation
 import com.example.stormbringersheetmanager.CharacterCreation.MainInfoCharacterFragment
 import android.widget.ArrayAdapter as ArrayAdapter
 
@@ -34,18 +35,7 @@ class VaultFragment : Fragment() {
         viewButton = view.findViewById(R.id.viewButton)
 
         createButton.setOnClickListener(){
-            var fragmentTransaction : FragmentTransaction = parentFragmentManager.beginTransaction()
-            fragmentTransaction.replace(
-                R.id.fragment_container,
-                MainInfoCharacterFragment()
-            ).commit()
-
-            /**var fragmentTransaction : FragmentTransaction = parentFragmentManager.beginTransaction()
-            fragmentTransaction.replace(
-                R.id.fragment_container,
-                <nome classe fragment e parentesi>()
-            ).commit()
-            */
+            Navigation.findNavController(view).navigate(R.id.VaultToCreation)
         }
 
         viewButton.setOnClickListener(){

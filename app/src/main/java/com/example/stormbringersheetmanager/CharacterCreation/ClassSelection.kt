@@ -11,6 +11,7 @@ import android.widget.*
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.Navigation
 import com.example.stormbringersheetmanager.DiceRolls
 import com.example.stormbringersheetmanager.R
 
@@ -144,7 +145,8 @@ class ClassSelection : Fragment() {
         return view
     }
 
-    private fun nationalityChoice(linearLayout : LinearLayout, finalClass: ArrayList<String>, bundle: Bundle) {
+    private fun nationalityChoice(linearLayout : LinearLayout, finalClass: ArrayList<String>,
+                                  bundle: Bundle) {
 
         val FORBACK = TextFOR.text.toString().toInt()
         val COSBACK = TextCOS.text.toString().toInt()
@@ -236,13 +238,7 @@ class ClassSelection : Fragment() {
             bundle.putString("nationality", nationalityText.text.toString())
 
             bundle.putStringArrayList("class", finalClass)
-            var nextFragment = EquipmentSelection()
-            nextFragment.arguments = bundle
-            var fragmentTransaction : FragmentTransaction = parentFragmentManager.beginTransaction()
-            fragmentTransaction.replace(
-                R.id.fragment_container,
-                nextFragment
-            ).commit()
+            Navigation.findNavController(requireView()).navigate(R.id.ClassToSkills, bundle)
         }
 
         val heightSpinner = Spinner(requireContext())

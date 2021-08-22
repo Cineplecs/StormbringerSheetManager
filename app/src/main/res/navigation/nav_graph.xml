@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.example.stormbringersheetmanager.AccountFragment"
+        android:label="Account"
+        tools:layout="@layout/fragment_games">
+        <action
+            android:id="@+id/AccountToLogin"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/AccountToRegister"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.stormbringersheetmanager.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.stormbringersheetmanager.RegisterFragment"
+        android:label="Register"
+        tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/vaultFragment"
+        android:name="com.example.stormbringersheetmanager.VaultFragment"
+        android:label="Vault">
+        <action
+            android:id="@+id/VaultToCreation"
+            app:destination="@id/CharacterCreation" />
+    </fragment>
+    <fragment
+        android:id="@+id/gamesFragment"
+        android:name="com.example.stormbringersheetmanager.GamesFragment"
+        android:label="Games" />
+    <navigation android:id="@+id/CharacterCreation"
+        app:startDestination="@id/mainInfoCharacterFragment">
+        <fragment
+            android:id="@+id/classSelection"
+            android:name="com.example.stormbringersheetmanager.CharacterCreation.ClassSelection"
+            android:label="ClassSelection"
+            tools:layout="@layout/fragment_class_and_skills_selection">
+            <action
+                android:id="@+id/ClassToSkills"
+                app:destination="@id/skillsCalculatorAndSelection" />
+        </fragment>
+        <fragment
+            android:id="@+id/equipmentSelection"
+            android:name="com.example.stormbringersheetmanager.CharacterCreation.EquipmentSelection"
+            android:label="Equipment"
+            tools:layout="@layout/fragment_equipment_selection" />
+        <fragment
+            android:id="@+id/skillsCalculatorAndSelection"
+            android:name="com.example.stormbringersheetmanager.CharacterCreation.SkillsCalculatorAndSelection"
+            android:label="CalculatorAndSelection"
+            tools:layout="@layout/fragment_skills_calculator_and_selection">
+            <action
+                android:id="@+id/SkillsToEquipment"
+                app:destination="@id/equipmentSelection" />
+        </fragment>
+        <fragment
+            android:id="@+id/mainInfoCharacterFragment"
+            android:name="com.example.stormbringersheetmanager.CharacterCreation.MainInfoCharacterFragment"
+            android:label="MainInfo"
+            tools:layout="@layout/fragment_main_info_character">
+            <action
+                android:id="@+id/InfoToClass"
+                app:destination="@id/classSelection" />
+        </fragment>
+    </navigation>
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.stormbringersheetmanager.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/HomeToVault"
+            app:destination="@id/vaultFragment" />
+        <action
+            android:id="@+id/HomeToGames"
+            app:destination="@id/gamesFragment" />
+        <action
+            android:id="@+id/HomeToAccount"
+            app:destination="@id/accountFragment" />
+    </fragment>
+</navigation>

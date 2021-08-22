@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.Navigation
 import com.example.stormbringersheetmanager.R
 
 class MainInfoCharacterFragment : Fragment() {
@@ -53,13 +54,7 @@ class MainInfoCharacterFragment : Fragment() {
                         bundle.putInt("age", ageSpinner.selectedItem.toString().toInt())
                         bundle.putString("characterName", nameEditText.text.toString())
                         bundle.putString("playerName", playerEditText.text.toString())
-                        var nextFragment = ClassSelection()
-                        nextFragment.arguments = bundle
-                        var fragmentTransaction : FragmentTransaction = parentFragmentManager.beginTransaction()
-                        fragmentTransaction.replace(
-                            R.id.fragment_container,
-                            nextFragment
-                        ).commit()
+                        Navigation.findNavController(view).navigate(R.id.InfoToClass, bundle)
                     } else {Toast.makeText(requireContext(), "Non è stato selezionato un genere!", Toast.LENGTH_SHORT).show()}
                 } else {Toast.makeText(requireContext(), "Non è stato selezionato un nome per il giocatore!", Toast.LENGTH_SHORT).show()}
             } else {Toast.makeText(requireContext(), "Non è stato selezionato un nome per il personaggio!", Toast.LENGTH_SHORT).show()}
