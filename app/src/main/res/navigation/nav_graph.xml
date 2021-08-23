@@ -40,11 +40,12 @@
         android:name="com.example.stormbringersheetmanager.GamesFragment"
         android:label="Games" />
     <navigation android:id="@+id/CharacterCreation"
-        app:startDestination="@id/mainInfoCharacterFragment">
+        app:startDestination="@id/mainInfoCharacterFragment"
+        >
         <fragment
             android:id="@+id/classSelection"
             android:name="com.example.stormbringersheetmanager.CharacterCreation.ClassSelection"
-            android:label="ClassSelection"
+            android:label="Class"
             tools:layout="@layout/fragment_class_and_skills_selection">
             <action
                 android:id="@+id/ClassToSkills"
@@ -58,7 +59,7 @@
         <fragment
             android:id="@+id/skillsCalculatorAndSelection"
             android:name="com.example.stormbringersheetmanager.CharacterCreation.SkillsCalculatorAndSelection"
-            android:label="CalculatorAndSelection"
+            android:label="Skill"
             tools:layout="@layout/fragment_skills_calculator_and_selection">
             <action
                 android:id="@+id/SkillsToEquipment"
@@ -67,7 +68,7 @@
         <fragment
             android:id="@+id/mainInfoCharacterFragment"
             android:name="com.example.stormbringersheetmanager.CharacterCreation.MainInfoCharacterFragment"
-            android:label="MainInfo"
+            android:label="Main Info"
             tools:layout="@layout/fragment_main_info_character">
             <action
                 android:id="@+id/InfoToClass"

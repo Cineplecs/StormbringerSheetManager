@@ -252,7 +252,6 @@ class ClassSelection : Fragment() {
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT,
         )
-        //TODO
 
         val heightText = TextView(requireContext())
         heightText.layoutParams = LinearLayout.LayoutParams(
@@ -320,7 +319,6 @@ class ClassSelection : Fragment() {
             println(weigth[i])
         }
 
-        //TODO
         var heightAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, height)
         heightSpinner.adapter = heightAdapter
 
@@ -595,7 +593,6 @@ class ClassSelection : Fragment() {
                 }
                 "Tarkesh" -> {
                     nationalityTextView.text = resources.getString(R.string.Tarkesh)
-                    //TODO
                     finalClass.clear()
                     TextCOS.text = (TextCOS.text.toString().toInt() + DiceRolls.D4()).toString()
                     if(TextTAG.text.toString().toInt() >= 10) {
@@ -695,7 +692,6 @@ class ClassSelection : Fragment() {
                 }
                 "Eshmir" -> {
                     nationalityTextView.text = resources.getString(R.string.Eshmir)
-                    //TODO
                     finalClass.clear()
                     TextINT.text = (TextINT.text.toString().toInt() + DiceRolls.D4()).toString()
                     TextMAN.text = (TextMAN.text.toString().toInt() + DiceRolls.D6()).toString()
@@ -957,6 +953,9 @@ class ClassSelection : Fragment() {
             heightAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, height)
             heightSpinner.adapter = heightAdapter
 
+            weightAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, weigth.toList())
+            weightSpinner.adapter = weightAdapter
+
         }
         linearLayout.addView(nationalityButton)
 
@@ -1102,7 +1101,7 @@ class ClassSelection : Fragment() {
     }
 
     private fun heightAndWeight(TAG: Int, corp: String): Pair<ArrayList<Int>, IntArray> {
-        var weight: IntArray = IntArray(0)
+        var weight = IntArray(0)
         var height = ArrayList<Int>()
         when (TAG) {
             1 -> {
