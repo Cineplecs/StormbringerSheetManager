@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="20dp"
             android:text="Stats and Class calculator"
-            android:textSize="30sp" />
+            android:textSize="20sp" />
 
         <LinearLayout
             android:id="@+id/linearLayoutHorizonatlClassFOR"
@@ -28,18 +28,18 @@
 
             <TextView
                 android:id="@+id/TextViewFOR"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.8"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text="FOR Stat"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/ButtonFOR"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.2"
+                android:layout_weight="1"
                 android:background="@android:color/holo_blue_dark"
                 android:text="Calculate FOR"
                 android:textSize="15sp" />
@@ -56,18 +56,18 @@
 
             <TextView
                 android:id="@+id/TextViewCOS"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.8"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text="COS Stat"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/ButtonCOS"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.2"
+                android:layout_weight="1"
                 android:background="@android:color/holo_blue_dark"
                 android:text="Calculate COS"
                 android:textSize="15sp" />
@@ -84,18 +84,18 @@
 
             <TextView
                 android:id="@+id/TextViewINT"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.8"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text="INT Stat"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/ButtonINT"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.2"
+                android:layout_weight="1"
                 android:background="@android:color/holo_blue_dark"
                 android:text="Calculate INT"
                 android:textSize="15sp" />
@@ -112,18 +112,18 @@
 
             <TextView
                 android:id="@+id/TextViewMAN"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.8"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text="MAN Stat"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/ButtonMAN"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.2"
+                android:layout_weight="1"
                 android:background="@android:color/holo_blue_dark"
                 android:text="Calculate MAN"
                 android:textSize="15sp" />
@@ -140,18 +140,18 @@
 
             <TextView
                 android:id="@+id/TextViewDES"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.8"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text="DES Stat"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/ButtonDES"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.2"
+                android:layout_weight="1"
                 android:background="@android:color/holo_blue_dark"
                 android:text="Calculate DES"
                 android:textSize="15sp" />
@@ -168,18 +168,18 @@
 
             <TextView
                 android:id="@+id/TextViewTAG"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.8"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text="TAG Stat"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/ButtonTAG"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.2"
+                android:layout_weight="1"
                 android:background="@android:color/holo_blue_dark"
                 android:text="Calculate TAG"
                 android:textSize="15sp" />
@@ -196,18 +196,18 @@
 
             <TextView
                 android:id="@+id/TextViewFAS"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.8"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text="FAS Stat"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <Button
                 android:id="@+id/ButtonFAS"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.2"
+                android:layout_weight="1"
                 android:background="@android:color/holo_blue_dark"
                 android:text="Calculate FAS"
                 android:textSize="15sp" />

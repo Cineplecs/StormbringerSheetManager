@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity() {
                 drawer.closeDrawers()
             }
             setNegativeButton("No") { _, _ ->
-
+                drawer.closeDrawers()
             }
         }.show()
     }

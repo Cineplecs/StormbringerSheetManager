@@ -1,4 +1,4 @@
-package com.example.stormbringersheetmanager.Weapons
+package com.example.stormbringersheetmanager.Utility
 
 class MeleeWeapon(
     name: String?, requestFOR: Int?, requestDES: Int?, damage: String?,

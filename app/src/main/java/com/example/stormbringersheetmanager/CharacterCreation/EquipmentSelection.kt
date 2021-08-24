@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import com.example.stormbringersheetmanager.R
-import com.example.stormbringersheetmanager.Weapons.MeleeWeapon
+import com.example.stormbringersheetmanager.Utility.MeleeWeapon
 
 class EquipmentSelection : Fragment() {
 
