@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import android.widget.GridLayout.LayoutParams
+import androidx.navigation.Navigation
 import com.example.stormbringersheetmanager.DiceRolls
 import com.example.stormbringersheetmanager.R
 import com.example.stormbringersheetmanager.Utility.Skills
@@ -16,7 +17,9 @@ class SkillsCalculatorAndSelection : Fragment() {
 
     private lateinit var skillValueTextView: TextView
     private lateinit var gridLayout: GridLayout
-    private lateinit var availableSkillsText : TextView
+    private lateinit var availableSkillsText: TextView
+    private lateinit var classSkillsList: TextView
+    private lateinit var skillConfirmButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,53 +36,13 @@ class SkillsCalculatorAndSelection : Fragment() {
         skillValueTextView = view.findViewById(R.id.skillValueTextView)
         availableSkillsText = view.findViewById(R.id.availableSkillsText)
         gridLayout = view.findViewById(R.id.simpleGridLayout)
+        classSkillsList = view.findViewById(R.id.classSkillsList)
+        skillConfirmButton = view.findViewById(R.id.skillConfirmButton)
         var defaultText = availableSkillsText.text.toString()
 
         var availableSkills = (DiceRolls.D6() + 2)
-        availableSkillsText.text = (availableSkillsText.text.toString() + availableSkills).toString()
-
-
-        /**
-        for (i in 0..10) {
-            var params = GridLayout.LayoutParams()
-            params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, GridLayout.FILL, 1f)
-            params.width = 0
-            var checkBox = CheckBox(requireContext())
-            checkBox.text = i.toString()
-            println(checkBox.text)
-            checkBox.layoutParams = params
-            gridLayout.addView(checkBox)
-        }*/
-
-        var skillList : List<Skills> = skillsCreation()
-
-        for(i in skillList.indices){
-            var params = GridLayout.LayoutParams()
-            params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, GridLayout.FILL, 1f)
-            params.width = 0
-            var checkBox = CheckBox(requireContext())
-            checkBox.setOnClickListener(){
-                if(availableSkills > 0){
-                    if(checkBox.isChecked){
-                        availableSkills--
-                        availableSkillsText.text = defaultText + availableSkills
-                    } else if(!checkBox.isChecked){
-                        availableSkills++
-                        availableSkillsText.text = defaultText + availableSkills
-                    }
-                } else {
-                    if(!checkBox.isChecked){
-                        availableSkills++
-                        availableSkillsText.text = defaultText + availableSkills
-                    } else {
-                        checkBox.isChecked = false
-                    }
-                }
-            }
-            checkBox.text = skillList[i].name
-            checkBox.layoutParams = params
-            gridLayout.addView(checkBox)
-        }
+        availableSkillsText.text =
+            (availableSkillsText.text.toString() + availableSkills).toString()
 
         var bundle: Bundle = requireArguments()
         var pairFOR = Pair<String, Int>("FOR", bundle.get("FOR") as Int)
@@ -101,20 +64,342 @@ class SkillsCalculatorAndSelection : Fragment() {
         pairArrayList.add(pairTAG)
         pairArrayList.add(pairFAS)
 
+        var attacco = Attacco(pairArrayList)
+        var parata = Parata(pairArrayList)
+        var dannoMischia = DannoMischia(pairArrayList)
+        var dannoLancio = DannoLancio(pairArrayList)
+        var agilita = Agilità(pairArrayList)
+        var manipolazione = Manipolazione(pairArrayList)
+        var percezione = Percezione(pairArrayList)
+        var furtivita = Furtività(pairArrayList)
+        var conoscenza = Conoscenza(
+            pairArrayList,
+            pgClass,
+            age
+        )
+        var comunicazione = Comunicazione(pairArrayList)
+
         skillValueTextView.text = (
-                Attacco(pairArrayList) + "\n" +
-                        Parata(pairArrayList) + "\n" +
-                        DannoMischia(pairArrayList) + "\n" +
-                        DannoLancio(pairArrayList) + "\n" +
-                        Agilità(pairArrayList) + "\n" +
-                        Manipolazione(pairArrayList) + "\n" +
-                        Percezione(pairArrayList) + "\n" +
-                        Furtività(pairArrayList) + "\n" + Conoscenza(
-                    pairArrayList,
-                    pgClass,
-                    age
-                ) + "\n" +
-                        Comunicazione(pairArrayList))
+                "Attacco: " + attacco +
+                        "\nParata: " + parata +
+                        "\nDanno Mischia: " + dannoMischia +
+                        "\nDanno Lancio: " + dannoLancio +
+                        "\nAgilità: " + agilita +
+                        "\nManipolazione: " + manipolazione +
+                        "\nPercezione: " + percezione +
+                        "\nFurtività: " + furtivita +
+                        "\n Conoscenza: " + conoscenza +
+                        "\nComunicazione: " + comunicazione
+                )
+
+        val classSkills = ArrayList<Skills>()
+
+        var finalSkills = ArrayList<Skills>()
+
+        for (i in pgClass.indices) {
+            when (pgClass[i]) {
+                "Guerriero" -> {
+                    if (DiceRolls.D100() < 85) {
+                        classSkills.add(
+                            Skills("Agilità", "Cavalcare", 10 + agilita, true)
+                        )
+                    }
+                }
+                "Assassino" -> {
+                    if (DiceRolls.D100() < 85) {
+                        classSkills.add(
+                            Skills("Agilità", "Cavalcare", 10 + agilita, true)
+                        )
+                    }
+                    classSkills.add(
+                        Skills(
+                            "Conoscenza",
+                            "Conoscenza dei Veleni",
+                            30 + percezione,
+                            false
+                        )
+                    )
+                    classSkills.add(
+                        Skills("Percezione", "Cercare", 25 + percezione, true)
+                    )
+                    classSkills.add(
+                        Skills("Furtività", "Intrufolarsi", 50 + furtivita, true)
+                    )
+                    classSkills.add(
+                        Skills("Furtività", "Nascondersi", 40 + furtivita, true)
+                    )
+                    classSkills.add(
+                        Skills("Furtività", "Agguato", 50 + furtivita, true)
+                    )
+                    classSkills.add(
+                        Skills("Percezione", "Ascoltare", 50 + percezione, true)
+                    )
+                }
+                "Mercante" -> {
+                    classSkills.add(
+                        Skills(
+                            "Conoscenza",
+                            "Leggere/Scrivere Lingua Comune",
+                            70 + conoscenza,
+                            true
+                        )
+                    )
+                    classSkills.add(
+                        Skills("Comunicazione", "Persuasione", 50 + comunicazione, true)
+                    )
+                    classSkills.add(
+                        Skills("Comunicazione", "Reputazione", 40 + comunicazione, true)
+                    )
+                    classSkills.add(
+                        Skills("Conoscenza", "Valutare Tesori", 80 + conoscenza, true)
+                    )
+                }
+                "Marinaio" -> {
+                    classSkills.add(
+                        Skills("Agilità", "Nuotare", 50 + agilita, true)
+                    )
+                    classSkills.add(
+                        Skills(
+                            "Manipolazione",
+                            "Fare/Disfare Nodi",
+                            70 + manipolazione,
+                            true
+                        )
+                    )
+                    classSkills.add(
+                        Skills("Agilità", "Arrampicarsi", 40 + agilita, true)
+                    )
+                    classSkills.add(
+                        Skills("Percezione", "Equilibrio", 50 + percezione, true)
+                    )
+                    if (pgClass.contains("Capitano") || pgClass.contains("Nostromo")) {
+                        classSkills.add(
+                            Skills("Conoscenza", "Navigazione", 80 + conoscenza, true)
+                        )
+                    }
+                }
+                "Cacciatore" -> {
+                    //TODO
+                    classSkills.add(
+                        Skills(
+                            "Manipolazione",
+                            "Attivare/Disattivare trappole",
+                            50 + manipolazione,
+                            true
+                        )
+                    )
+                    classSkills.add(
+                        Skills("Furtività", "Agguato", 50 + percezione, true)
+                    )
+                    classSkills.add(
+                        Skills("Percezione", "Seguire Tracce", 50 + percezione, true)
+                    )
+                }
+                "Agricoltore" -> {
+                    classSkills.add(
+                        Skills("Percezione", "Seguire Tracce", 20 + percezione, true)
+                    )
+                    classSkills.add(
+                        Skills(
+                            "Conoscenza",
+                            "Conoscenza delle Piante",
+                            20 + conoscenza,
+                            false
+                        )
+                    )
+                }
+                "Sacerdote" -> {
+                    classSkills.add(
+                        Skills("Conoscenza", "Leggere/Scrivere Lingua Comune", 0, true)
+                    )
+                    classSkills.add(
+                        Skills("Conoscenza", "Leggere/Scrivere Tardo Melniboleano", 0, true)
+                    )
+                    classSkills.add(
+                        Skills("Conoscenza", "Leggere/Scrivere Alto Meniboleano", 0, true)
+                    )
+                    classSkills.add(
+                        Skills(
+                            "Conoscenza",
+                            "Conoscenza delle Piante",
+                            40 + conoscenza,
+                            false
+                        )
+                    )
+                    classSkills.add(
+                        Skills("Conoscenza", "Pronto Soccorso", 40 + conoscenza, true)
+                    )
+                    classSkills.add(
+                        Skills("Comunicazione", "Persuasione", 25 + comunicazione, true)
+                    )
+                    classSkills.add(
+                        Skills("Comunicazione", "Reputazione", 25 + comunicazione, true)
+                    )
+                }
+                "Nobile" -> {
+                    classSkills.add(
+                        Skills("Comunicazione", "Reputazione", 40 + comunicazione, true)
+                    )
+                }
+                "Ladro" -> {
+                    classSkills.add(
+                        Skills(
+                            "Conoscenza",
+                            "Leggere/Scrivere Lingua Comune",
+                            25 + conoscenza,
+                            true
+                        )
+                    )
+                    classSkills.add(
+                        Skills("Agilità", "Arrampicarsi", DiceRolls.D100() + agilita, true)
+                    )
+                    classSkills.add(
+                        Skills("Furtività", "Celare", DiceRolls.D100() + furtivita, true)
+                    )
+                    classSkills.add(
+                        Skills("Agilità", "Saltare", DiceRolls.D100() + agilita, true)
+                    )
+                    classSkills.add(
+                        Skills(
+                            "Manipolazione",
+                            "Scassinare",
+                            DiceRolls.D100() + manipolazione,
+                            true
+                        )
+                    )
+                    classSkills.add(
+                        Skills("Percezione", "Ascoltare", 70 + percezione, true)
+                    )
+                    classSkills.add(
+                        Skills("Percezione", "Osservare", DiceRolls.D100() + percezione, true),
+                    )
+                    classSkills.add(
+                        Skills("Percezione", "Cercare", DiceRolls.D100() + percezione, true)
+                    )
+                    classSkills.add(
+                        Skills("Furtività", "Intrufolarsi", 50 + furtivita, true)
+                    )
+                    classSkills.add(
+                        Skills("Furtività", "Borseggiare", DiceRolls.D100() + furtivita, true)
+                    )
+                    classSkills.add(
+                        Skills("Conoscenza", "Valutare Tesori", 50 + conoscenza, true)
+                    )
+                }
+                "Mendicante" -> {
+                    classSkills.add(
+                        Skills("Comunicazione", "Persuasione", 60 + comunicazione, true)
+                    )
+                    classSkills.add(
+                        Skills("Percezione", "Osservare", 60 + percezione, true)
+                    )
+                    classSkills.add(
+                        Skills("Percezione", "Cercare", 25 + manipolazione, true)
+                    )
+                }
+                "Artigiano" -> {
+                    classSkills.add(
+                        Skills("Conoscenza", "Arte", 70 + conoscenza, true)
+                    )
+                }
+            }
+        }
+
+        val classSkillsNames = ArrayList<String>()
+
+        for (i in classSkills.indices) {
+            finalSkills.add(classSkills[i])
+            if (classSkills[i].iniziale > 100) {
+                classSkills[i].iniziale = 100
+            } else if (classSkills[i].iniziale < 0) {
+                classSkills[i].iniziale = 0
+            }
+            classSkillsNames.add(
+                classSkills[i].name
+            )
+        }
+
+        for (i in classSkills.indices) {
+            when {
+                i == (classSkills.size - 1) -> {
+                    classSkillsList.text =
+                        classSkillsList.text.toString() + classSkills[i].name + " " + classSkills[i].iniziale
+                }
+                i < (classSkills.size - 1) -> {
+                    classSkillsList.text =
+                        classSkillsList.text.toString() + classSkills[i].name + " " + classSkills[i].iniziale + "\n"
+                }
+                i == 0 -> {
+                    classSkillsList.text =
+                        classSkills[i].name + " " + classSkills[i].iniziale + "\n"
+                }
+            }
+        }
+
+        val skillsList: ArrayList<Skills> = skillsCreation()
+
+        for (i in skillsList.indices) {
+            if (!classSkillsNames.contains((skillsList[i].name))) {
+                var skillCheck : Skills
+                val params = GridLayout.LayoutParams()
+                params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, GridLayout.FILL, 1f)
+                params.width = 0
+                val checkBox = CheckBox(requireContext())
+                checkBox.setOnClickListener() {
+                    if (availableSkills > 0) {
+                        if (checkBox.isChecked) {
+                            availableSkills--
+                            availableSkillsText.text = defaultText + availableSkills
+                        } else if (!checkBox.isChecked) {
+                            availableSkills++
+                            availableSkillsText.text = defaultText + availableSkills
+                        }
+                    } else {
+                        if (!checkBox.isChecked) {
+                            availableSkills++
+                            availableSkillsText.text = defaultText + availableSkills
+                        } else {
+                            checkBox.isChecked = false
+                        }
+                    }
+                    if (checkBox.isChecked) {
+                        skillCheck = searchSkill(checkBox.text.toString(), skillsList)
+                        println("Prova ricerca: " + skillCheck.name)
+                        when(skillCheck.type){
+                            "Furtività" -> skillCheck.iniziale += furtivita
+                            "Agilità" -> skillCheck.iniziale += agilita
+                            "Manipolazione" -> skillCheck.iniziale += manipolazione
+                            "Percezione" -> skillCheck.iniziale += manipolazione
+                            "Conoscenza" -> skillCheck.iniziale += conoscenza
+                            "Comunicazione" -> skillCheck.iniziale += comunicazione
+                        }
+                        if(skillCheck.iniziale < 0){
+                            skillCheck.iniziale = 0
+                        } else if (skillCheck.iniziale > 100){
+                            skillCheck.iniziale = 100
+                        }
+                        finalSkills.add(skillCheck)
+                    } else if (!checkBox.isChecked) {
+                        finalSkills.remove(
+                            searchSkill(checkBox.text.toString(), skillsList)
+                        )
+                    }
+                }
+                checkBox.text = (skillsList[i].name)
+                checkBox.layoutParams = params
+                gridLayout.addView(checkBox)
+            }
+        }
+
+        skillConfirmButton.setOnClickListener() {
+            if(availableSkills == 0){
+                bundle.putParcelableArrayList("finalSkills", finalSkills)
+                Navigation.findNavController(view).navigate(R.id.SkillsToEquipment, bundle)
+
+            } else {
+                Toast.makeText(requireContext(), "Ci sono altre abilità selezionabili", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         return view
     }
@@ -137,7 +422,7 @@ class SkillsCalculatorAndSelection : Fragment() {
         return finalString
     }
 
-    private fun Attacco(pairArrayList: ArrayList<Pair<String, Int>>): String {
+    private fun Attacco(pairArrayList: ArrayList<Pair<String, Int>>): Int {
         var attacco = 0
         if (pairArrayList[0].second > 12) {
             attacco += (pairArrayList[0].second - 12)
@@ -159,10 +444,10 @@ class SkillsCalculatorAndSelection : Fragment() {
         } else if (pairArrayList[2].second < 9) {
             attacco -= (9 - pairArrayList[2].second)
         }
-        return ("Attacco: " + attacco)
+        return attacco
     }
 
-    private fun Parata(pairArrayList: ArrayList<Pair<String, Int>>): String {
+    private fun Parata(pairArrayList: ArrayList<Pair<String, Int>>): Int {
         var parata: Int = 0
         if (pairArrayList[0].second > 12) {
             parata += (pairArrayList[0].second - 12)
@@ -184,10 +469,10 @@ class SkillsCalculatorAndSelection : Fragment() {
         } else if (pairArrayList[5].second < 9) {
             parata += (9 - pairArrayList[5].second)
         }
-        return ("Parata: " + parata)
+        return parata
     }
 
-    private fun DannoMischia(pairArrayList: ArrayList<Pair<String, Int>>): String {
+    private fun DannoMischia(pairArrayList: ArrayList<Pair<String, Int>>): Int {
         var dannoMischia: Int = 0
         var somma = pairArrayList[0].second + pairArrayList[5].second
         when {
@@ -207,10 +492,10 @@ class SkillsCalculatorAndSelection : Fragment() {
                 dannoMischia += (DiceRolls.D6() + DiceRolls.D6() + DiceRolls.D6())
             }
         }
-        return ("Danno da mischia: " + dannoMischia)
+        return dannoMischia
     }
 
-    private fun DannoLancio(pairArrayList: ArrayList<Pair<String, Int>>): String {
+    private fun DannoLancio(pairArrayList: ArrayList<Pair<String, Int>>): Int {
         var dannoLancio: Int = 0
         var somma = pairArrayList[0].second + pairArrayList[5].second
         when {
@@ -230,11 +515,11 @@ class SkillsCalculatorAndSelection : Fragment() {
                 dannoLancio += (DiceRolls.D4() + DiceRolls.D4() + DiceRolls.D4())
             }
         }
-        return ("Danno da lancio: " + dannoLancio)
+        return dannoLancio
 
     }
 
-    private fun Agilità(pairArrayList: ArrayList<Pair<String, Int>>): String {
+    private fun Agilità(pairArrayList: ArrayList<Pair<String, Int>>): Int {
         var agilità: Int = 0
         if (pairArrayList[0].second > 12) {
             agilità += (pairArrayList[0].second - 12)
@@ -256,10 +541,10 @@ class SkillsCalculatorAndSelection : Fragment() {
         } else if (pairArrayList[5].second < 9) {
             agilità += (9 - pairArrayList[5].second)
         }
-        return ("Agilità: " + agilità)
+        return agilità
     }
 
-    private fun Manipolazione(pairArrayList: ArrayList<Pair<String, Int>>): String {
+    private fun Manipolazione(pairArrayList: ArrayList<Pair<String, Int>>): Int {
         var manipolazione = 0
         if (pairArrayList[0].second > 12) {
             manipolazione += (pairArrayList[0].second - 12)
@@ -281,10 +566,10 @@ class SkillsCalculatorAndSelection : Fragment() {
         } else if (pairArrayList[2].second < 9) {
             manipolazione -= (9 - pairArrayList[2].second)
         }
-        return ("Manipolazione: " + manipolazione)
+        return manipolazione
     }
 
-    private fun Percezione(pairArrayList: ArrayList<Pair<String, Int>>): String {
+    private fun Percezione(pairArrayList: ArrayList<Pair<String, Int>>): Int {
         var percezione = 0
         if (pairArrayList[4].second > 12) {
             percezione += (pairArrayList[4].second - 12)
@@ -296,10 +581,10 @@ class SkillsCalculatorAndSelection : Fragment() {
         } else if (pairArrayList[3].second < 9) {
             percezione -= (9 - pairArrayList[3].second)
         }
-        return ("Percezione: " + percezione)
+        return percezione
     }
 
-    private fun Furtività(pairArrayList: ArrayList<Pair<String, Int>>): String {
+    private fun Furtività(pairArrayList: ArrayList<Pair<String, Int>>): Int {
         var furtività = 0
         if (pairArrayList[5].second > 12) {
             furtività -= (pairArrayList[5].second - 12)
@@ -316,14 +601,14 @@ class SkillsCalculatorAndSelection : Fragment() {
         } else if (pairArrayList[2].second < 9) {
             furtività -= (9 - pairArrayList[2].second)
         }
-        return ("Furtività: " + furtività)
+        return furtività
     }
 
     private fun Conoscenza(
         pairArrayList: ArrayList<Pair<String, Int>>,
         pgClass: ArrayList<String>,
         age: Int
-    ): String {
+    ): Int {
         var conoscenza = 0
         if (pairArrayList[4].second > 12) {
             conoscenza += 2 * (pairArrayList[4].second - 12)
@@ -340,10 +625,10 @@ class SkillsCalculatorAndSelection : Fragment() {
                 conoscenza += 3 * (age - 25)
             }
         }
-        return ("Conoscenza: " + conoscenza)
+        return conoscenza
     }
 
-    private fun Comunicazione(pairArrayList: ArrayList<Pair<String, Int>>): String {
+    private fun Comunicazione(pairArrayList: ArrayList<Pair<String, Int>>): Int {
         var comunicazione = 0
         if (pairArrayList[3].second > 12) {
             comunicazione += (pairArrayList[3].second - 12)
@@ -360,61 +645,148 @@ class SkillsCalculatorAndSelection : Fragment() {
         } else if (pairArrayList[3].second < 9) {
             comunicazione -= (9 - pairArrayList[6].second)
         }
-        return ("Comunicazione: " + comunicazione)
+        return comunicazione
     }
 
-    private fun warriorClass() {
-        //TODO
-    }
-
-    private fun skillsCreation(): List<Skills> {
-        var skillsList: List<Skills> = listOf(
-            Skills("Furtività", "Intrufolarsi", 10, true),
-            Skills("Furtività", "Nascondersi", 10, true),
-            Skills("Furtività", "Agguato", 0, true),
-            Skills("Furtività", "Celare", 0, true),
-            Skills("Furtività", "Borseggiare", 0, true),
-            Skills("Agilità", "Cavalcare", 0, true),
-            Skills("Agilità", "Nuotare", 0, true),
-            Skills("Agilità", "Arrampicarsi", 10, true),
-            Skills("Agilità", "Saltare", 10, true),
-            Skills("Agilità", "Cadere", 0, true),
-            Skills("Agilità", "Schivare", 0, true),
-            Skills("Manipolazione", "Fare/Disfare Nodi", 0, true),
-            Skills("Manipolazione", "Attivare/Disattivare trappole", 0, true),
-            Skills("Manipolazione", "Prestidigitazione", 0, true),
-            Skills("Manipolazione", "Giocoleria", 0, true),
-            Skills("Manipolazione", "Scassinare", 0, true),
-            Skills("Percezione", "Osservare", 10, true),
-            Skills("Percezione", "Ascoltare", 10, true),
-            Skills("Percezione", "Annusare", 0, true),
-            Skills("Percezione", "Gustare", 0, true),
-            Skills("Percezione", "Equilibrio", 10, true),
-            Skills("Percezione", "Cercare", 0, true),
-            Skills("Percezione", "Seguire Tracce", 0, true),
-            Skills("Conoscenza", "Leggere/Scrivere Lingua Comune", 0, true),
-            Skills("Conoscenza", "Leggere/Scrivere Basso Melniboleano", 0, true),
-            Skills("Conoscenza", "Leggere/Scrivere Tardo Melniboleano", 0, true),
-            Skills("Conoscenza", "Leggere/Scrivere/Parlare Altre Lingue", 0, true),
-            Skills("Conoscenza", "Navigazione", 0, true),
-            Skills("Conoscenza", "Valutare Tesori", 0, true),
-            Skills("Conoscenza", "Artigianato", 0, true),
-            Skills("Conoscenza", "Pronto Soccorso", 0, true),
-            Skills("Conoscenza", "Cartografia", 0, true),
-            Skills("Conoscenza", "Memoria", 0, true),
-            Skills("Conoscenza", "Conoscenza dei Veleni", 0, false),
-            Skills("Conoscenza", "Conoscenza delle Piante", 0, false),
-            Skills("Conoscenza", "Conoscenza della Musica", 0, false),
-            Skills("Comunicazione", "Persuasione", 10, true),
-            Skills("Comunicazione", "Reputazione", 0, true),
-            Skills("Comunicazione", "Oratoria", 0, true),
+    private fun skillsCreation(): ArrayList<Skills> {
+        var skillsList: ArrayList<Skills> = ArrayList<Skills>()
+        skillsList.add(
+            Skills("Furtività", "Intrufolarsi", 10, true)
+        )
+        skillsList.add(
+            Skills("Furtività", "Nascondersi", 10, true)
+        )
+        skillsList.add(
+            Skills("Furtività", "Agguato", 0, true)
+        )
+        skillsList.add(
+            Skills("Furtività", "Celare", 0, true)
+        )
+        skillsList.add(
+            Skills("Furtività", "Borseggiare", 0, true)
+        )
+        skillsList.add(
+            Skills("Agilità", "Cavalcare", 0, true)
+        )
+        skillsList.add(
+            Skills("Agilità", "Nuotare", 0, true)
+        )
+        skillsList.add(
+            Skills("Agilità", "Arrampicarsi", 10, true)
+        )
+        skillsList.add(
+            Skills("Agilità", "Saltare", 10, true)
+        )
+        skillsList.add(
+            Skills("Agilità", "Cadere", 0, true)
+        )
+        skillsList.add(
+            Skills("Agilità", "Schivare", 0, true)
+        )
+        skillsList.add(
+            Skills("Manipolazione", "Fare/Disfare Nodi", 0, true)
+        )
+        skillsList.add(
+            Skills("Manipolazione", "Attivare/Disattivare trappole", 0, true)
+        )
+        skillsList.add(
+            Skills("Manipolazione", "Prestidigitazione", 0, true)
+        )
+        skillsList.add(
+            Skills("Manipolazione", "Giocoleria", 0, true)
+        )
+        skillsList.add(
+            Skills("Manipolazione", "Scassinare", 0, true)
+        )
+        skillsList.add(
+            Skills("Percezione", "Osservare", 10, true)
+        )
+        skillsList.add(
+            Skills("Percezione", "Ascoltare", 10, true)
+        )
+        skillsList.add(
+            Skills("Percezione", "Annusare", 0, true)
+        )
+        skillsList.add(
+            Skills("Percezione", "Gustare", 0, true)
+        )
+        skillsList.add(
+            Skills("Percezione", "Equilibrio", 10, true)
+        )
+        skillsList.add(
+            Skills("Percezione", "Cercare", 0, true)
+        )
+        skillsList.add(
+            Skills("Percezione", "Seguire Tracce", 0, true)
+        )
+        skillsList.add(
+            Skills("Conoscenza", "Arte", 0, true)
+        )
+        skillsList.add(
+            Skills("Conoscenza", "Leggere/Scrivere Lingua Comune", 0, true)
+        )
+        skillsList.add(
+            Skills("Conoscenza", "Leggere/Scrivere Basso Melniboleano", 0, true)
+        )
+        skillsList.add(
+            Skills("Conoscenza", "Leggere/Scrivere Tardo Melniboleano", 0, true)
+        )
+        skillsList.add(
+            Skills("Conoscenza", "Leggere/Scrivere Alto Meniboleano", 0, true)
+        )
+        skillsList.add(
+            Skills("Conoscenza", "Leggere/Scrivere/Parlare Altre Lingue", 0, true)
+        )
+        skillsList.add(
+            Skills("Conoscenza", "Navigazione", 0, true)
+        )
+        skillsList.add(
+            Skills("Conoscenza", "Valutare Tesori", 0, true)
+        )
+        skillsList.add(
+            Skills("Conoscenza", "Artigianato", 0, true)
+        )
+        skillsList.add(
+            Skills("Conoscenza", "Pronto Soccorso", 0, true)
+        )
+        skillsList.add(
+            Skills("Conoscenza", "Cartografia", 0, true)
+        )
+        skillsList.add(
+            Skills("Conoscenza", "Memoria", 0, true)
+        )
+        skillsList.add(
+            Skills("Conoscenza", "Conoscenza dei Veleni", 0, false)
+        )
+        skillsList.add(
+            Skills("Conoscenza", "Conoscenza delle Piante", 0, false)
+        )
+        skillsList.add(
+            Skills("Conoscenza", "Conoscenza della Musica", 0, false)
+        )
+        skillsList.add(
+            Skills("Comunicazione", "Persuasione", 10, true)
+        )
+        skillsList.add(
+            Skills("Comunicazione", "Reputazione", 0, true)
+        )
+        skillsList.add(
+            Skills("Comunicazione", "Oratoria", 0, true)
+        )
+        skillsList.add(
             Skills("Comunicazione", "Cantare", 0, true)
         )
         return skillsList
     }
 
-    private fun skillName(skill : Skills) : String{
-        return skill.name
+    private fun searchSkill(nome: String, skills: ArrayList<Skills>): Skills {
+        var skillReturn: Skills = Skills("Nessuno", "Non ci sono abilità selezionate", 0, false)
+        for (i in skills.indices) {
+            if (skills[i].name == nome) {
+                skillReturn = skills[i]
+            }
+        }
+        return skillReturn
     }
 
 }

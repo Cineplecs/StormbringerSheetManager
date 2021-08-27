@@ -43,7 +43,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.homeFragment, R.id.mainInfoCharacterFragment,
                 R.id.gamesFragment, R.id.accountFragment,
                 R.id.registerFragment, R.id.loginFragment,
-                R.id.vaultFragment
+                R.id.vaultFragment, R.id.skillsCalculatorAndSelection,
+                R.id.classSelection, R.id.equipmentSelection
             ),
             drawer
         )

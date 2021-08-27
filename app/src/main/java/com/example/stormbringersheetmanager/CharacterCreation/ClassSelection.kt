@@ -309,15 +309,7 @@ class ClassSelection : Fragment() {
         )
 
         var height = heightWeightPair.first
-        println("Prova-1")
-        for(i in height.indices){
-            println(height[i])
-        }
         var weigth = heightWeightPair.second
-        println("Prova-2")
-        for(i in weigth.indices){
-            println(weigth[i])
-        }
 
         var heightAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, height)
         heightSpinner.adapter = heightAdapter
@@ -363,16 +355,8 @@ class ClassSelection : Fragment() {
                 )
 
                 var height2 = heightWeightPair2.first
-                println("Prova1-1")
-                for(i in height2.indices){
-                    println(height[i])
-                }
                 var weight2 = heightWeightPair2.second
-                println("Prova1-2 " + weight2.size)
-                for(i in weight2.indices){
-                    println(weight2[i])
-                }
-                //TODO
+
                 heightAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, height2)
                 heightSpinner.adapter = heightAdapter
 
@@ -509,7 +493,6 @@ class ClassSelection : Fragment() {
                         TextTAG.text = (TextTAG.text.toString().toInt() - 2).toString()
                     }
                     finalClass.add(classChoice())
-                    println(finalClassToString(finalClass))
                     for(i in 0 until finalClass.size){
                         if(finalClass[i] == "Marinaio" ||
                             finalClass[i] == "Ladro" ||
@@ -517,7 +500,6 @@ class ClassSelection : Fragment() {
                         ){
                             finalClass.removeAt(i)
                             finalClass.add("Guerriero")
-                            println(finalClassToString(finalClass))
                             warriorClass(finalClass)
                         }
                     }
@@ -940,15 +922,7 @@ class ClassSelection : Fragment() {
             )
 
             var height = heightWeigthPair.first
-            println("Prova-1")
-            for(i in height.indices){
-                println(height[i])
-            }
             var weigth = heightWeigthPair.second
-            println("Prova-2")
-            for(i in weigth.indices){
-                println(weigth[i])
-            }
 
             heightAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, height)
             heightSpinner.adapter = heightAdapter
@@ -1355,7 +1329,6 @@ class ClassSelection : Fragment() {
                 }
             }
         }
-        println("Vediamo se sta merda fin qua arriva: " + weight.size)
         return Pair(height, weight)
     }
 

@@ -8,39 +8,65 @@
     tools:context=".CharacterCreation.SkillsCalculatorAndSelection">
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/skillValueTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text=""
-            android:textSize="15sp" />
+            <TextView
+                android:id="@+id/skillValueTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text=""
+                android:layout_weight="1"
+                android:textSize="15sp"
+                android:layout_margin="5dp"/>
+
+            <TextView
+                android:id="@+id/classSkillsList"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text=""
+                android:layout_weight="1"
+                android:textSize="15sp"
+                android:layout_margin="5dp"/>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/availableSkillsText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_margin="15dp"
+            android:gravity="center"
             android:text="Abilità da selezionare: "
             android:textSize="15sp" />
 
-            <GridLayout
-                android:id="@+id/simpleGridLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:alignmentMode="alignBounds"
-                android:columnCount="3"
-                android:columnOrderPreserved="true"
-                android:gravity="center"
-                android:useDefaultMargins="false" />
+        <GridLayout
+            android:id="@+id/simpleGridLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alignmentMode="alignBounds"
+            android:columnOrderPreserved="true"
+            android:columnCount="2"
+            android:gravity="center"
+            android:useDefaultMargins="false" />
 
-        </LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/skillConfirmButton"
+            android:text="Conferma"
+            android:layout_gravity="center"
+            android:gravity="center"/>
+
+    </LinearLayout>
 
 </ScrollView>
