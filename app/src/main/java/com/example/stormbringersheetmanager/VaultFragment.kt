@@ -13,6 +13,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.Navigation
 import com.example.stormbringersheetmanager.CharacterCreation.MainInfoCharacterFragment
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import android.widget.ArrayAdapter as ArrayAdapter
 
 class VaultFragment : Fragment() {

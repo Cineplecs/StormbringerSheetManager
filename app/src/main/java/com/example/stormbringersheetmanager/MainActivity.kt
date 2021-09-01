@@ -16,6 +16,11 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.*
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.ktx.initialize
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navigationView: NavigationView
+    private lateinit var mAuth : FirebaseAuth
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -139,5 +145,12 @@ class MainActivity : AppCompatActivity() {
         }.show()
 
 
+    }
+
+    override fun onDestroy() {
+        if(mAuth.currentUser != null){
+            Firebase.auth.signOut()
+        }
+        super.onDestroy()
     }
 }

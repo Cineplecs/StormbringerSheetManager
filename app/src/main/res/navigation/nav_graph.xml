@@ -26,7 +26,11 @@
         android:id="@+id/registerFragment"
         android:name="com.example.stormbringersheetmanager.RegisterFragment"
         android:label="Register"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/registerToLogin"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/vaultFragment"
         android:name="com.example.stormbringersheetmanager.VaultFragment"
@@ -55,7 +59,11 @@
             android:id="@+id/equipmentSelection"
             android:name="com.example.stormbringersheetmanager.CharacterCreation.EquipmentSelection"
             android:label="Equipment"
-            tools:layout="@layout/fragment_equipment_selection" />
+            tools:layout="@layout/fragment_equipment_selection" >
+            <action
+                android:id="@+id/equipmentToSheet"
+                app:destination="@id/sheetFragment" />
+        </fragment>
         <fragment
             android:id="@+id/skillsCalculatorAndSelection"
             android:name="com.example.stormbringersheetmanager.CharacterCreation.SkillsCalculatorAndSelection"
@@ -74,6 +82,11 @@
                 android:id="@+id/InfoToClass"
                 app:destination="@id/classSelection" />
         </fragment>
+        <fragment
+            android:id="@+id/sheetFragment"
+            android:name="com.example.stormbringersheetmanager.CharacterCreation.SheetFragment"
+            android:label="fragment_sheet"
+            tools:layout="@layout/fragment_sheet" />
     </navigation>
 
     <fragment

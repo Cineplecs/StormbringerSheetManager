@@ -3,14 +3,16 @@ package com.example.stormbringersheetmanager.Utility
 import android.os.Parcel
 import android.os.Parcelable
 
-class RangedWeapon(name : String, requestFOR : Int?, requestDES : Int?, damage : String?,
-                   range : Int?, price : Int?) : Parcelable {
-    var name = name
-    var requestFOR = requestFOR
-    var requestDES = requestDES
-    var damage = damage
-    var range = range
-    var price = price
+class Weapon(
+    name: String, requestFOR: Int?, requestDES: Int, damage: String?,
+    length: String?, price: String?
+) : Parcelable {
+    var name: String = name
+    var requestFOR: Int? = requestFOR
+    var requestDES: Int = requestDES
+    var damage: String? = damage
+    var length: String? = length
+    var price: String? = price
     var healthPoints = 20
 
     constructor(parcel: Parcel) : this(
@@ -18,15 +20,15 @@ class RangedWeapon(name : String, requestFOR : Int?, requestDES : Int?, damage :
         TODO("requestFOR"),
         TODO("requestDES"),
         TODO("damage"),
-        TODO("range"),
+        TODO("length"),
         TODO("price")
     ) {
         name = parcel.readString().toString()
         requestFOR = parcel.readValue(Int::class.java.classLoader) as? Int
-        requestDES = parcel.readValue(Int::class.java.classLoader) as? Int
+        requestDES = (parcel.readValue(Int::class.java.classLoader) as? Int)!!
         damage = parcel.readString()
-        range = parcel.readValue(Int::class.java.classLoader) as? Int
-        price = parcel.readValue(Int::class.java.classLoader) as? Int
+        length = parcel.readString()
+        price = parcel.readString()
         healthPoints = parcel.readInt()
     }
 
@@ -35,8 +37,8 @@ class RangedWeapon(name : String, requestFOR : Int?, requestDES : Int?, damage :
         parcel.writeValue(requestFOR)
         parcel.writeValue(requestDES)
         parcel.writeString(damage)
-        parcel.writeValue(range)
-        parcel.writeValue(price)
+        parcel.writeString(length)
+        parcel.writeString(price)
         parcel.writeInt(healthPoints)
     }
 
@@ -44,13 +46,14 @@ class RangedWeapon(name : String, requestFOR : Int?, requestDES : Int?, damage :
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<RangedWeapon> {
-        override fun createFromParcel(parcel: Parcel): RangedWeapon {
-            return RangedWeapon(parcel)
+    companion object CREATOR : Parcelable.Creator<Weapon> {
+        override fun createFromParcel(parcel: Parcel): Weapon {
+            return Weapon(parcel)
         }
 
-        override fun newArray(size: Int): Array<RangedWeapon?> {
+        override fun newArray(size: Int): Array<Weapon?> {
             return arrayOfNulls(size)
         }
     }
 }
+

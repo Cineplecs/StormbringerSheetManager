@@ -53,6 +53,18 @@ class SkillsCalculatorAndSelection : Fragment() {
         var pairTAG = Pair<String, Int>("TAG", bundle.get("TAG") as Int)
         var pairFAS = Pair<String, Int>("FAS", bundle.get("FAS") as Int)
         var pgClass: ArrayList<String> = bundle.get("class") as ArrayList<String>
+
+        var classe = ""
+        if (pgClass.contains("Nobile")) {
+            classe = randomClassFinder()
+            pgClass.add(
+                classe
+            )
+            if (classe == "Nobile") {
+                bundle.putInt("trono", DiceRolls.D6())
+            }
+        }
+
         var age: Int = bundle.get("age") as Int
 
         val pairArrayList = ArrayList<Pair<String, Int>>()
@@ -179,7 +191,6 @@ class SkillsCalculatorAndSelection : Fragment() {
                     }
                 }
                 "Cacciatore" -> {
-                    //TODO
                     classSkills.add(
                         Skills(
                             "Manipolazione",
@@ -237,9 +248,11 @@ class SkillsCalculatorAndSelection : Fragment() {
                     )
                 }
                 "Nobile" -> {
-                    classSkills.add(
-                        Skills("Comunicazione", "Reputazione", 40 + comunicazione, true)
-                    )
+                    if(i != pgClass.lastIndex) {
+                        classSkills.add(
+                            Skills("Comunicazione", "Reputazione", 40 + comunicazione, true)
+                        )
+                    }
                 }
                 "Ladro" -> {
                     classSkills.add(
@@ -305,6 +318,10 @@ class SkillsCalculatorAndSelection : Fragment() {
             }
         }
 
+        if(pgClass.contains("Nobile")){
+            pgClass.removeAt(pgClass.size - 1)
+        }
+
         val classSkillsNames = ArrayList<String>()
 
         for (i in classSkills.indices) {
@@ -340,8 +357,8 @@ class SkillsCalculatorAndSelection : Fragment() {
 
         for (i in skillsList.indices) {
             if (!classSkillsNames.contains((skillsList[i].name))) {
-                var skillCheck : Skills
-                val params = GridLayout.LayoutParams()
+                var skillCheck: Skills
+                val params = LayoutParams()
                 params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, GridLayout.FILL, 1f)
                 params.width = 0
                 val checkBox = CheckBox(requireContext())
@@ -364,18 +381,17 @@ class SkillsCalculatorAndSelection : Fragment() {
                     }
                     if (checkBox.isChecked) {
                         skillCheck = searchSkill(checkBox.text.toString(), skillsList)
-                        println("Prova ricerca: " + skillCheck.name)
-                        when(skillCheck.type){
-                            "Furtività" -> skillCheck.iniziale += furtivita
-                            "Agilità" -> skillCheck.iniziale += agilita
-                            "Manipolazione" -> skillCheck.iniziale += manipolazione
-                            "Percezione" -> skillCheck.iniziale += manipolazione
-                            "Conoscenza" -> skillCheck.iniziale += conoscenza
-                            "Comunicazione" -> skillCheck.iniziale += comunicazione
+                        when (skillCheck.type) {
+                            "Furtività" -> skillCheck.iniziale += ((DiceRolls.D100() + 2 - 1) / 2) + furtivita
+                            "Agilità" -> skillCheck.iniziale += ((DiceRolls.D100() + 2 - 1) / 2) + agilita
+                            "Manipolazione" -> skillCheck.iniziale += ((DiceRolls.D100() + 2 - 1) / 2) + manipolazione
+                            "Percezione" -> skillCheck.iniziale += ((DiceRolls.D100() + 2 - 1) / 2) + manipolazione
+                            "Conoscenza" -> skillCheck.iniziale += ((DiceRolls.D100() + 2 - 1) / 2) + conoscenza
+                            "Comunicazione" -> skillCheck.iniziale += ((DiceRolls.D100() + 2 - 1) / 2) + comunicazione
                         }
-                        if(skillCheck.iniziale < 0){
+                        if (skillCheck.iniziale < 0) {
                             skillCheck.iniziale = 0
-                        } else if (skillCheck.iniziale > 100){
+                        } else if (skillCheck.iniziale > 100) {
                             skillCheck.iniziale = 100
                         }
                         finalSkills.add(skillCheck)
@@ -392,22 +408,35 @@ class SkillsCalculatorAndSelection : Fragment() {
         }
 
         skillConfirmButton.setOnClickListener() {
-            if(availableSkills == 0){
+            if (availableSkills == 0) {
+                for(i in skillsList.indices){
+                    if(!finalSkills.contains(skillsList[i])){
+                        when (skillsList[i].type) {
+                            "Furtività" -> skillsList[i].iniziale += furtivita
+                            "Agilità" -> skillsList[i].iniziale += agilita
+                            "Manipolazione" -> skillsList[i].iniziale += manipolazione
+                            "Percezione" -> skillsList[i].iniziale += manipolazione
+                            "Conoscenza" -> skillsList[i].iniziale += conoscenza
+                            "Comunicazione" -> skillsList[i].iniziale += comunicazione
+                        }
+                        finalSkills.add(
+                            skillsList[i]
+                        )
+                    }
+                }
                 bundle.putParcelableArrayList("finalSkills", finalSkills)
                 Navigation.findNavController(view).navigate(R.id.SkillsToEquipment, bundle)
 
             } else {
-                Toast.makeText(requireContext(), "Ci sono altre abilità selezionabili", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Ci sono altre abilità selezionabili",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
         return view
-    }
-
-    private fun classString(finalClass: ArrayList<String>) {
-        for (i in 0 until finalClass.size) {
-            println(finalClass[i])
-        }
     }
 
     private fun finalClassToString(finalClass: ArrayList<String>): String {
@@ -789,4 +818,43 @@ class SkillsCalculatorAndSelection : Fragment() {
         return skillReturn
     }
 
+    private fun randomClassFinder(): String {
+        var className = ""
+        when (DiceRolls.D100()) {
+            in 1..20 -> {
+                className = "Guerriero"
+                if (DiceRolls.D10() in 9..10) {
+                    className = ("Assassino")
+                }
+            }
+            in 21..30 -> {
+                className = ("Mercante")
+            }
+            in 31..45 -> {
+                className = ("Marinaio")
+            }
+            in 46..60 -> {
+                className = ("Cacciatore")
+            }
+            in 61..65 -> {
+                className = ("Agricoltore")
+            }
+            in 66..70 -> {
+                className = ("Sacerdote")
+            }
+            in 71..75 -> {
+                className = ("Nobile")
+            }
+            in 76..85 -> {
+                className = ("Ladro")
+            }
+            in 86..90 -> {
+                className = ("Mendicante")
+            }
+            in 91..100 -> {
+                className = ("Artigiano")
+            }
+        }
+        return className
+    }
 }

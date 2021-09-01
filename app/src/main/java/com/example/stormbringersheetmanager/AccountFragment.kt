@@ -1,15 +1,32 @@
 package com.example.stormbringersheetmanager
 
 import android.os.Bundle
+import android.renderscript.Sampler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import androidx.core.view.isGone
+import androidx.navigation.Navigation
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
 
 class AccountFragment : Fragment() {
 
+    private lateinit var mAuth : FirebaseAuth
+    private lateinit var database : DatabaseReference
+    private lateinit var usernameText : TextView
+    private lateinit var toLoginButton : Button
+    private lateinit var toRegisterButton : Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        mAuth = Firebase.auth
     }
 
     override fun onCreateView(
@@ -18,7 +35,36 @@ class AccountFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_account, container, false)
 
+        usernameText = view.findViewById(R.id.usernameText)
+        toLoginButton = view.findViewById(R.id.goingToLoginButton)
+        toRegisterButton = view.findViewById(R.id.goingToRegisterButton)
 
+        if(mAuth.currentUser != null){
+            usernameText.isGone = false
+            toLoginButton.isGone = true
+            toRegisterButton.isGone = true
+
+            database = FirebaseDatabase.getInstance("https://stormbringersheetmanager-default-rtdb.europe-west1.firebasedatabase.app/").reference
+
+            database.child("Users").child(mAuth.uid!!).get().addOnSuccessListener { it ->
+                val username = it.child("username").value.toString()
+                usernameText.text = username
+            }.addOnFailureListener(){
+                println("NON HA FUNZIONATO")
+            }
+        } else {
+            usernameText.isGone = true
+            toLoginButton.isGone = false
+            toRegisterButton.isGone = false
+
+            toLoginButton.setOnClickListener {
+                Navigation.findNavController(view).navigate(R.id.loginFragment)
+            }
+
+            toRegisterButton.setOnClickListener {
+                Navigation.findNavController(view).navigate(R.id.registerFragment)
+            }
+        }
 
         return view
     }
