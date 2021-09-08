@@ -9,8 +9,6 @@ import android.widget.*
 import androidx.navigation.Navigation
 import com.example.stormbringersheetmanager.R
 import com.example.stormbringersheetmanager.Utility.Weapon
-import com.example.stormbringersheetmanager.Utility.RangedWeapon
-import java.nio.file.WatchEvent
 
 class EquipmentSelection : Fragment() {
 
@@ -36,6 +34,9 @@ class EquipmentSelection : Fragment() {
         equipmentConfirmButton = view.findViewById(R.id.equipmentConfirmButton)
 
         val bundle: Bundle = requireArguments()
+        if(bundle.containsKey("finalSkills")){
+            println("MA CHE CAZZOOOOOO")
+        }
         val FOR: Int = bundle.getInt("FOR")
         val DES: Int = bundle.getInt("DES")
         val pgClass = bundle.getStringArrayList("class")
@@ -57,6 +58,10 @@ class EquipmentSelection : Fragment() {
                 "Mendicante" -> availableWeapon = 0
                 "Artigiano" -> availableWeapon = 0
             }
+        }
+
+        if(pgClass.contains("Guerriero")){
+            availableWeapon = 3
         }
 
         var finalWeapon = ArrayList<Weapon>()
@@ -136,6 +141,9 @@ class EquipmentSelection : Fragment() {
                     if(checkBox.text.toString() == "Arco lungo"){
                         checkBox.isChecked = true
                         checkBox.isClickable = false
+                        finalWeapon.add(
+                            searchWeapon(checkBox.text.toString(), weapons)
+                        )
                     }
                     gridLayout.addView(checkBox)
                 }
@@ -154,6 +162,9 @@ class EquipmentSelection : Fragment() {
                 } else {
                     checkBox.isChecked = true
                     checkBox.isClickable = false
+                    finalWeapon.add(
+                        searchWeapon(checkBox.text.toString(), weapons)
+                    )
                     gridLayout.addView(checkBox)
                 }
             } else if (pgClass.contains("Nobile")) {
@@ -164,6 +175,9 @@ class EquipmentSelection : Fragment() {
                 } else {
                     checkBox.isChecked = true
                     checkBox.isClickable = false
+                    finalWeapon.add(
+                        searchWeapon(checkBox.text.toString(), weapons)
+                    )
                     gridLayout.addView(checkBox)
                 }
             } else if (pgClass.contains("Mendicante")) {
@@ -177,7 +191,7 @@ class EquipmentSelection : Fragment() {
 
         equipmentConfirmButton.setOnClickListener() {
             bundle.putParcelableArrayList("weapon", finalWeapon)
-            Navigation.findNavController(view).navigate(R.id.equipmentToSheet)
+            Navigation.findNavController(view).navigate(R.id.equipmentToSheet, bundle)
         }
 
         return view

@@ -17,7 +17,7 @@ data class Character(
     var weight : Int?,
     var description : String?,
     var armor : String?,
-    var armorProtection : Int?,
+    var armorProtection : String?,
     var graveWounds : Int?,
     var hp : Int?,
     var availableHP : Int?,
@@ -32,17 +32,16 @@ data class Character(
     var communicationSkills : ArrayList<Skills>?,
     var knowledge : Int?,
     var knowledgeSkills : ArrayList<Skills>?,
-    var readAndWrite : String?,
-    var readAndWriteSkills : ArrayList<Skills>?,
     var manipulation : Int?,
     var manipulationSkills : ArrayList<Skills>?,
     var perception : Int?,
     var perceptionSkills : ArrayList<Skills>?,
     var stealth : Int?,
     var stealthSkills : ArrayList<Skills>?,
-    var availableInt : Int?,
+    var availableINT : Int?,
     var evocation : Boolean?,
-    var availableEvocations : String?
+    var availableEvocations : String?,
+    var inGame : Boolean? = false
 ) {
 
 }

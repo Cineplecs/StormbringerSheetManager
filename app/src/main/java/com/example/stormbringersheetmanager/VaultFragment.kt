@@ -13,6 +13,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.Navigation
 import com.example.stormbringersheetmanager.CharacterCreation.MainInfoCharacterFragment
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -22,6 +24,7 @@ class VaultFragment : Fragment() {
 
     private lateinit var createButton : Button
     private lateinit var viewButton : Button
+    private lateinit var mAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +37,12 @@ class VaultFragment : Fragment() {
         // Inflate the layout for this fragment
         var view : View = inflater.inflate(R.layout.fragment_vault, container, false)
 
+        mAuth = Firebase.auth
+
+        if(mAuth.currentUser == null){
+            Navigation.findNavController(view).navigate(R.id.Account)
+        }
+
         createButton = view.findViewById(R.id.createButton)
         viewButton = view.findViewById(R.id.viewButton)
 
@@ -42,7 +51,7 @@ class VaultFragment : Fragment() {
         }
 
         viewButton.setOnClickListener(){
-            //TODO
+            Navigation.findNavController(view).navigate(R.id.vaultToList)
         }
 
         return view

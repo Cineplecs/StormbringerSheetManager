@@ -30,4 +30,9 @@ object DiceRolls {
         var diceShot : Int = (1..4).random()
         return diceShot
     }
+
+    fun D90() : Int {
+        var diceRoll : Int = (1..90).random()
+        return diceRoll
+    }
 }

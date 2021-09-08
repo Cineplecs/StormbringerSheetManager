@@ -25,8 +25,8 @@
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.stormbringersheetmanager.RegisterFragment"
-        android:label="Register"
-        tools:layout="@layout/fragment_register" >
+        android:label="Registrazione"
+        tools:layout="@layout/fragment_register">
         <action
             android:id="@+id/registerToLogin"
             app:destination="@id/loginFragment" />
@@ -38,11 +38,21 @@
         <action
             android:id="@+id/VaultToCreation"
             app:destination="@id/CharacterCreation" />
+        <action
+            android:id="@+id/vaultToList"
+            app:destination="@id/listFragment" />
     </fragment>
     <fragment
         android:id="@+id/gamesFragment"
         android:name="com.example.stormbringersheetmanager.GamesFragment"
-        android:label="Games" />
+        android:label="Games" >
+        <action
+            android:id="@+id/gamesToNewGame"
+            app:destination="@id/newGameFragment" />
+        <action
+            android:id="@+id/gamesToGameList"
+            app:destination="@id/gameListFragment" />
+    </fragment>
     <navigation android:id="@+id/CharacterCreation"
         app:startDestination="@id/mainInfoCharacterFragment"
         >
@@ -103,5 +113,67 @@
         <action
             android:id="@+id/HomeToAccount"
             app:destination="@id/accountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.example.stormbringersheetmanager.ListFragment"
+        android:label="Lista schede"
+        tools:layout="@layout/fragment_list">
+        <action
+            android:id="@+id/listToSheet"
+            app:destination="@id/sheetViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sheetViewFragment"
+        android:name="com.example.stormbringersheetmanager.SheetViewFragment"
+        android:label="Scheda personaggio"
+        tools:layout="@layout/fragment_sheet_view" />
+    <fragment
+        android:id="@+id/gameListFragment"
+        android:name="com.example.stormbringersheetmanager.GameListFragment"
+        android:label="Elenco partite"
+        tools:layout="@layout/fragment_game_list">
+        <action
+            android:id="@+id/action_gameListFragment_to_gameSheetFragment"
+            app:destination="@id/gameSheetFragment" />
+        <action
+            android:id="@+id/action_gameListFragment_to_masterSheetCollectionFragment"
+            app:destination="@id/masterSheetCollectionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newGameFragment"
+        android:name="com.example.stormbringersheetmanager.NewGameFragment"
+        android:label="Nuova campagna"
+        tools:layout="@layout/fragment_new_game">
+        <action
+            android:id="@+id/toGameCreation"
+            app:destination="@id/gameCreation" />
+        <action
+            android:id="@+id/toGameJoin"
+            app:destination="@id/gameJoinFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameCreation"
+        android:name="com.example.stormbringersheetmanager.GameCreation"
+        android:label="Crea una campagna"
+        tools:layout="@layout/fragment_game_creation" />
+    <fragment
+        android:id="@+id/gameJoinFragment"
+        android:name="com.example.stormbringersheetmanager.GameJoinFragment"
+        android:label="Partecipa a campagna"
+        tools:layout="@layout/fragment_game_join" />
+    <fragment
+        android:id="@+id/gameSheetFragment"
+        android:name="com.example.stormbringersheetmanager.GameSheetFragment"
+        android:label="Scheda personaggio"
+        tools:layout="@layout/fragment_game_sheet" />
+    <fragment
+        android:id="@+id/masterSheetCollectionFragment"
+        android:name="com.example.stormbringersheetmanager.MasterSheetCollectionFragment"
+        android:label="Elenco schede giocatori"
+        tools:layout="@layout/fragment_master_sheet_collection">
+        <action
+            android:id="@+id/action_masterSheetCollectionFragment_to_gameSheetFragment"
+            app:destination="@id/gameSheetFragment" />
     </fragment>
 </navigation>

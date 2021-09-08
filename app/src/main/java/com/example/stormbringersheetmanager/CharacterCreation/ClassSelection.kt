@@ -218,28 +218,6 @@ class ClassSelection : Fragment() {
         confirmButton.setPadding(15, 15, 15, 15)
         confirmButton.text = "Conferma"
         confirmButton.gravity = Gravity.CENTER
-        confirmButton.setOnClickListener{
-            nationalityButton.isGone = true
-            corpSpinner.isEnabled = false
-            var bundleFOR = TextFOR.text.toString().toInt()
-            var bundleINT = TextINT.text.toString().toInt()
-            var bundleCOS = TextCOS.text.toString().toInt()
-            var bundleMAN = TextMAN.text.toString().toInt()
-            var bundleDES = TextDES.text.toString().toInt()
-            var bundleTAG = TextTAG.text.toString().toInt()
-            var bundleFAS = TextFAS.text.toString().toInt()
-            bundle.putInt("FOR", bundleFOR)
-            bundle.putInt("FAS", bundleFAS)
-            bundle.putInt("DES", bundleDES)
-            bundle.putInt("COS", bundleCOS)
-            bundle.putInt("INT", bundleINT)
-            bundle.putInt("MAN", bundleMAN)
-            bundle.putInt("TAG", bundleTAG)
-            bundle.putString("nationality", nationalityText.text.toString())
-
-            bundle.putStringArrayList("class", finalClass)
-            Navigation.findNavController(requireView()).navigate(R.id.ClassToSkills, bundle)
-        }
 
         val heightSpinner = Spinner(requireContext())
         heightSpinner.layoutParams = LinearLayout.LayoutParams(
@@ -317,7 +295,29 @@ class ClassSelection : Fragment() {
         var weightAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, weigth.toList())
         weightSpinner.adapter = weightAdapter
 
-
+        confirmButton.setOnClickListener{
+            nationalityButton.isGone = true
+            corpSpinner.isEnabled = false
+            var bundleFOR = TextFOR.text.toString().toInt()
+            var bundleINT = TextINT.text.toString().toInt()
+            var bundleCOS = TextCOS.text.toString().toInt()
+            var bundleMAN = TextMAN.text.toString().toInt()
+            var bundleDES = TextDES.text.toString().toInt()
+            var bundleTAG = TextTAG.text.toString().toInt()
+            var bundleFAS = TextFAS.text.toString().toInt()
+            bundle.putInt("FOR", bundleFOR)
+            bundle.putInt("FAS", bundleFAS)
+            bundle.putInt("DES", bundleDES)
+            bundle.putInt("COS", bundleCOS)
+            bundle.putInt("INT", bundleINT)
+            bundle.putInt("MAN", bundleMAN)
+            bundle.putInt("TAG", bundleTAG)
+            bundle.putString("nationality", nationalityText.text.toString())
+            bundle.putInt("weight", weightSpinner.selectedItem.toString().toInt())
+            bundle.putInt("height", heightSpinner.selectedItem.toString().toInt())
+            bundle.putStringArrayList("class", finalClass)
+            Navigation.findNavController(requireView()).navigate(R.id.ClassToSkills, bundle)
+        }
 
         corpSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -1030,7 +1030,7 @@ class ClassSelection : Fragment() {
 
     private fun classChoice() : String {
         var classString = ""
-        val tiroClasse: Int = DiceRolls.D100()
+        val tiroClasse: Int = DiceRolls.D90()
         when (tiroClasse) {
             in 1..20 -> {
                 classString = "Guerriero"
@@ -1058,9 +1058,6 @@ class ClassSelection : Fragment() {
             }
             in 86..90 -> {
                 classString = "Mendicante"
-            }
-            in 91..100 -> {
-                classString = "Artigiano"
             }
         }
         return classString

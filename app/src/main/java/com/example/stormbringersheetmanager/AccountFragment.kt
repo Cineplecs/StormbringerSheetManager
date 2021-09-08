@@ -1,7 +1,6 @@
 package com.example.stormbringersheetmanager
 
 import android.os.Bundle
-import android.renderscript.Sampler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +21,8 @@ class AccountFragment : Fragment() {
     private lateinit var usernameText : TextView
     private lateinit var toLoginButton : Button
     private lateinit var toRegisterButton : Button
+    private lateinit var gameCountTextView : TextView
+    private lateinit var charCountTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,11 +39,17 @@ class AccountFragment : Fragment() {
         usernameText = view.findViewById(R.id.usernameText)
         toLoginButton = view.findViewById(R.id.goingToLoginButton)
         toRegisterButton = view.findViewById(R.id.goingToRegisterButton)
+        gameCountTextView = view.findViewById(R.id.gameCountTextView)
+        charCountTextView = view.findViewById(R.id.charCountTextVIew)
 
         if(mAuth.currentUser != null){
+            charCountTextView.isGone = false
+            gameCountTextView.isGone = false
             usernameText.isGone = false
             toLoginButton.isGone = true
             toRegisterButton.isGone = true
+            var gameCount = 0
+            var charCount = 0
 
             database = FirebaseDatabase.getInstance("https://stormbringersheetmanager-default-rtdb.europe-west1.firebasedatabase.app/").reference
 
@@ -52,7 +59,10 @@ class AccountFragment : Fragment() {
             }.addOnFailureListener(){
                 println("NON HA FUNZIONATO")
             }
+
         } else {
+            charCountTextView.isGone = true
+            gameCountTextView.isGone = true
             usernameText.isGone = true
             toLoginButton.isGone = false
             toRegisterButton.isGone = false

@@ -16,34 +16,48 @@
             android:id="@+id/weaponTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
             android:layout_margin="5dp"
-            android:text="Selezionare un'arma"/>
+            android:text="Selezionare un'arma"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/availableWeaponsText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:gravity="center"
-            android:textSize="15sp"
-            android:layout_margin="5dp"/>
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="L'ordine di scelta delle armi influirà\nsui punteggi di attacco e parata"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="15sp" />
 
         <GridLayout
             android:id="@+id/weaponGrid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:columnCount="1"
-            android:alignmentMode="alignBounds"
-            android:columnOrderPreserved="true"
             android:layout_gravity="left"
-            android:layout_margin="5dp"/>
+            android:layout_margin="5dp"
+            android:alignmentMode="alignBounds"
+            android:columnCount="1"
+            android:columnOrderPreserved="true" />
 
         <Button
             android:id="@+id/equipmentConfirmButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Conferma"/>
+            android:text="Conferma" />
 
     </LinearLayout>
 

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CharacterCreation.SheetFragment">
+    tools:context=".GameSheetFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -102,7 +102,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <EditText
+            <TextView
                 android:id="@+id/cultTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -139,67 +139,239 @@
                 android:layout_weight="0.65"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/FOR"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="FOR"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/COS"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="COS"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    <Button
+                        android:id="@+id/FORminus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.3"
+                        android:text="-" />
 
-                <TextView
-                    android:id="@+id/TAG"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="TAG"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    <TextView
+                        android:id="@+id/FOR"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:layout_weight="0.4"
+                        android:text="FOR"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
 
-                <TextView
-                    android:id="@+id/INT"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="INT"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    <Button
+                        android:id="@+id/FORplus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.3"
+                        android:text="+" />
 
-                <TextView
-                    android:id="@+id/MAN"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="MAN"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/DES"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="DES"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/FAS"
+                    <Button
+                        android:id="@+id/COSminus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.3"
+                        android:text="-" />
+
+                    <TextView
+                        android:id="@+id/COS"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:layout_weight="0.4"
+                        android:text="COS"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <Button
+                        android:id="@+id/COSplus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.3"
+                        android:text="+" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="FAS"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/TAGminus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.3"
+                        android:text="-" />
+
+                    <TextView
+                        android:id="@+id/TAG"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:layout_weight="0.4"
+                        android:text="TAG"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <Button
+                        android:id="@+id/TAGplus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.3"
+                        android:text="+" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/INTminus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.3"
+                        android:text="-" />
+
+                    <TextView
+                        android:id="@+id/INT"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:layout_weight="0.4"
+                        android:text="INT"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <Button
+                        android:id="@+id/INTplus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.3"
+                        android:text="+" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/MANminus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.3"
+                        android:text="-" />
+
+                    <TextView
+                        android:id="@+id/MAN"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:layout_weight="0.4"
+                        android:text="MAN"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <Button
+                        android:id="@+id/MANplus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.3"
+                        android:text="+" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/DESminus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.3"
+                        android:text="-" />
+
+                    <TextView
+                        android:id="@+id/DES"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:layout_weight="0.4"
+                        android:text="DES"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <Button
+                        android:id="@+id/DESplus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.3"
+                        android:text="+" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/FASminus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.3"
+                        android:text="-" />
+
+                    <TextView
+                        android:id="@+id/FAS"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:layout_weight="0.4"
+                        android:text="FAS"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <Button
+                        android:id="@+id/FASplus"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.3"
+                        android:text="+" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -235,7 +407,7 @@
 
                 </LinearLayout>
 
-                <EditText
+                <TextView
                     android:id="@+id/characterDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -260,15 +432,7 @@
                 android:layout_height="300dp"
                 android:layout_gravity="center"
                 android:layout_margin="15dp"
-                android:background="@color/purple_700" />
-
-            <Button
-                android:id="@+id/imageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="15dp"
-                android:text="Selezionare immagine" />
+                android:background="@android:color/holo_purple" />
 
         </LinearLayout>
 
@@ -283,23 +447,23 @@
                 android:layout_weight="0.5"
                 android:orientation="horizontal">
 
-                <Spinner
+                <TextView
                     android:id="@+id/armor"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="15dp"
-                    android:layout_weight="0.75"
+                    android:layout_weight="0.5"
                     android:gravity="center"
                     android:text="armor"
                     android:textColor="@color/black"
-                    android:textSize="10sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/armorProtection"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="15dp"
-                    android:layout_weight="0.25"
+                    android:layout_weight="0.5"
                     android:gravity="center"
                     android:text="armor protection"
                     android:textColor="@color/black"
@@ -310,30 +474,110 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/graveWounds"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="15dp"
-                    android:layout_weight="0.5"
-                    android:gravity="center"
-                    android:text="ferita grave"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/HP"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="15dp"
-                    android:layout_weight="0.5"
-                    android:gravity="center"
-                    android:text="HP"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="15dp"
+                        android:layout_weight="0.5"
+                        android:gravity="center"
+                        android:text="ferita grave"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="15dp"
+                        android:layout_weight="0.5"
+                        android:gravity="center"
+                        android:text="HP"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="0.5">
+
+                        <Button
+                            android:id="@+id/graveMinus"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.3"
+                            android:text="-"
+                            android:textSize="15sp"/>
+
+                        <TextView
+                            android:id="@+id/graveWounds"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="15dp"
+                            android:layout_weight="0.4"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="valore ferita grave"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <Button
+                            android:id="@+id/gravePlus"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.3"
+                            android:text="+"
+                            android:textSize="15sp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_weight="0.5">
+
+                        <Button
+                            android:id="@+id/hpMinus"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:layout_weight="0.3"
+                            android:text="-"/>
+
+                        <EditText
+                            android:id="@+id/HP"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:gravity="center"
+                            android:text="valore HP"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <Button
+                            android:id="@+id/hpPlus"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:layout_weight="0.3"
+                            android:text="+"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -610,7 +854,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/climbValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -638,7 +882,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/jumpValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -666,7 +910,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/swimValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -694,7 +938,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/dodgeValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -722,7 +966,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/ridingValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -750,7 +994,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/fallValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -827,7 +1071,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/reputationValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -855,7 +1099,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/persuasionValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -883,7 +1127,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/speechValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -911,7 +1155,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/singingValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -988,7 +1232,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/firstAidValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1016,7 +1260,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/memoryValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1044,7 +1288,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/navigationValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1072,7 +1316,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/poisonValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1101,7 +1345,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/treasureValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1129,7 +1373,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/cartographyValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1157,7 +1401,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/musicValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1186,7 +1430,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/plantsValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1215,7 +1459,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/commonValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1244,7 +1488,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/lowMelniboleanoValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1273,7 +1517,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/lateMelniboleanoValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1302,7 +1546,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/highMelniboleanoValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1331,7 +1575,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/otherLanguagesValue"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -1407,7 +1651,7 @@
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/jugglingValue"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1435,7 +1679,7 @@
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/magicValue"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1464,7 +1708,7 @@
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/trapsValue"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1494,7 +1738,7 @@
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/lockValue"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1524,7 +1768,7 @@
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/nodesValue"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1602,7 +1846,7 @@
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/stabilityValue"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1630,7 +1874,7 @@
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/smellValue"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1658,7 +1902,7 @@
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/watchValue"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1686,7 +1930,7 @@
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tracksValue"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1715,7 +1959,7 @@
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/listenValue"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1743,7 +1987,7 @@
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/searchingValue"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1771,7 +2015,7 @@
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tasteValue"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1819,7 +2063,7 @@
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/stealthBonus"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1848,7 +2092,7 @@
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/ambushValue"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1876,7 +2120,7 @@
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/pickpocketValue"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1904,7 +2148,7 @@
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/sneakValue"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1928,11 +2172,11 @@
                         android:layout_margin="15dp"
                         android:layout_weight="0.5"
                         android:gravity="center_horizontal"
-                        android:text="Nascondere"
+                        android:text="Celare"
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/concealValue"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1960,7 +2204,7 @@
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/hideValue"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -1997,7 +2241,7 @@
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/availableINT"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -2009,14 +2253,6 @@
                         android:textSize="15sp" />
 
                 </LinearLayout>
-
-                <CheckBox
-                    android:id="@+id/evocationCheckBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Evocare"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -2040,19 +2276,18 @@
                         android:gravity="center"
                         android:text="----\n----\n----\n"
                         android:textColor="@color/black"
-                        android:textSize="15sp"
-                        android:visibility="gone"/>
+                        android:textSize="15sp" />
 
                     <EditText
                         android:id="@+id/evocationEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:gravity="left"
-                        android:hint="Selezionare le evocazioni\n con il master ed\n inserirle qui"
+                        android:gravity="center"
+                        android:text="----\n----\n----\n"
                         android:textColor="@color/black"
                         android:textSize="15sp"
-                        android:enabled="false"/>
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
@@ -2060,14 +2295,12 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/finalConfirmButton"
+            android:id="@+id/changeConfirmButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="15dp"
             android:gravity="center"
-            android:text="Conferma"
-            android:textSize="15sp" />
+            android:text="Salva modifiche" />
 
     </LinearLayout>
 

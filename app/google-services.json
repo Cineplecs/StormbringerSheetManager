@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "447920261508",
+    "firebase_url": "https://stormbringersheetmanager-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "stormbringersheetmanager",
+    "storage_bucket": "stormbringersheetmanager.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:447920261508:android:e902e1a53f7fc8b0fdb5d1",
+        "android_client_info": {
+          "package_name": "com.example.stormbringersheetmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "447920261508-rmgq8ngj7i58kjkmlkuums0ob28ilbar.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7k7s2mTLCaooEGMWFefFetkiLNttr7vk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "447920261508-rmgq8ngj7i58kjkmlkuums0ob28ilbar.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

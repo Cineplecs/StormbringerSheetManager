@@ -4,38 +4,33 @@ import android.os.Parcel
 import android.os.Parcelable
 
 class Weapon(
-    name: String, requestFOR: Int?, requestDES: Int, damage: String?,
-    length: String?, price: String?
+    var name: String = "", var requestFOR: Int? = 0, var requestDES: Int = 0, val damage: String? = "",
+    val length: String? = "", val price: String? = "", val healthPoints: Int = 20
 ) : Parcelable {
-    var name: String = name
-    var requestFOR: Int? = requestFOR
-    var requestDES: Int = requestDES
-    var damage: String? = damage
-    var length: String? = length
-    var price: String? = price
-    var healthPoints = 20
-
     constructor(parcel: Parcel) : this(
-        TODO("name"),
-        TODO("requestFOR"),
-        TODO("requestDES"),
-        TODO("damage"),
-        TODO("length"),
-        TODO("price")
-    ) {
-        name = parcel.readString().toString()
-        requestFOR = parcel.readValue(Int::class.java.classLoader) as? Int
-        requestDES = (parcel.readValue(Int::class.java.classLoader) as? Int)!!
-        damage = parcel.readString()
-        length = parcel.readString()
-        price = parcel.readString()
-        healthPoints = parcel.readInt()
-    }
+        parcel.readString().toString(),
+        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readInt(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readInt()
+    )
+
+    constructor() : this(
+        "",
+        0,
+        0,
+        "",
+        "",
+        "",
+        0
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
         parcel.writeValue(requestFOR)
-        parcel.writeValue(requestDES)
+        parcel.writeInt(requestDES)
         parcel.writeString(damage)
         parcel.writeString(length)
         parcel.writeString(price)
@@ -55,5 +50,7 @@ class Weapon(
             return arrayOfNulls(size)
         }
     }
+
+
 }
 

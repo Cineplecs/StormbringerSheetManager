@@ -151,6 +151,28 @@
 
     <string name="ToolbarDefault">Stormbringer Sheet Manager</string>
 
+    <string name="FOR">FOR: </string>
+    <string name="COS">COS: </string>
+    <string name="TAG">TAG: </string>
+    <string name="INT">INT: </string>
+    <string name="MAN">MAN: </string>
+    <string name="DES">DES: </string>
+    <string name="FAS">FAS: </string>
+
+    <string name="weight">Peso: </string>
+    <string name="height">Altezza: </string>
+    <string name="age">Età: </string>
+    <string name="gender">Genere: </string>
+    <string name="hp">HP:</string>
+    <string name="wounds">Ferite\ngravi:\n</string>
+
+    <string name="elan">Punti Elan: </string>
+    <string name="cult">Culto: </string>
+
+    <string name="evocation">Non sono disponibili evocazioni</string>
+    <string name="availableINT">Int\ndisponibile\n</string>
+
+
     <string name="Prova">Questa è la prova per il cambio di testo della text view</string>
     <string name="navigation_drawer_open"> Open navigation drawer </string>
     <string name="navigation_drawer_close"> Close navigation drawer </string>

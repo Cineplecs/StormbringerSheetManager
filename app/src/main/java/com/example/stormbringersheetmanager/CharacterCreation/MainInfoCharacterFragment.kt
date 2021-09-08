@@ -18,12 +18,15 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import org.w3c.dom.Text
 
 class MainInfoCharacterFragment : Fragment() {
 
     private lateinit var buttonProsegui: Button
     private lateinit var nameEditText: EditText
-    private lateinit var playerEditText: EditText
+    private lateinit var playerEditText: TextView
+    private lateinit var database : DatabaseReference
+    private lateinit var mAuth : FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,9 +39,21 @@ class MainInfoCharacterFragment : Fragment() {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_main_info_character, container, false)
 
+        mAuth = Firebase.auth
         buttonProsegui = view.findViewById(R.id.buttonProsegui)
         nameEditText = view.findViewById(R.id.NameEditText)
         playerEditText = view.findViewById(R.id.playerEditText)
+
+        database = FirebaseDatabase.getInstance("https://stormbringersheetmanager-default-rtdb.europe-west1.firebasedatabase.app/").reference
+
+        var username = ""
+
+        database.child("Users").child(mAuth.uid!!).get().addOnSuccessListener { it ->
+            username = it.child("username").value.toString()
+            playerEditText.text = username
+        }.addOnFailureListener(){
+            println("NON HA FUNZIONATO")
+        }
 
 
         val ageSpinner = view.findViewById<Spinner>(R.id.ageSpinner)
@@ -62,7 +77,6 @@ class MainInfoCharacterFragment : Fragment() {
                         bundle.putString("gender", genderSpinner.selectedItem.toString())
                         bundle.putInt("age", ageSpinner.selectedItem.toString().toInt())
                         bundle.putString("characterName", nameEditText.text.toString())
-                        bundle.putString("playerName", playerEditText.text.toString())
                         Navigation.findNavController(view).navigate(R.id.InfoToClass, bundle)
 
                         /**

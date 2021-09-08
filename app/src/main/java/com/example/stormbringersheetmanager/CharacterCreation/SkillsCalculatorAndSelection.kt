@@ -248,7 +248,7 @@ class SkillsCalculatorAndSelection : Fragment() {
                     )
                 }
                 "Nobile" -> {
-                    if(i != pgClass.lastIndex) {
+                    if (i != pgClass.lastIndex) {
                         classSkills.add(
                             Skills("Comunicazione", "Reputazione", 40 + comunicazione, true)
                         )
@@ -318,7 +318,7 @@ class SkillsCalculatorAndSelection : Fragment() {
             }
         }
 
-        if(pgClass.contains("Nobile")){
+        if (pgClass.contains("Nobile")) {
             pgClass.removeAt(pgClass.size - 1)
         }
 
@@ -326,14 +326,16 @@ class SkillsCalculatorAndSelection : Fragment() {
 
         for (i in classSkills.indices) {
             finalSkills.add(classSkills[i])
-            if (classSkills[i].iniziale > 100) {
+            if (classSkills[i].iniziale!! > 100) {
                 classSkills[i].iniziale = 100
-            } else if (classSkills[i].iniziale < 0) {
+            } else if (classSkills[i].iniziale!! < 0) {
                 classSkills[i].iniziale = 0
             }
-            classSkillsNames.add(
-                classSkills[i].name
-            )
+            classSkills[i].name?.let {
+                classSkillsNames.add(
+                    it
+                )
+            }
         }
 
         for (i in classSkills.indices) {
@@ -380,18 +382,24 @@ class SkillsCalculatorAndSelection : Fragment() {
                         }
                     }
                     if (checkBox.isChecked) {
-                        skillCheck = searchSkill(checkBox.text.toString(), skillsList)
+                        var skillCheck = searchSkill(checkBox.text.toString(), skillsList)
                         when (skillCheck.type) {
-                            "Furtività" -> skillCheck.iniziale += ((DiceRolls.D100() + 2 - 1) / 2) + furtivita
-                            "Agilità" -> skillCheck.iniziale += ((DiceRolls.D100() + 2 - 1) / 2) + agilita
-                            "Manipolazione" -> skillCheck.iniziale += ((DiceRolls.D100() + 2 - 1) / 2) + manipolazione
-                            "Percezione" -> skillCheck.iniziale += ((DiceRolls.D100() + 2 - 1) / 2) + manipolazione
-                            "Conoscenza" -> skillCheck.iniziale += ((DiceRolls.D100() + 2 - 1) / 2) + conoscenza
-                            "Comunicazione" -> skillCheck.iniziale += ((DiceRolls.D100() + 2 - 1) / 2) + comunicazione
+                            "Furtività" -> skillCheck.iniziale =
+                                skillCheck.iniziale?.plus(((DiceRolls.D100() + 2 - 1) / 2) + furtivita)
+                            "Agilità" -> skillCheck.iniziale =
+                                skillCheck.iniziale?.plus(((DiceRolls.D100() + 2 - 1) / 2) + agilita)
+                            "Manipolazione" -> skillCheck.iniziale =
+                                skillCheck.iniziale?.plus(((DiceRolls.D100() + 2 - 1) / 2) + manipolazione)
+                            "Percezione" -> skillCheck.iniziale =
+                                skillCheck.iniziale?.plus(((DiceRolls.D100() + 2 - 1) / 2) + manipolazione)
+                            "Conoscenza" -> skillCheck.iniziale =
+                                skillCheck.iniziale?.plus(((DiceRolls.D100() + 2 - 1) / 2) + conoscenza)
+                            "Comunicazione" -> skillCheck.iniziale =
+                                skillCheck.iniziale?.plus(((DiceRolls.D100() + 2 - 1) / 2) + comunicazione)
                         }
-                        if (skillCheck.iniziale < 0) {
+                        if (skillCheck.iniziale!! < 0) {
                             skillCheck.iniziale = 0
-                        } else if (skillCheck.iniziale > 100) {
+                        } else if (skillCheck.iniziale!! > 100) {
                             skillCheck.iniziale = 100
                         }
                         finalSkills.add(skillCheck)
@@ -407,24 +415,57 @@ class SkillsCalculatorAndSelection : Fragment() {
             }
         }
 
+
+
         skillConfirmButton.setOnClickListener() {
+            var finalSkillsNames = ArrayList<String>()
+            for (i in finalSkills.indices) {
+                finalSkillsNames.add(finalSkills[i].name.toString())
+            }
             if (availableSkills == 0) {
-                for(i in skillsList.indices){
-                    if(!finalSkills.contains(skillsList[i])){
+                for (i in skillsList.indices) {
+                    if (!finalSkillsNames.contains(skillsList[i].name)) {
                         when (skillsList[i].type) {
-                            "Furtività" -> skillsList[i].iniziale += furtivita
-                            "Agilità" -> skillsList[i].iniziale += agilita
-                            "Manipolazione" -> skillsList[i].iniziale += manipolazione
-                            "Percezione" -> skillsList[i].iniziale += manipolazione
-                            "Conoscenza" -> skillsList[i].iniziale += conoscenza
-                            "Comunicazione" -> skillsList[i].iniziale += comunicazione
+                            "Furtività" -> skillsList[i].iniziale =
+                                skillsList[i].iniziale?.plus(
+                                    furtivita
+                                )
+                            "Agilità" -> skillsList[i].iniziale = skillsList[i].iniziale?.plus(
+                                agilita
+                            )
+                            "Manipolazione" -> skillsList[i].iniziale =
+                                skillsList[i].iniziale?.plus(
+                                    manipolazione
+                                )
+                            "Percezione" -> skillsList[i].iniziale =
+                                skillsList[i].iniziale?.plus(
+                                    manipolazione
+                                )
+                            "Conoscenza" -> skillsList[i].iniziale =
+                                skillsList[i].iniziale?.plus(
+                                    conoscenza
+                                )
+                            "Comunicazione" -> skillsList[i].iniziale =
+                                skillsList[i].iniziale?.plus(
+                                    comunicazione
+                                )
                         }
-                        finalSkills.add(
-                            skillsList[i]
-                        )
+                        finalSkills.add(skillsList[i])
                     }
                 }
+
+                for (i in finalSkills.indices) {
+                    println("LALALA: ${finalSkills[i].name}")
+                }
                 bundle.putParcelableArrayList("finalSkills", finalSkills)
+                bundle.putInt("agility", agilita)
+                bundle.putInt("communication", comunicazione)
+                bundle.putInt("knowledge", conoscenza)
+                bundle.putInt("manipulation", manipolazione)
+                bundle.putInt("perception", percezione)
+                bundle.putInt("stealth", furtivita)
+                bundle.putInt("attack", attacco)
+                bundle.putInt("block", parata)
                 Navigation.findNavController(view).navigate(R.id.SkillsToEquipment, bundle)
 
             } else {
@@ -684,6 +725,9 @@ class SkillsCalculatorAndSelection : Fragment() {
         )
         skillsList.add(
             Skills("Furtività", "Nascondersi", 10, true)
+        )
+        skillsList.add(
+            Skills("Furtività", "Nascondere", 10, true)
         )
         skillsList.add(
             Skills("Furtività", "Agguato", 0, true)

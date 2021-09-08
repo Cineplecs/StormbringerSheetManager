@@ -7,8 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.navigation.Navigation
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class GamesFragment : Fragment() {
+
+    private lateinit var mAuth: FirebaseAuth
+    private lateinit var newGameButton : Button
+    private lateinit var gameListButton : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,7 +26,24 @@ class GamesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_games, container, false)
+        val view = inflater.inflate(R.layout.fragment_games, container, false)
+
+        mAuth = Firebase.auth
+        newGameButton = view.findViewById(R.id.newGameButton)
+        gameListButton = view.findViewById(R.id.gameListButton)
+
+        if(mAuth.currentUser == null){
+            Navigation.findNavController(view).navigate(R.id.Account)
+        }
+
+        newGameButton.setOnClickListener() {
+            Navigation.findNavController(view).navigate(R.id.gamesToNewGame)
+        }
+
+        gameListButton.setOnClickListener(){
+            Navigation.findNavController(view).navigate(R.id.gamesToGameList)
+        }
+
+        return view
     }
 }

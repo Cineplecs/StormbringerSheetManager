@@ -5,12 +5,12 @@ import android.os.Parcelable
 
 
 class Skills(
-    type: String, name: String, iniziale: Int, esperienza: Boolean
+    type: String? = "", name: String? = "", iniziale: Int? = 0, esperienza: Boolean? = true
 ) : Parcelable {
-    var type : String = type
-    var name = name
-    var iniziale = iniziale
-    var esperienza = esperienza
+    var type : String? = type
+    var name : String? = name
+    var iniziale : Int? = iniziale
+    var esperienza : Boolean? = esperienza
 
     constructor(parcel: Parcel) : this(
         TODO("type"),
@@ -18,17 +18,21 @@ class Skills(
         TODO("iniziale"),
         TODO("esperienza")
     ) {
-        type = parcel.readString().toString()
-        name = parcel.readString().toString()
-        iniziale = parcel.readInt()
-        esperienza = parcel.readByte() != 0.toByte()
+        type = parcel.readString()
+        name = parcel.readString()
+        iniziale = parcel.readValue(Int::class.java.classLoader) as? Int
+        esperienza = parcel.readValue(Boolean::class.java.classLoader) as? Boolean
     }
+
+    constructor() : this(
+        "","",0,true
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(type)
         parcel.writeString(name)
-        parcel.writeInt(iniziale)
-        parcel.writeByte(if (esperienza) 1 else 0)
+        parcel.writeValue(iniziale)
+        parcel.writeValue(esperienza)
     }
 
     override fun describeContents(): Int {
@@ -44,4 +48,5 @@ class Skills(
             return arrayOfNulls(size)
         }
     }
+
 }

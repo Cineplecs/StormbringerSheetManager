@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navigationView: NavigationView
-    private lateinit var mAuth : FirebaseAuth
+    private lateinit var mAuth: FirebaseAuth
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +50,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.gamesFragment, R.id.accountFragment,
                 R.id.registerFragment, R.id.loginFragment,
                 R.id.vaultFragment, R.id.skillsCalculatorAndSelection,
-                R.id.classSelection, R.id.equipmentSelection
+                R.id.classSelection, R.id.equipmentSelection,
+                R.id.sheetFragment
             ),
             drawer
         )
@@ -90,9 +91,9 @@ class MainActivity : AppCompatActivity() {
             return if (navController.currentDestination?.label.toString().contains("Main") ||
                 navController.currentDestination?.label.toString().contains("Equipment") ||
                 navController.currentDestination?.label.toString().contains("Skill") ||
-                navController.currentDestination?.label.toString().contains("Class")
+                navController.currentDestination?.label.toString().contains("Class") ||
+                navController.currentDestination?.label.toString().contains("Sheet")
             ) {
-                println("Qui ci siamo")
                 showDialog()
                 true
             } else {
@@ -148,7 +149,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        if(mAuth.currentUser != null){
+        if (mAuth.currentUser != null) {
             Firebase.auth.signOut()
         }
         super.onDestroy()
