@@ -12,14 +12,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.view.isGone
-import androidx.navigation.Navigation
-import com.example.stormbringersheetmanager.Utility.Character
 import com.example.stormbringersheetmanager.Utility.Skills
 import com.example.stormbringersheetmanager.Utility.Weapon
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
-import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -138,7 +135,7 @@ class GameSheetFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_game_sheet, container, false)
 
-        var bundle = requireArguments()
+        val bundle = requireArguments()
 
         changeConfirmButton = view.findViewById(R.id.changeConfirmButton)
 
@@ -238,7 +235,7 @@ class GameSheetFragment : Fragment() {
                 characterImage.setImageBitmap(bitmap)
             }
 
-        var rifPlayer: String = ""
+        var rifPlayer = ""
         var forza = 0
         var const = 0
         var size = 0
@@ -249,7 +246,7 @@ class GameSheetFragment : Fragment() {
         var hp = 0
         var grave = 0
 
-        var key = database.child("Games").child(bundle.getString("game")!!).child("players").ref
+        val key = database.child("Games").child(bundle.getString("game")!!).child("players").ref
 
         database.child("Games").get().addOnSuccessListener { game ->
             game.child(bundle.getString("game").toString())

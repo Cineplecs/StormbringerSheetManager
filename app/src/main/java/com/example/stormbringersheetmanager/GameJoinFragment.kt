@@ -79,6 +79,8 @@ class GameJoinFragment : Fragment() {
                             var key =
                                 database.child("Games").child(gameName).child("players").push()
                             key.child(username).setValue(character)
+                            var charKey = it.child(mAuth.uid!!).child(characterSpinner.selectedItem.toString()).ref
+                            charKey.child("inGame").setValue(true)
                         }
                     }
                 }
