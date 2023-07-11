@@ -21,13 +21,14 @@ class AccountFragment : Fragment() {
     private lateinit var usernameText : TextView
     private lateinit var toLoginButton : Button
     private lateinit var toRegisterButton : Button
-    private lateinit var gameCountTextView : TextView
-    private lateinit var charCountTextView: TextView
+    private lateinit var indirizzoMail : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         mAuth = Firebase.auth
+
+        println("Arrivo almeno a qui?")
     }
 
     override fun onCreateView(
@@ -39,12 +40,10 @@ class AccountFragment : Fragment() {
         usernameText = view.findViewById(R.id.usernameText)
         toLoginButton = view.findViewById(R.id.goingToLoginButton)
         toRegisterButton = view.findViewById(R.id.goingToRegisterButton)
-        gameCountTextView = view.findViewById(R.id.gameCountTextView)
-        charCountTextView = view.findViewById(R.id.charCountTextVIew)
+        indirizzoMail = view.findViewById(R.id.indirizzoMail)
 
         if(mAuth.currentUser != null){
-            charCountTextView.isGone = false
-            gameCountTextView.isGone = false
+            indirizzoMail.isGone = false
             usernameText.isGone = false
             toLoginButton.isGone = true
             toRegisterButton.isGone = true
@@ -53,16 +52,19 @@ class AccountFragment : Fragment() {
 
             database = FirebaseDatabase.getInstance("https://stormbringersheetmanager-default-rtdb.europe-west1.firebasedatabase.app/").reference
 
+
+
             database.child("Users").child(mAuth.uid!!).get().addOnSuccessListener { it ->
                 val username = it.child("username").value.toString()
                 usernameText.text = username
+                val mail = it.child("mail").value.toString()
+                indirizzoMail.text = mail
             }.addOnFailureListener(){
                 println("NON HA FUNZIONATO")
             }
 
         } else {
-            charCountTextView.isGone = true
-            gameCountTextView.isGone = true
+            indirizzoMail.isGone = true
             usernameText.isGone = true
             toLoginButton.isGone = false
             toRegisterButton.isGone = false

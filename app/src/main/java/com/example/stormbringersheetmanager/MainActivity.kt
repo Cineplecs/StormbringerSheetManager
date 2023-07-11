@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity() {
                         navController.currentDestination?.label.toString().contains("Skill") ||
                         navController.currentDestination?.label.toString().contains("Class")
                     ) {
+                        println(menuItem.itemId.toString() + ", ho scelto questo")
                         showDialog(menuItem)
                     } else {
                         NavigationUI.onNavDestinationSelected(menuItem, navController)
