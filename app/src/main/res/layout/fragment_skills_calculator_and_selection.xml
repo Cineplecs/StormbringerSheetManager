@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/background_light"
     android:orientation="vertical"
     tools:context=".CharacterCreation.SkillsCalculatorAndSelection">
 
@@ -22,21 +23,23 @@
                 android:id="@+id/skillValueTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:text=""
-                android:layout_weight="1"
-                android:textSize="15sp"
-                android:layout_margin="5dp"/>
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/classSkillsList"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
                 android:gravity="left"
                 android:text=""
-                android:layout_weight="1"
-                android:textSize="15sp"
-                android:layout_margin="5dp"/>
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
         </LinearLayout>
 
@@ -47,6 +50,7 @@
             android:layout_margin="15dp"
             android:gravity="center"
             android:text="Abilità da selezionare: "
+            android:textColor="@color/black"
             android:textSize="15sp" />
 
         <GridLayout
@@ -54,18 +58,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alignmentMode="alignBounds"
-            android:columnOrderPreserved="true"
             android:columnCount="2"
+            android:columnOrderPreserved="true"
             android:gravity="center"
             android:useDefaultMargins="false" />
 
         <Button
+            android:id="@+id/skillConfirmButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/skillConfirmButton"
-            android:text="Conferma"
             android:layout_gravity="center"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:text="Conferma" />
 
     </LinearLayout>
 

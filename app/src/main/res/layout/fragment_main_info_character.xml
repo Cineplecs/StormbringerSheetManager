@@ -13,14 +13,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:background="@android:color/background_light"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="10dp"
                 android:text="Creazione personaggio - \nInformazioni Base"
-                android:textSize="20sp"
-                android:paddingTop="10dp"/>
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -29,6 +31,7 @@
                 android:paddingTop="20dp"
                 android:paddingBottom="10dp"
                 android:text="Nome"
+                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <EditText
@@ -37,7 +40,9 @@
                 android:layout_height="55dp"
                 android:ems="10"
                 android:hint="Nome personaggio"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -46,6 +51,7 @@
                 android:paddingTop="20dp"
                 android:paddingBottom="10dp"
                 android:text="Giocatore"
+                android:textColor="@color/black"
                 android:textSize="18sp" />
 
             <TextView
@@ -54,7 +60,8 @@
                 android:layout_height="55dp"
                 android:ems="10"
                 android:hint="Nome giocatore"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -63,6 +70,7 @@
                 android:paddingTop="20dp"
                 android:paddingBottom="10dp"
                 android:text="Genere"
+                android:textColor="@color/black"
                 android:textSize="18sp" />
 
             <Spinner
@@ -77,6 +85,7 @@
                 android:paddingTop="20dp"
                 android:paddingBottom="10dp"
                 android:text="Età"
+                android:textColor="@color/black"
                 android:textSize="18sp" />
 
             <Spinner

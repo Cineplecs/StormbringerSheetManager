@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.navigation.Navigation
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -33,7 +34,8 @@ class GamesFragment : Fragment() {
         gameListButton = view.findViewById(R.id.gameListButton)
 
         if(mAuth.currentUser == null){
-            Navigation.findNavController(view).navigate(R.id.Account)
+            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.loginFragment)
+            Toast.makeText(requireContext(), "Login necessario", Toast.LENGTH_SHORT).show()
         }
 
         newGameButton.setOnClickListener() {

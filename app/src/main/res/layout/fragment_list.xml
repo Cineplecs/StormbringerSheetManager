@@ -9,17 +9,18 @@
         android:id="@+id/listLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/background_light"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:text="Lista personaggi"
-            android:layout_margin="15dp"
             android:layout_gravity="center"
-            android:gravity="center"/>
+            android:layout_margin="15dp"
+            android:gravity="center"
+            android:text="Lista personaggi"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
 
     </LinearLayout>
 

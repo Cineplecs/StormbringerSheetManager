@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/background_light"
     tools:context=".GameCreation">
 
     <EditText
@@ -14,6 +15,8 @@
         android:hint="Inserire il nome della partita"
         android:inputType="text"
         android:padding="15dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,6 +30,8 @@
         android:hint="Inserire la password della partita"
         android:inputType="textPassword"
         android:padding="15dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/grey"
         app:layout_constraintBottom_toTopOf="@+id/gameCreationConfirmButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

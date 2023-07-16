@@ -95,7 +95,7 @@
         <fragment
             android:id="@+id/sheetFragment"
             android:name="com.example.stormbringersheetmanager.CharacterCreation.SheetFragment"
-            android:label="fragment_sheet"
+            android:label="Recap"
             tools:layout="@layout/fragment_sheet" />
     </navigation>
 

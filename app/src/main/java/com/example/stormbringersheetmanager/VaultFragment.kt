@@ -40,7 +40,8 @@ class VaultFragment : Fragment() {
         mAuth = Firebase.auth
 
         if(mAuth.currentUser == null){
-            Navigation.findNavController(view).navigate(R.id.Account)
+            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.loginFragment)
+            Toast.makeText(requireContext(), "Login necessario", Toast.LENGTH_SHORT).show()
         }
 
         createButton = view.findViewById(R.id.createButton)

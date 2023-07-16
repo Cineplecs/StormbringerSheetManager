@@ -8,6 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/background_light"
         android:orientation="vertical">
 
         <LinearLayout
@@ -112,6 +113,7 @@
                 android:gravity="center"
                 android:hint="Inserire un culto"
                 android:textColor="@color/black"
+                android:textColorHint="@color/grey"
                 android:textSize="15sp" />
 
             <TextView
@@ -415,6 +417,7 @@
                     android:gravity="center"
                     android:hint="Inserire la descrizione del personaggio"
                     android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
                     android:textSize="15sp" />
 
             </LinearLayout>
@@ -432,7 +435,7 @@
                 android:layout_height="300dp"
                 android:layout_gravity="center"
                 android:layout_margin="15dp"
-                android:background="@android:color/holo_purple" />
+                android:background="@color/purple_500" />
 
         </LinearLayout>
 
@@ -510,8 +513,8 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_weight="0.5">
+                        android:layout_weight="0.5"
+                        android:orientation="horizontal">
 
                         <Button
                             android:id="@+id/graveMinus"
@@ -519,16 +522,16 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="0.3"
                             android:text="-"
-                            android:textSize="15sp"/>
+                            android:textSize="15sp" />
 
                         <TextView
                             android:id="@+id/graveWounds"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
+                            android:layout_gravity="center"
                             android:layout_margin="15dp"
                             android:layout_weight="0.4"
                             android:gravity="center"
-                            android:layout_gravity="center"
                             android:text="valore ferita grave"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
@@ -539,23 +542,23 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="0.3"
                             android:text="+"
-                            android:textSize="15sp"/>
+                            android:textSize="15sp" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_weight="0.5">
+                        android:layout_weight="0.5"
+                        android:orientation="horizontal">
 
                         <Button
                             android:id="@+id/hpMinus"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:textSize="15sp"
                             android:layout_weight="0.3"
-                            android:text="-"/>
+                            android:text="-"
+                            android:textSize="15sp" />
 
                         <EditText
                             android:id="@+id/HP"
@@ -571,9 +574,9 @@
                             android:id="@+id/hpPlus"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:textSize="15sp"
                             android:layout_weight="0.3"
-                            android:text="+"/>
+                            android:text="+"
+                            android:textSize="15sp" />
 
                     </LinearLayout>
 
@@ -654,6 +657,7 @@
                     android:layout_margin="15dp"
                     android:hint="Inserire equipaggiamento del personaggio"
                     android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
                     android:textSize="15sp" />
 
                 <LinearLayout
@@ -790,6 +794,7 @@
             android:layout_margin="15dp"
             android:hint="Inserire note sul personaggio"
             android:textColor="@color/black"
+            android:textColorHint="@color/grey"
             android:textSize="15sp" />
 
         <LinearLayout
@@ -2266,6 +2271,7 @@
                         android:gravity="center"
                         android:text="Evocazioni memorizzate"
                         android:textColor="@color/black"
+                        android:textColorHint="@color/grey"
                         android:textSize="15sp" />
 
                     <TextView

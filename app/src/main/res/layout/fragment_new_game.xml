@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/background_light"
     tools:context=".NewGameFragment">
 
     <Button
         android:id="@+id/newGameCreationButton"
         android:layout_width="120dp"
         android:layout_height="120dp"
+        android:layout_marginTop="80dp"
         android:text="Crea nuova partita"
         app:layout_constraintBottom_toTopOf="@+id/joinGame"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,6 +22,7 @@
         android:id="@+id/joinGame"
         android:layout_width="120dp"
         android:layout_height="120dp"
+        android:layout_marginBottom="80dp"
         android:text="Partecipa ad una partita"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

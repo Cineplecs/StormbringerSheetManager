@@ -32,6 +32,10 @@
             android:title="Account" />
     </group>
 
+    <item android:id="@+id/logout"
+        android:title="Logout"
+        android:icon="@drawable/ic_logout"/>
+
 
 
 </menu>

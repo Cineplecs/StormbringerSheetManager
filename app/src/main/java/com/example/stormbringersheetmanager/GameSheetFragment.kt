@@ -249,21 +249,20 @@ class GameSheetFragment : Fragment() {
         val key = database.child("Games").child(bundle.getString("game")!!).child("players").ref
 
         database.child("Games").get().addOnSuccessListener { game ->
-            game.child(bundle.getString("game").toString())
+
+            game.child(bundle.getString("game")!!)
                 .child("players").children.forEach() { playerData ->
-                    playerData.children.forEach() {
-                        if (it.key.toString().trim() == bundle.getString("username")) {
+                    if (playerData.key == bundle.getString("username")) {
+                        //if (it.key.toString().trim() == bundle.getString("username")) {
                             var finalClasses: ArrayList<String> = ArrayList()
                             var weapons: ArrayList<Weapon> = ArrayList()
-                            if (it.child("weapons").value != null) {
-                                it.child("finalClass").children.forEach() { classData ->
+                            if (playerData.child("weapons").value != null) {
+                                playerData.child("finalClass").children.forEach() { classData ->
                                     var classes =
                                         classData.value.toString()
-                                    if (classes != null) {
-                                        finalClasses.add(classes)
-                                    }
+                                    finalClasses.add(classes)
                                 }
-                                it.child("weapons").children.forEach() { weaponData ->
+                                playerData.child("weapons").children.forEach() { weaponData ->
                                     var weapon =
                                         weaponData.getValue(Weapon::class.java)
                                     if (weapon != null) {
@@ -435,7 +434,6 @@ class GameSheetFragment : Fragment() {
                                     weaponsGrid.addView(block)
                                 }
                             }
-                        }
                     }
                 }
         }
@@ -446,14 +444,14 @@ class GameSheetFragment : Fragment() {
                 dataSnapshot.child("Games").child(bundle.getString("game").toString())
                     .child("players").children.forEach()
                     { playerData ->
-                        playerData.children.forEach() { it ->
-                            if (it.key.toString().trim() == bundle.getString("username")) {
+                            //if (it.key.toString().trim() == bundle.getString("username")) {
+                            if (playerData.key == bundle.getString("username")) {
                                 rifPlayer = playerData.key.toString()
-                                characterName.text = it.child("characterName").value.toString()
+                                characterName.text = playerData.child("characterName").value.toString()
                                 playerName.text = bundle.getString("username")
-                                nationality.text = it.child("nationality").value.toString()
+                                nationality.text = playerData.child("nationality").value.toString()
                                 var finalClasses = ArrayList<String>()
-                                it.child("finalClass").children.forEach() { classChild ->
+                                playerData.child("finalClass").children.forEach() { classChild ->
                                     finalClasses.add(classChild.value.toString())
                                 }
                                 for (i in finalClasses.indices) {
@@ -470,17 +468,17 @@ class GameSheetFragment : Fragment() {
                                     }
                                 }
                                 gender.text =
-                                    resources.getString(R.string.gender) + it.child("characterGender").value.toString()
+                                    resources.getString(R.string.gender) + playerData.child("characterGender").value.toString()
                                 age.text =
-                                    resources.getString(R.string.age) + it.child("characterAge").value.toString()
-                                if (it.child("cult").value.toString() == "Inserire un culto") {
+                                    resources.getString(R.string.age) + playerData.child("characterAge").value.toString()
+                                if (playerData.child("cult").value.toString() == "Inserire un culto") {
                                     cult.text = "Nessun culto selezionato"
                                 } else {
-                                    cult.text = it.child("cult").value.toString()
+                                    cult.text = playerData.child("cult").value.toString()
                                 }
-                                elan.text = it.child("elan").value.toString()
+                                elan.text = playerData.child("elan").value.toString()
                                 var stats = ArrayList<Int>()
-                                stats = it.child("stats").value as ArrayList<Int>
+                                stats = playerData.child("stats").value as ArrayList<Int>
                                 FOR.text = resources.getString(R.string.FOR) + stats[0]
                                 COS.text = resources.getString(R.string.COS) + stats[1]
                                 TAG.text = resources.getString(R.string.TAG) + stats[2]
@@ -488,30 +486,30 @@ class GameSheetFragment : Fragment() {
                                 MAN.text = resources.getString(R.string.MAN) + stats[4]
                                 DES.text = resources.getString(R.string.DES) + stats[5]
                                 FAS.text = resources.getString(R.string.FAS) + stats[6]
-                                grave = it.child("graveWounds").value.toString().toInt()
-                                hp = it.child("hp").value.toString().toInt()
-                                forza = it.child("stats").child("0").value.toString().toInt()
-                                const = it.child("stats").child("1").value.toString().toInt()
-                                size = it.child("stats").child("2").value.toString().toInt()
-                                int = it.child("stats").child("3").value.toString().toInt()
-                                man = it.child("stats").child("4").value.toString().toInt()
-                                dex = it.child("stats").child("5").value.toString().toInt()
-                                fas = it.child("stats").child("6").value.toString().toInt()
+                                grave = playerData.child("graveWounds").value.toString().toInt()
+                                hp = playerData.child("hp").value.toString().toInt()
+                                forza = playerData.child("stats").child("0").value.toString().toInt()
+                                const = playerData.child("stats").child("1").value.toString().toInt()
+                                size = playerData.child("stats").child("2").value.toString().toInt()
+                                int = playerData.child("stats").child("3").value.toString().toInt()
+                                man = playerData.child("stats").child("4").value.toString().toInt()
+                                dex = playerData.child("stats").child("5").value.toString().toInt()
+                                fas = playerData.child("stats").child("6").value.toString().toInt()
                                 weight.text =
-                                    resources.getString(R.string.weight) + it.child("weight").value.toString()
+                                    resources.getString(R.string.weight) + playerData.child("weight").value.toString()
                                 height.text =
-                                    resources.getString(R.string.height) + it.child("height").value.toString()
-                                if (it.child("description").value.toString() == "Inserire la descrizione del personaggio") {
+                                    resources.getString(R.string.height) + playerData.child("height").value.toString()
+                                if (playerData.child("description").value.toString() == "Inserire la descrizione del personaggio") {
                                     characterDescription.text = "----\n----\n----"
                                 } else {
                                     characterDescription.text =
-                                        it.child("description").value.toString()
+                                        playerData.child("description").value.toString()
                                 }
-                                armor.text = it.child("armor").value.toString()
-                                armorProtection.text = it.child("armorProtection").value.toString()
-                                graveWounds.text = it.child("graveWounds").value.toString()
-                                HP.text = it.child("hp").value.toString()
-                                equipmentEditText.setText(it.child("equipment").value.toString())
+                                armor.text = playerData.child("armor").value.toString()
+                                armorProtection.text = playerData.child("armorProtection").value.toString()
+                                graveWounds.text = playerData.child("graveWounds").value.toString()
+                                HP.text = playerData.child("hp").value.toString()
+                                equipmentEditText.setText(playerData.child("equipment").value.toString())
                                 equipmentEditText.addTextChangedListener(object : TextWatcher {
                                     override fun beforeTextChanged(
                                         p0: CharSequence?,
@@ -539,11 +537,11 @@ class GameSheetFragment : Fragment() {
                                     }
 
                                 })
-                                money.text = it.child("money").value.toString()
-                                handicap.text = it.child("handicap").value.toString()
+                                money.text = playerData.child("money").value.toString()
+                                handicap.text = playerData.child("handicap").value.toString()
 
                                 agilityBonus = view.findViewById(R.id.agilityBonus)
-                                agilityBonus.text = it.child("agility").value.toString()
+                                agilityBonus.text = playerData.child("agility").value.toString()
                                 climbValue = view.findViewById(R.id.climbValue)
                                 jumpValue = view.findViewById(R.id.jumpValue)
                                 swimValue = view.findViewById(R.id.swimValue)
@@ -551,8 +549,8 @@ class GameSheetFragment : Fragment() {
                                 ridingValue = view.findViewById(R.id.ridingValue)
                                 fallValue = view.findViewById(R.id.fallValue)
                                 var agilitySkills: ArrayList<Skills> = ArrayList()
-                                if (it.child("agilitySkills").value != null) {
-                                    it.child("agilitySkills").children.forEach() { child ->
+                                if (playerData.child("agilitySkills").value != null) {
+                                    playerData.child("agilitySkills").children.forEach() { child ->
                                         var agilitySkill =
                                             child.getValue(Skills::class.java)!!
                                         agilitySkills.add(agilitySkill)
@@ -583,16 +581,16 @@ class GameSheetFragment : Fragment() {
 
 
                                 communicationBonus = view.findViewById(R.id.communicationBonus)
-                                communicationBonus.text = it.child("communication").value.toString()
+                                communicationBonus.text = playerData.child("communication").value.toString()
                                 reputationValue = view.findViewById(R.id.reputationValue)
                                 persuasionValue = view.findViewById(R.id.persuasionValue)
                                 speechValue = view.findViewById(R.id.speechValue)
                                 singingValue = view.findViewById(R.id.singingValue)
                                 var communicationSkills: ArrayList<Skills> = ArrayList()
-                                if (it.child("communicationSkills").value != null) {
-                                    for (i in 0 until it.child("communicationSkills").childrenCount) {
+                                if (playerData.child("communicationSkills").value != null) {
+                                    for (i in 0 until playerData.child("communicationSkills").childrenCount) {
                                         var communicationSkill =
-                                            it.child("communicationSkills").child(i.toString())
+                                            playerData.child("communicationSkills").child(i.toString())
                                                 .getValue(Skills::class.java)!!
                                         communicationSkills.add(communicationSkill)
                                     }
@@ -616,7 +614,7 @@ class GameSheetFragment : Fragment() {
 
 
                                 knowledgeBonus = view.findViewById(R.id.knowledgeBonus)
-                                knowledgeBonus.text = it.child("knowledge").value.toString()
+                                knowledgeBonus.text = playerData.child("knowledge").value.toString()
                                 firstAidValue = view.findViewById(R.id.firstAidValue)
                                 memoryValue = view.findViewById(R.id.memoryValue)
                                 navigationValue = view.findViewById(R.id.navigationValue)
@@ -631,8 +629,8 @@ class GameSheetFragment : Fragment() {
                                 commonLanguage = view.findViewById(R.id.commonValue)
                                 otherLanguages = view.findViewById(R.id.otherLanguagesValue)
                                 var knowledgeSkills: ArrayList<Skills> = ArrayList()
-                                if (it.child("knowledgeSkills").value != null) {
-                                    it.child("knowledgeSkills").children.forEach() { child ->
+                                if (playerData.child("knowledgeSkills").value != null) {
+                                    playerData.child("knowledgeSkills").children.forEach() { child ->
                                         var knowledgeSkill =
                                             child.getValue(Skills::class.java)!!
                                         knowledgeSkills.add(knowledgeSkill)
@@ -683,15 +681,15 @@ class GameSheetFragment : Fragment() {
                                 }
 
                                 manipulationBonus = view.findViewById(R.id.manipulationBonus)
-                                manipulationBonus.text = it.child("manipulation").value.toString()
+                                manipulationBonus.text = playerData.child("manipulation").value.toString()
                                 jugglingValue = view.findViewById(R.id.jugglingValue)
                                 magicValue = view.findViewById(R.id.magicValue)
                                 trapsValue = view.findViewById(R.id.trapsValue)
                                 lockValue = view.findViewById(R.id.lockValue)
                                 nodesValue = view.findViewById(R.id.nodesValue)
                                 var manipulationSkills: ArrayList<Skills> = ArrayList()
-                                if (it.child("manipulationSkills").value != null) {
-                                    it.child("manipulationSkills").children.forEach() { child ->
+                                if (playerData.child("manipulationSkills").value != null) {
+                                    playerData.child("manipulationSkills").children.forEach() { child ->
                                         var manipulationSkill =
                                             child.getValue(Skills::class.java)!!
                                         manipulationSkills.add(manipulationSkill)
@@ -718,7 +716,7 @@ class GameSheetFragment : Fragment() {
                                 }
 
                                 perceptionBonus = view.findViewById(R.id.perceptionBonus)
-                                perceptionBonus.text = it.child("perception").value.toString()
+                                perceptionBonus.text = playerData.child("perception").value.toString()
                                 stabilityValue = view.findViewById(R.id.stabilityValue)
                                 smellValue = view.findViewById(R.id.smellValue)
                                 watchValue = view.findViewById(R.id.watchValue)
@@ -727,8 +725,8 @@ class GameSheetFragment : Fragment() {
                                 searchingValue = view.findViewById(R.id.searchingValue)
                                 tasteValue = view.findViewById(R.id.tasteValue)
                                 var perceptionSkills: ArrayList<Skills> = ArrayList()
-                                if (it.child("perceptionSkills").value != null) {
-                                    it.child("perceptionSkills").children.forEach() { child ->
+                                if (playerData.child("perceptionSkills").value != null) {
+                                    playerData.child("perceptionSkills").children.forEach() { child ->
                                         var perceptionSkill =
                                             child.getValue(Skills::class.java)!!
                                         perceptionSkills.add(perceptionSkill)
@@ -761,15 +759,15 @@ class GameSheetFragment : Fragment() {
                                 }
 
                                 stealthBonus = view.findViewById(R.id.stealthBonus)
-                                stealthBonus.text = it.child("stealth").value.toString()
+                                stealthBonus.text = playerData.child("stealth").value.toString()
                                 ambushValue = view.findViewById(R.id.ambushValue)
                                 pickpocketValue = view.findViewById(R.id.pickpocketValue)
                                 sneakValue = view.findViewById(R.id.sneakValue)
                                 concealValue = view.findViewById(R.id.concealValue)
                                 hideValue = view.findViewById(R.id.hideValue)
                                 var stealthSkills: ArrayList<Skills> = ArrayList()
-                                if (it.child("stealthSkills").value != null) {
-                                    it.child("stealthSkills").children.forEach() { child ->
+                                if (playerData.child("stealthSkills").value != null) {
+                                    playerData.child("stealthSkills").children.forEach() { child ->
                                         var stealthSkill =
                                             child.getValue(Skills::class.java)!!
                                         stealthSkills.add(stealthSkill)
@@ -794,23 +792,23 @@ class GameSheetFragment : Fragment() {
                                         }
                                     }
                                 }
-                                notes.setText(it.child("notes").value.toString())
+                                notes.setText(playerData.child("notes").value.toString())
                                 availableINT = view.findViewById(R.id.availableINT)
                                 availableINT.text =
-                                    resources.getString(R.string.availableINT) + it.child("availableINT").value.toString()
+                                    resources.getString(R.string.availableINT) + playerData.child("availableINT").value.toString()
                                 evocationTextView = view.findViewById(R.id.evocationTextView)
-                                if (it.child("availablEvocations").value.toString() == ""
+                                if (playerData.child("availablEvocations").value.toString() == ""
                                 ) {
                                     evocationTextView.text =
                                         resources.getString(R.string.evocation)
                                 } else {
                                     evocationTextView.text =
-                                        it.child("availableEvocations").value.toString()
+                                        playerData.child("availableEvocations").value.toString()
                                 }
-                                if (it.child("evocation").value == true) {
+                                if (playerData.child("evocation").value == true) {
                                     evocationEditText.isGone = false
                                     evocationTextView.isGone = true
-                                    evocationEditText.setText(it.child("availableEvocations").value.toString())
+                                    evocationEditText.setText(playerData.child("availableEvocations").value.toString())
                                 } else {
                                     evocationTextView.isGone = false
                                     evocationTextView.isGone = true
@@ -1265,7 +1263,6 @@ class GameSheetFragment : Fragment() {
                                         .child("notes").setValue(notes.text.toString())
                                 }
                             }
-                        }
                     }
             }
 

@@ -112,6 +112,7 @@
                 android:gravity="center"
                 android:hint="Inserire un culto"
                 android:textColor="@color/black"
+                android:textColorHint="@color/grey"
                 android:textSize="15sp" />
 
             <TextView
@@ -243,6 +244,7 @@
                     android:gravity="center"
                     android:hint="Inserire la descrizione del personaggio"
                     android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
                     android:textSize="15sp" />
 
             </LinearLayout>
@@ -402,6 +404,7 @@
                     android:layout_margin="15dp"
                     android:hint="Inserire equipaggiamento del personaggio"
                     android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
                     android:textSize="15sp" />
 
                 <LinearLayout
@@ -538,6 +541,7 @@
             android:layout_margin="15dp"
             android:hint="Inserire note sul personaggio"
             android:textColor="@color/black"
+            android:textColorHint="@color/grey"
             android:textSize="15sp" />
 
         <LinearLayout

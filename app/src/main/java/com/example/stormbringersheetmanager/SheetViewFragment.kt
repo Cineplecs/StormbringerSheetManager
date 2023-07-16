@@ -213,8 +213,7 @@ class SheetViewFragment : Fragment() {
         database.child("Char").child(mAuth.uid!!).child(charName!!).get()
             .addOnSuccessListener { it ->
                 nationality.text = it.child("nationality").value.toString()
-                var finalClasses = ArrayList<String>()
-                finalClasses = it.child("finalClass").value as ArrayList<String>
+                var finalClasses: ArrayList<String> = it.child("finalClass").value as ArrayList<String>
                 for (i in finalClasses.indices) {
                     when (i) {
                         0 -> {

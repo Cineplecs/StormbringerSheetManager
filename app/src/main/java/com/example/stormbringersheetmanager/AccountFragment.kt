@@ -37,6 +37,10 @@ class AccountFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_account, container, false)
 
+        if(mAuth.currentUser == null){
+            Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.loginFragment)
+        }
+
         usernameText = view.findViewById(R.id.usernameText)
         toLoginButton = view.findViewById(R.id.goingToLoginButton)
         toRegisterButton = view.findViewById(R.id.goingToRegisterButton)

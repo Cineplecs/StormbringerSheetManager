@@ -9,6 +9,7 @@
         android:id="@+id/linearLayoutVerticalClassMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/background_light"
         android:orientation="vertical">
 
         <TextView
@@ -16,6 +17,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="20dp"
             android:text="Stats and Class calculator"
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
         <LinearLayout
@@ -33,6 +35,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="FOR Stat"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <Button
@@ -61,6 +64,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="COS Stat"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <Button
@@ -89,6 +93,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="INT Stat"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <Button
@@ -117,6 +122,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="MAN Stat"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <Button
@@ -145,6 +151,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="DES Stat"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <Button
@@ -173,6 +180,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="TAG Stat"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <Button
@@ -201,6 +209,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="FAS Stat"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <Button
@@ -224,7 +233,7 @@
             android:paddingRight="15dp"
             android:paddingBottom="15dp"
             android:text="Clicca sul pulsante per ottenere una classe"
-            android:textColor="#000000"
+            android:textColor="@color/black"
             android:textSize="20sp" />
 
     </LinearLayout>

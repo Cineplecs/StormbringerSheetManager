@@ -36,6 +36,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        mAuth = Firebase.auth
+
         toolbar = findViewById(R.id.toolbar)
         drawer = findViewById(R.id.drawer_layout)
         navigationView = findViewById(R.id.nav_view)
@@ -63,6 +65,9 @@ class MainActivity : AppCompatActivity() {
 
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
+                R.id.logout -> {
+                    logout()
+                }
                 else -> {
                     if (navController.currentDestination?.label.toString().contains("Main") ||
                         navController.currentDestination?.label.toString().contains("Equipment") ||
@@ -78,6 +83,16 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             true
+        }
+        navigationView.menu.findItem(R.id.logout).isVisible = mAuth.currentUser != null
+    }
+
+    private fun logout() {
+        if(mAuth.currentUser != null){
+            mAuth.signOut()
+            navController.navigate(R.id.accountFragment)
+            drawer.closeDrawers()
+            navigationView.menu.findItem(R.id.logout).isVisible = false
         }
     }
 

@@ -9,6 +9,9 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.Toast
+import androidx.core.view.isEmpty
+import androidx.navigation.Navigation
 import com.example.stormbringersheetmanager.Utility.Character
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -66,26 +69,50 @@ class GameJoinFragment : Fragment() {
         }
 
         joinButton.setOnClickListener() {
-            var gameName = gameNameInput.text.toString()
-            var password = passwordInput.text.toString()
-            database.child("Games").get().addOnSuccessListener {
-                if (it.child(gameName).exists()) {
-                    println(it.child(gameName).child("gamePassword").value)
-                    if (it.child(gameName).child("gamePassword").value == password) {
-                        database.child("Char").get().addOnSuccessListener {
-                            database.child("Char").child(mAuth.uid!!)
-                                .child(characterSpinner.selectedItem.toString()).child("inGame")
-                                .setValue(true)
-                            var character = it.child(mAuth.uid!!)
-                                .child(characterSpinner.selectedItem.toString()).value
-                            var key =
-                                database.child("Games").child(gameName).child("players").push()
-                            key.child(username).setValue(character)
-                            var charKey = it.child(mAuth.uid!!).child(characterSpinner.selectedItem.toString()).ref
-                            charKey.child("inGame").setValue(true)
+            if(!characterSpinner.isEmpty()) {
+                var gameName = gameNameInput.text.toString()
+                var password = passwordInput.text.toString()
+                database.child("Games").get().addOnSuccessListener {
+                    if (it.child(gameName).exists()) {
+                        println(it.child(gameName).child("gamePassword").value)
+                        if (it.child(gameName).child("gamePassword").value == password) {
+                            var m = true
+                            var master = it.child(gameName).child("gameMaster").value.toString()
+                            if(master.equals(username)) m = false
+                            it.child(gameName).child("players").children.forEach{p ->
+                                println("COMBACIANO: ${p.value.toString()} - $username")
+                                if(p.value.toString().equals(username)){
+                                    m = false
+                                }
+                            }
+                            if(m) {
+                                database.child("Char").get().addOnSuccessListener {
+                                    database.child("Char").child(mAuth.uid!!)
+                                        .child(characterSpinner.selectedItem.toString())
+                                        .child("inGame")
+                                        .setValue(true)
+                                    var character = it.child(mAuth.uid!!)
+                                        .child(characterSpinner.selectedItem.toString()).value
+                                    /*var key =
+                                    database.child("Games").child(gameName).child("players").push()
+                                    key.child(username).setValue(character)*/
+                                    database.child("Games").child(gameName).child("players")
+                                        .child(username).setValue(character)
+                                    var charKey = it.child(mAuth.uid!!)
+                                        .child(characterSpinner.selectedItem.toString()).ref
+                                    charKey.child("inGame").setValue(true)
+
+                                    Toast.makeText(requireContext(), "Personaggio registrato", Toast.LENGTH_SHORT).show()
+                                    Navigation.findNavController(requireActivity(), R.id.nav_host_fragment).navigate(R.id.gameListFragment)
+                                }
+                            } else {
+                                Toast.makeText(requireContext(), "Impossibile partecipare a questa partita", Toast.LENGTH_SHORT).show()
+                            }
                         }
                     }
                 }
+            } else{
+                Toast.makeText(requireContext(), "Non è possibile unirsi alla partita, mancano informazioni", Toast.LENGTH_SHORT).show()
             }
         }
 
